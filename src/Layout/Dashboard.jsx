@@ -1,207 +1,219 @@
-import {
-  FaAd,
-  FaBook,
-  FaHome,
-  FaShoppingBag,
-  FaShoppingCart,
-  FaUtensils,
-} from 'react-icons/fa';
-import {
-  FaCalendar,
-  FaEnvelope,
-  FaList,
-  FaPeopleGroup,
-  FaWallet,
-} from 'react-icons/fa6';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 // import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
   // const { isAdmin } = useAdmin();
   // console.log(isAdmin);
-  const admin = true;
+  const admin = false;
+  const agent = true;
+  const user1 = false;
   return (
-    <div className="flex  items-start  mx-auto">
-      <div className="w-64 bg-[#d1a054] min-h-screen">
+    <div className="flex h-screen    items-stretch  mx-auto">
+      <div className="w-64 bg-[#1b71c7] text-white min-h-screen">
         <div className="flex justify-center p-4">
           <Link to={'/'}>
             <div className="">
-              <h3 className="text-2xl font-extrabold">BISTRO BOSS</h3>
-              <h4 className="text-xl tracking-[5.4px]">Restaurant</h4>
+              <h3 className="text-2xl font-extrabold tracking-[5.4px]">
+                Heaven
+              </h3>
+              <h4 className="text-xl tracking-[5.4px]">Residence</h4>
             </div>
           </Link>
         </div>
         <ul className="menu px-3 mt-10">
-          {admin ? (
+          {admin && (
             <>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/admin-home'}
+                  to={'/dashboard/admin-profile'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30  text-white font-bold '
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaHome />
-                  Admin Home
+                  Admin Profile
                 </NavLink>
               </li>
 
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/add-items'}
+                  to={'/dashboard/manage-properties'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white '
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaUtensils />
-                  Add Items
+                  Manage Properties
                 </NavLink>
               </li>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/manage-items'}
+                  to={'/dashboard/manage-users'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaList />
-                  Manage Items
+                  Manage Users
                 </NavLink>
               </li>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/manage-bookings'}
+                  to={'/dashboard/manage-reviews'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaBook />
-                  Manage Booking
-                </NavLink>
-              </li>
-
-              <li className="mb-3">
-                <NavLink
-                  to={'/dashboard/all-users'}
-                  className={({ isActive, isPending }) =>
-                    isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
-                      : isPending
-                      ? 'pending'
-                      : ''
-                  }
-                >
-                  <FaPeopleGroup />
-                  All Users
+                  Manage Reviews
                 </NavLink>
               </li>
             </>
-          ) : (
+          )}
+          {agent && (
             <>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/user-home'}
+                  to={'/dashboard/agent-profile'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaHome />
-                  User Home
+                  Agent Profile
                 </NavLink>
               </li>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/my-cart'}
+                  to={'/dashboard/add-property'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaShoppingCart />
-                  My Cart
+                  Add Property
                 </NavLink>
               </li>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/reservation'}
+                  to={'/dashboard/added-properties'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaCalendar />
-                  RESERVATION
+                  My Added Properties
                 </NavLink>
               </li>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/payment-history'}
+                  to={'/dashboard/sold-properties'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaWallet />
-                  PAYMENT HISTORY
+                  My Sold Properties
                 </NavLink>
               </li>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/add-review'}
+                  to={'/dashboard/requested-properties'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaAd />
-                  ADD REVIEW
+                  {' '}
+                  Requested Properties
+                </NavLink>
+              </li>
+            </>
+          )}
+
+          {user1 && (
+            <>
+              <li className="mb-3">
+                <NavLink
+                  to={'/dashboard/user-profile'}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
+                      : isPending
+                      ? 'pending'
+                      : ''
+                  }
+                >
+                  My Profile
                 </NavLink>
               </li>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/my-bookings'}
+                  to={'/dashboard/wishlist'}
                   className={({ isActive, isPending }) =>
                     isActive
-                      ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
                       : isPending
                       ? 'pending'
                       : ''
                   }
                 >
-                  <FaList />
-                  MY BOOKING
+                  Wishlist
+                </NavLink>
+              </li>
+              <li className="mb-3">
+                <NavLink
+                  to={'/dashboard/bought-properties'}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
+                      : isPending
+                      ? 'pending'
+                      : ''
+                  }
+                >
+                  Property Bought
+                </NavLink>
+              </li>
+              <li className="mb-3">
+                <NavLink
+                  to={'/dashboard/my-reviews'}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
+                      : isPending
+                      ? 'pending'
+                      : ''
+                  }
+                >
+                  My-Reviews
                 </NavLink>
               </li>
             </>
@@ -213,64 +225,32 @@ const Dashboard = () => {
               to={'/'}
               className={({ isActive, isPending }) =>
                 isActive
-                  ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                  ? 'border-2 w-full bg-black/30 font-bold text-white'
                   : isPending
                   ? 'pending'
                   : ''
               }
             >
-              <FaHome />
               HOME
             </NavLink>
           </li>
           <li className="mb-3">
             <NavLink
-              to={'/our-menu'}
+              to={'/all-properties'}
               className={({ isActive, isPending }) =>
                 isActive
-                  ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
+                  ? 'border-2 w-full bg-black/30 font-bold text-white'
                   : isPending
                   ? 'pending'
                   : ''
               }
             >
-              <FaList />
-              Menu
-            </NavLink>
-          </li>
-          <li className="mb-3">
-            <NavLink
-              to={'/our-shop'}
-              className={({ isActive, isPending }) =>
-                isActive
-                  ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
-                  : isPending
-                  ? 'pending'
-                  : ''
-              }
-            >
-              <FaShoppingBag />
-              SHOP
-            </NavLink>
-          </li>
-          <li className="mb-3">
-            <NavLink
-              to={'/contact-us'}
-              className={({ isActive, isPending }) =>
-                isActive
-                  ? 'border-2 w-full bg-gray-400 font-bold text-[#EEFF25]'
-                  : isPending
-                  ? 'pending'
-                  : ''
-              }
-            >
-              <FaEnvelope />
-              CONTACT
+              All Properties
             </NavLink>
           </li>
         </ul>
       </div>
-      <div className="flex-1 py-10 mx-6">
+      <div className="flex-1  p-6 overflow-y-auto">
         <Outlet />
       </div>
     </div>

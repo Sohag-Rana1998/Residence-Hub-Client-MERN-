@@ -55,7 +55,9 @@ const NavBar = () => {
     // console.log(user);
   };
 
-  const admin = true;
+  const admin = false;
+  const agent = true;
+  const user1 = false;
 
   //https://i.postimg.cc/66LCsndF/light.png
   //https://i.postimg.cc/RFxv43cD/dark.png
@@ -140,9 +142,9 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        {admin ? (
+        {admin && (
           <NavLink
-            to="/dashboard"
+            to="/dashboard/admin-profile"
             className={({ isActive, isPending }) =>
               isActive
                 ? 'border-2 font-bold text-[#EEFF25]'
@@ -153,9 +155,24 @@ const NavBar = () => {
           >
             DASHBOARD
           </NavLink>
-        ) : (
+        )}
+        {agent && (
           <NavLink
-            to="/dashboard/user-home"
+            to="/dashboard/agent-profile"
+            className={({ isActive, isPending }) =>
+              isActive
+                ? 'border-2 font-bold text-[#EEFF25]'
+                : isPending
+                ? 'pending'
+                : ''
+            }
+          >
+            DASHBOARD
+          </NavLink>
+        )}
+        {user1 && (
+          <NavLink
+            to="/dashboard/user-profile"
             className={({ isActive, isPending }) =>
               isActive
                 ? 'border-2 font-bold text-[#EEFF25]'
