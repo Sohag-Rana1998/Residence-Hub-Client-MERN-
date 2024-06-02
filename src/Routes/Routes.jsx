@@ -20,6 +20,7 @@ import Wishlist from '../Pages/Dashboard/UserDashboard/WishList/Wishlist';
 import PropertyBought from '../Pages/Dashboard/UserDashboard/PropertyBought/PropertyBought';
 import MyReviews from '../Pages/Dashboard/UserDashboard/MyReviews/MyReviews';
 import UpdateProperty from '../Pages/Dashboard/AgentsDashboard/UpdateProperty/UpdateProperty';
+import AdvertiseProperty from '../Pages/Dashboard/AdminDashboard/AdvertiseProperty/AdvertiseProperty';
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
           {
             path: 'manage-reviews',
             element: <ManageReviews />,
+          },
+          {
+            path: 'advertise-property',
+            element: <AdvertiseProperty />,
           },
         ],
       },

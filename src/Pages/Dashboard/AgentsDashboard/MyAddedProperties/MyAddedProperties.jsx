@@ -6,7 +6,7 @@ import usePropertyByAgent from '../../../../hooks/usePropertyByAgent';
 const MyAddedProperties = () => {
   const { user } = useAuth();
   const email = user?.email;
-  const { agentProperties, isLoading, refetch } = usePropertyByAgent(email);
+  const { agentProperties, refetch } = usePropertyByAgent(email);
   console.log(agentProperties);
   return (
     <div>

@@ -6,7 +6,7 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
 
 const ManageProperties = () => {
-  const { properties, refetch, isLoading } = useAllProperties();
+  const { properties, refetch } = useAllProperties();
   const axiosSecure = useAxiosSecure();
 
   const { mutateAsync } = useMutation({
@@ -71,15 +71,15 @@ const ManageProperties = () => {
 
               <thead>
                 <tr className="bg-blue-500 text-white rounded-t-3xl">
-                  <th className="p-5 ">No</th>
+                  <th className=" ">No</th>
 
                   <th>Title</th>
                   <th> Location</th>
                   <th> Agent Name</th>
                   <th> Agent Email</th>
                   <th> Price Range</th>
-                  <th> Verify Action</th>
-                  <th> Reject Action</th>
+                  <th> Action</th>
+                  <th> Action</th>
                 </tr>
               </thead>
 
@@ -87,8 +87,7 @@ const ManageProperties = () => {
                 {/* row 1 */}
                 {properties?.map((property, index) => (
                   <tr key={property._id}>
-                    <th>{index + 1}</th>
-
+                    <td>{index + 1}</td>
                     <td>{property.title}</td>
                     <td>{property.location}</td>
                     <td>{property.agentName}</td>
@@ -99,7 +98,13 @@ const ManageProperties = () => {
                     {property.status === 'Verified' ||
                     property.status === 'Rejected' ? (
                       <td className="">
-                        <button className="btn bg-blue-500 text-white">
+                        <button
+                          className={`btn ${
+                            property.status === 'Rejected'
+                              ? 'bg-red-400'
+                              : 'bg-blue-500'
+                          }  text-white`}
+                        >
                           {property.status}
                         </button>
                       </td>
@@ -120,7 +125,7 @@ const ManageProperties = () => {
                             onClick={() =>
                               handleStatus(property._id, 'Rejected')
                             }
-                            className="btn bg-red-400"
+                            className="btn bg-red-400 text-white"
                           >
                             Reject
                           </button>

@@ -54,6 +54,20 @@ const Dashboard = () => {
               </li>
               <li className="mb-3">
                 <NavLink
+                  to={'/dashboard/advertise-property'}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? 'border-2 w-full bg-black/30 font-bold text-white '
+                      : isPending
+                      ? 'pending'
+                      : ''
+                  }
+                >
+                  Advertise Properties
+                </NavLink>
+              </li>
+              <li className="mb-3">
+                <NavLink
                   to={'/dashboard/manage-users'}
                   className={({ isActive, isPending }) =>
                     isActive
