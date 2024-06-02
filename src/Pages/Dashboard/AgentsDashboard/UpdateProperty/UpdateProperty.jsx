@@ -1,17 +1,40 @@
 import { useForm } from 'react-hook-form';
 import useAxiosPublic from '../../../../hooks/useAxiosPublic';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import useAuth from '../../../../hooks/useAuth';
+
 import { toast } from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
+import usePropertyById from '../../../../hooks/usePropertyById';
+import useAuth from '../../../../hooks/useAuth';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import SectionTitle from '../../../../components/Shared/SectionTitle';
-const AddProperty = () => {
+const UpdateProperty = () => {
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const { property, refetch, isLoading } = usePropertyById(id);
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+  console.log(property);
+
+  useEffect(() => {
+    setTimeout(setLoading, 500, false);
+  }, []);
+  const {
+    _id,
+    title,
+    location,
+    image,
+    facilities,
+    maximumPrice,
+    minimumPrice,
+    status,
+    area,
+    description,
+  } = property;
 
   const {
     register,
@@ -22,18 +45,19 @@ const AddProperty = () => {
 
   const { mutateAsync } = useMutation({
     mutationFn: async propertyData => {
-      const { data } = await axiosSecure.post(`/add-property`, propertyData);
+      const { data } = await axiosSecure.put(`/property/${_id}`, propertyData);
       return data;
     },
     onSuccess: () => {
-      console.log('Data Saved Successfully');
+      console.log('Property Saved Successfully');
       Swal.fire({
         icon: 'success',
-        title: 'Property Added Successfully!',
+        title: 'Property Updated Successfully',
         showConfirmButton: false,
         timer: 1500,
       });
       reset();
+      refetch();
     },
   });
   const onSubmit = async data => {
@@ -54,13 +78,13 @@ const AddProperty = () => {
           location: data.location,
           minimumPrice: parseFloat(data.price),
           maximumPrice: parseFloat(data.price1),
-          image: res?.data?.data?.display_url,
+          image: res?.data?.data?.display_url || image,
           description: data.description,
           facilities: data.facilities,
           area: data.area,
-          status: 'Pending',
-          agentName: data.agent_name,
-          agentEmail: data.agent_email,
+          status: status,
+          agentName: user?.displayName,
+          agentEmail: user?.email,
           agentImg: user?.photoURL,
         };
         console.log(propertyData);
@@ -72,17 +96,21 @@ const AddProperty = () => {
         toast.error(err.message);
       }
     }
-
-    console.log('with image url', data);
   };
 
-  return (
+  return isLoading || loading ? (
+    <div className="w-screen min-h-screen flex justify-center items-center">
+      <p>Loading</p>
+    </div>
+  ) : (
     <div>
-      <div>
-        <SectionTitle
-          heading={'Add Property'}
-          subheading={'Home/Dashboard/Add-Property'}
-        ></SectionTitle>
+      <div className="flex justify-center ">
+        <div className="w-[280px]  p-3 text-center rounded-t-3xl">
+          <h3 className="text-3xl font-bold border-b-2 pb-1">
+            Update Property
+          </h3>
+          <h3 className="text-sm mt-2">Home/Dashboard/Added-Property/Update</h3>
+        </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className=" ">
         <div className="space-y-4 grid grid-cols-2 gap-5">
@@ -93,8 +121,9 @@ const AddProperty = () => {
             <input
               type="text"
               name="title"
+              defaultValue={title}
               id="title"
-              {...register('title', { required: true })}
+              {...register('title')}
               placeholder="Property Title"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -109,8 +138,9 @@ const AddProperty = () => {
             <input
               type="text"
               name="location"
+              defaultValue={location}
               id="location"
-              {...register('location', { required: true })}
+              {...register('location')}
               placeholder="Property Location"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -125,8 +155,9 @@ const AddProperty = () => {
             <input
               type="text"
               name="area"
+              defaultValue={area}
               id="area"
-              {...register('area', { required: true })}
+              {...register('area')}
               placeholder="Area by sq feet"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -145,8 +176,9 @@ const AddProperty = () => {
             <input
               type="text"
               name="facilities"
+              defaultValue={facilities}
               id="facilities"
-              {...register('facilities', { required: true })}
+              {...register('facilities')}
               placeholder="Facilities"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -179,7 +211,8 @@ const AddProperty = () => {
                 <input
                   type="number"
                   name="price"
-                  {...register('price', { required: true })}
+                  defaultValue={minimumPrice}
+                  {...register('price')}
                   id="price"
                   placeholder="Minimum Price"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
@@ -192,7 +225,8 @@ const AddProperty = () => {
                 <input
                   type="number"
                   name="price1"
-                  {...register('price1', { required: true })}
+                  defaultValue={maximumPrice}
+                  {...register('price1')}
                   id="price1"
                   placeholder="Maximum Price"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
@@ -215,10 +249,8 @@ const AddProperty = () => {
                 type="text"
                 name="agent_name"
                 id="agent_name"
-                {...register('agent_name', {
-                  required: true,
-                })}
-                value={user?.displayName}
+                disabled
+                defaultValue={user?.displayName}
                 className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
               />
             </div>
@@ -234,10 +266,8 @@ const AddProperty = () => {
                 type="email"
                 name="agent_email"
                 id="agent_email"
-                {...register('agent_email', {
-                  required: true,
-                })}
-                value={user?.email}
+                disabled
+                defaultValue={user?.email}
                 className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
               />
             </div>
@@ -253,9 +283,10 @@ const AddProperty = () => {
           <textarea
             rows="5"
             type="text"
+            defaultValue={description}
             name="description"
             id="description"
-            {...register('description', { required: true })}
+            {...register('description')}
             placeholder="Description about property"
             className="w-full textarea px-3 py-2 border rounded-md border-gray-300 bg-gray-50"
           ></textarea>
@@ -277,4 +308,4 @@ const AddProperty = () => {
   );
 };
 
-export default AddProperty;
+export default UpdateProperty;

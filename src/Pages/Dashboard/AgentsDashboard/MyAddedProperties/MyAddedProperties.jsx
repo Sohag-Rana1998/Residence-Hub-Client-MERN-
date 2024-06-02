@@ -1,9 +1,13 @@
 import Card from '../../../../components/Shared/Card';
-import useAllProperties from '../../../../hooks/useAllProperties';
+import useAuth from '../../../../hooks/useAuth';
+
+import usePropertyByAgent from '../../../../hooks/usePropertyByAgent';
 
 const MyAddedProperties = () => {
-  const { properties, isLoading, refetch } = useAllProperties();
-  console.log(properties);
+  const { user } = useAuth();
+  const email = user?.email;
+  const { agentProperties, isLoading, refetch } = usePropertyByAgent(email);
+  console.log(agentProperties);
   return (
     <div>
       <div className="flex justify-center ">
@@ -13,7 +17,7 @@ const MyAddedProperties = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {properties?.map(property => (
+        {agentProperties?.map(property => (
           <Card key={property._id} estate={property} refetch={refetch}></Card>
         ))}
       </div>

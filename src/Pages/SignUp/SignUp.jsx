@@ -10,21 +10,17 @@ import { useEffect, useState } from 'react';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import Swal from 'sweetalert2';
 
-// import useAxiosPublic from '../../hooks/useAxiosPublic';
-import useAuth from '../../hooks/useAuth';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
   const [type, setType] = useState(false);
-  const {
-    createUserByEmailAndPassword,
-
-    handleUpdateProfile,
-  } = useAuth;
+  const { updateUserProfile, createUser } = useAuth();
 
   const {
     register,
@@ -34,27 +30,27 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = data => {
-    createUserByEmailAndPassword(data.email, data.password)
+    createUser(data.email, data.password)
       .then(result => {
         navigate(location.state || '/');
         const userInfo = {
           name: data.name,
           email: data.email,
         };
-        // axiosPublic.post('/users', userInfo).then(res => {
-        //   console.log(res.data);
+        axiosPublic.post('/users', userInfo).then(res => {
+          console.log(res.data);
 
-        //   console.log(result.user);
-        //   handleUpdateProfile(data.name, data.photo);
-        //   reset();
-        //   Swal.fire({
-        //     icon: 'success',
-        //     title:
-        //       'Congratulation! Your account has been registered successfully',
-        //     showConfirmButton: true,
-        //   });
-        //   navigate(location.state || '/');
-        // });
+          console.log(result.user);
+          updateUserProfile(data.name, data.photo);
+          reset();
+          Swal.fire({
+            icon: 'success',
+            title:
+              'Congratulation! Your account has been registered successfully',
+            showConfirmButton: true,
+          });
+          navigate(location.state || '/');
+        });
       })
       .catch(errors => console.log(errors.message));
   };
@@ -178,11 +174,6 @@ const SignUp = () => {
                     {errors.password?.type === 'minLength' && (
                       <p className="text-red-500">
                         Password must be six character
-                      </p>
-                    )}
-                    {errors.password?.type === 'maxLength' && (
-                      <p className="text-red-500">
-                        Password must be less then 20 characters
                       </p>
                     )}
                     {errors.password?.type === 'pattern' && (

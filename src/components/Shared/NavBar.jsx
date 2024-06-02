@@ -55,8 +55,8 @@ const NavBar = () => {
     // console.log(user);
   };
 
-  const admin = false;
-  const agent = true;
+  const admin = true;
+  const agent = false;
   const user1 = false;
 
   //https://i.postimg.cc/66LCsndF/light.png

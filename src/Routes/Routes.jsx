@@ -19,6 +19,7 @@ import UserProfle from '../Pages/Dashboard/UserDashboard/UserProfle/UserProfle';
 import Wishlist from '../Pages/Dashboard/UserDashboard/WishList/Wishlist';
 import PropertyBought from '../Pages/Dashboard/UserDashboard/PropertyBought/PropertyBought';
 import MyReviews from '../Pages/Dashboard/UserDashboard/MyReviews/MyReviews';
+import UpdateProperty from '../Pages/Dashboard/AgentsDashboard/UpdateProperty/UpdateProperty';
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
           {
             path: 'sold-properties',
             element: <MySoldProperties />,
+          },
+          {
+            path: 'added-properties/:id',
+            element: <UpdateProperty />,
           },
 
           // Admin Routes

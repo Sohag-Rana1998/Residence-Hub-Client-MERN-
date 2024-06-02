@@ -17,21 +17,27 @@ import { toast } from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
+import { useForm } from 'react-hook-form';
 
 const SignIn = () => {
   const captChaRef = useRef();
   const [type, setType] = useState(false);
 
-  const { signInWithEmail } = useAuth();
+  const { signIn } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
   // console.log(location);
-  const handleLogIn = e => {
-    e.preventDefault();
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = data => {
+    const email = data.email;
+    const password = data.password;
 
     const user_captcha_value = captChaRef.current.value;
     if (validateCaptcha(user_captcha_value)) {
@@ -40,10 +46,9 @@ const SignIn = () => {
       return toast('CaptCha Not Verified');
     }
 
-    signInWithEmail(email, password)
+    signIn(email, password)
       .then(() => {
         // console.log(result.user);
-
         Swal.fire({
           icon: 'success',
           title: 'Log In successful',
@@ -86,12 +91,7 @@ const SignIn = () => {
             <div className="mb-4 h-20 rounded-3xl w-60 shadow-lg bg-[#399edd] flex justify-center items-center text-3xl font-extrabold text-white">
               <h3>Sign In</h3>
             </div>
-            <form
-              onSubmit={handleLogIn}
-              noValidate=""
-              action=""
-              className="space-y-6"
-            >
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="space-y-4">
                 <div>
                   <label
@@ -104,10 +104,13 @@ const SignIn = () => {
                     type="email"
                     name="email"
                     id="email"
-                    required
-                    placeholder=" Email address"
+                    {...register('email', { required: true })}
+                    placeholder="Email address"
                     className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                   />
+                  {errors.email && (
+                    <span className="text-red-500">Email is required</span>
+                  )}
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
@@ -129,8 +132,11 @@ const SignIn = () => {
                       id="password"
                       placeholder="password"
                       className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
-                      required
+                      {...register('password', { required: true })}
                     />
+                    {errors.password && (
+                      <span className="text-red-500">Password is required</span>
+                    )}
                     <span
                       className="absolute right-5 top-2 "
                       onClick={() => setType(!type)}

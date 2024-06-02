@@ -4,11 +4,11 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 const Dashboard = () => {
   // const { isAdmin } = useAdmin();
   // console.log(isAdmin);
-  const admin = false;
-  const agent = true;
+  const admin = true;
+  const agent = false;
   const user1 = false;
   return (
-    <div className="flex h-screen    items-stretch  mx-auto">
+    <div className="flex h-screen  pt-[50px]  items-stretch  mx-auto">
       <div className="w-64 bg-[#1b71c7] text-white min-h-screen">
         <div className="flex justify-center p-4">
           <Link to={'/'}>

@@ -94,7 +94,7 @@ const Card = ({ estate, refetch }) => {
               </p>
             </div>
             <div className="mt-3 md:mt-0">
-              <span className="font-semibold text-sm bg-blue-400 p-2 text-white rounded-3xl">
+              <span className="font-semibold text-sm bg-blue-500 p-2 text-white rounded-3xl">
                 Price Range: ${minimumPrice}-{maximumPrice}
               </span>
             </div>
@@ -116,7 +116,7 @@ const Card = ({ estate, refetch }) => {
                 {' '}
                 Delete
               </button>
-              <Link to={`/update-property/${_id}`}>
+              <Link to={`${_id}`}>
                 <button className="bg-blue-600 btn mb-2  hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
                   Update
                 </button>
