@@ -1,14 +1,16 @@
 import { Avatar } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
+
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
+import useRole from '../../hooks/userRole';
 
 // import useCartsData from '../../hooks/useCartsData';
 // import useAdmin from '../../hooks/useAdmin';
 
 const NavBar = () => {
+  const { loggedUser } = useRole();
   const localTheme = localStorage.getItem('theme');
   const { user, logOut } = useAuth();
   const [theme, setTheme] = useState(localTheme);
@@ -54,10 +56,6 @@ const NavBar = () => {
       });
     // console.log(user);
   };
-
-  const admin = true;
-  const agent = false;
-  const user1 = false;
 
   //https://i.postimg.cc/66LCsndF/light.png
   //https://i.postimg.cc/RFxv43cD/dark.png
@@ -142,48 +140,22 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        {admin && (
-          <NavLink
-            to="/dashboard/admin-profile"
-            className={({ isActive, isPending }) =>
-              isActive
-                ? 'border-2 font-bold text-[#EEFF25]'
-                : isPending
-                ? 'pending'
-                : ''
-            }
-          >
-            DASHBOARD
-          </NavLink>
-        )}
-        {agent && (
-          <NavLink
-            to="/dashboard/agent-profile"
-            className={({ isActive, isPending }) =>
-              isActive
-                ? 'border-2 font-bold text-[#EEFF25]'
-                : isPending
-                ? 'pending'
-                : ''
-            }
-          >
-            DASHBOARD
-          </NavLink>
-        )}
-        {user1 && (
-          <NavLink
-            to="/dashboard/user-profile"
-            className={({ isActive, isPending }) =>
-              isActive
-                ? 'border-2 font-bold text-[#EEFF25]'
-                : isPending
-                ? 'pending'
-                : ''
-            }
-          >
-            DASHBOARD
-          </NavLink>
-        )}
+        <NavLink
+          to={
+            (loggedUser?.role === 'Admin' && '/dashboard/admin-profile') ||
+            (loggedUser?.role === 'Agent' && '/dashboard/agent-profile') ||
+            '/dashboard/user-profile'
+          }
+          className={({ isActive, isPending }) =>
+            isActive
+              ? 'border-2 font-bold text-[#EEFF25]'
+              : isPending
+              ? 'pending'
+              : ''
+          }
+        >
+          DASHBOARD
+        </NavLink>{' '}
       </li>
     </div>
   );

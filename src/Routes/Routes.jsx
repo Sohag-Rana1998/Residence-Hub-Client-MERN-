@@ -21,6 +21,7 @@ import PropertyBought from '../Pages/Dashboard/UserDashboard/PropertyBought/Prop
 import MyReviews from '../Pages/Dashboard/UserDashboard/MyReviews/MyReviews';
 import UpdateProperty from '../Pages/Dashboard/AgentsDashboard/UpdateProperty/UpdateProperty';
 import AdvertiseProperty from '../Pages/Dashboard/AdminDashboard/AdvertiseProperty/AdvertiseProperty';
+import ViewDetails from '../Pages/ViewDetails/ViewDetails';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <SignIn />,
+      },
+      {
+        path: '/view-details/:id',
+        element: <ViewDetails />,
       },
       {
         path: '/dashboard',

@@ -1,12 +1,10 @@
 import { Link, NavLink, Outlet } from 'react-router-dom';
+import useRole from '../hooks/userRole';
 // import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
-  // const { isAdmin } = useAdmin();
-  // console.log(isAdmin);
-  const admin = true;
-  const agent = false;
-  const user1 = false;
+  const { loggedUser } = useRole();
+
   return (
     <div className="flex h-screen  pt-[50px]  items-stretch  mx-auto">
       <div className="w-64 bg-[#1b71c7] text-white min-h-screen">
@@ -21,7 +19,7 @@ const Dashboard = () => {
           </Link>
         </div>
         <ul className="menu px-3 mt-10">
-          {admin && (
+          {loggedUser?.status === 'Admin' && (
             <>
               <li className="mb-3">
                 <NavLink
@@ -96,7 +94,7 @@ const Dashboard = () => {
               </li>
             </>
           )}
-          {agent && (
+          {loggedUser?.status === 'Agent' && (
             <>
               <li className="mb-3">
                 <NavLink
@@ -172,7 +170,7 @@ const Dashboard = () => {
             </>
           )}
 
-          {user1 && (
+          {loggedUser?.status || (
             <>
               <li className="mb-3">
                 <NavLink

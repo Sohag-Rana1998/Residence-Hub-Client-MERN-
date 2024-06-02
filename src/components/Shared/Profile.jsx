@@ -4,7 +4,6 @@ import {
   FaInstagram,
   FaLinkedin,
   FaLocationPin,
-  FaMessage,
   FaPhone,
   FaPinterest,
   FaTwitter,
@@ -13,7 +12,8 @@ import {
 import { Helmet } from 'react-helmet-async';
 import { FaEnvelope } from 'react-icons/fa';
 
-const Profile = ({ user }) => {
+const Profile = ({ user, refetch }) => {
+  console.log(refetch);
   return (
     <div className="container  mx-auto    rounded-lg ">
       <Helmet>
@@ -28,7 +28,7 @@ const Profile = ({ user }) => {
           <div className="mx-auto w-32 h-32 relative -mt-10 border-4 border-white rounded-full overflow-hidden">
             <img
               className="object-cover object-center h-32"
-              src={user?.photoURL}
+              src={user?.photo}
             />
           </div>
           <div className="divider"></div>
@@ -49,10 +49,12 @@ const Profile = ({ user }) => {
         <div className=" flex-1">
           <div className="px-5 mt-5">
             <div>
-              <h2 className="font-bold text-4xl">
-                {user?.displayName || 'Unknown'}
-              </h2>
-              <h4 className="text-xl font-bold">Agent</h4>
+              <h2 className="font-bold text-4xl">{user?.name || 'Unknown'}</h2>
+              <h4 className="text-xl font-bold">
+                {(user?.role === 'Admin' && 'Admin') ||
+                  (user?.role === 'Agent' && 'Agent') ||
+                  ''}
+              </h4>
             </div>
             <div className="mt-5">
               <p className=" font-semibold flex items-center gap-2">
@@ -77,5 +79,6 @@ const Profile = ({ user }) => {
 
 Profile.propTypes = {
   user: PropTypes.object,
+  refetch: PropTypes.func,
 };
 export default Profile;

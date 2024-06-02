@@ -113,7 +113,7 @@ const Card = ({ estate, refetch }) => {
             </div>
             {showDetailsbtn && (
               <div className="flex w-full justify-end md:items-center mt-3">
-                <Link to={`${_id}`}>
+                <Link to={`/view-details/${_id}`}>
                   <button className="bg-blue-600 btn mb-2  hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
                     View Details
                   </button>

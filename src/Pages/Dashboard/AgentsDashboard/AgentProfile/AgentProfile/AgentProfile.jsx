@@ -1,11 +1,12 @@
 import Profile from '../../../../../components/Shared/Profile';
-import useAuth from '../../../../../hooks/useAuth';
+import useRole from '../../../../../hooks/userRole';
 
 const AgentProfile = () => {
-  const { user } = useAuth();
+  const { loggedUser, refetch } = useRole();
+  console.log(loggedUser);
   return (
     <div>
-      <Profile user={user} />
+      <Profile user={loggedUser} refetch={refetch} />
     </div>
   );
 };
