@@ -62,9 +62,9 @@ const MakeOffer = () => {
   });
   const onSubmit = async data => {
     // console.log(data);
-    // if (data.amount < minimumPrice || data.amount > maximumPrice) {
-    //   return toast.error('Offered Amount Must Be Within The Price Range');
-    // }
+    if (data.amount < minimumPrice || data.amount > maximumPrice) {
+      return toast.error('Offered Amount Must Be Within The Price Range');
+    }
 
     const offeredProperty = {
       propertyId,

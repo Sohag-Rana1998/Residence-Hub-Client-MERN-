@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 import useOfferedPropertyById from '../../../../hooks/useOfferedPropertyById';
@@ -16,8 +16,8 @@ const CheckoutForm = ({ id }) => {
   const { user } = useAuth();
   const { acceptedProperty, reload, isLoading } = useOfferedPropertyById(id);
   console.log(acceptedProperty);
-  // const navigate = useNavigate();
-  const paymentPrice = 2000;
+  const navigate = useNavigate();
+  const paymentPrice = acceptedProperty?.OfferedAmount;
   const propertyId = acceptedProperty?.propertyId;
   console.log(paymentPrice, propertyId);
   useEffect(() => {
@@ -79,13 +79,16 @@ const CheckoutForm = ({ id }) => {
 
         // now save the payment in the database
         const payment = {
-          email: user?.email,
+          buyerEmail: user?.email,
           price: paymentPrice,
           transactionId: paymentIntent.id,
-          date: new Date(), // utc date convert. use moment js to
+          date: new Date(),
           boughtId: id,
           propertyId: propertyId,
-          status: 'pending',
+          agentEmail: acceptedProperty?.agentEmail,
+          buyerName: user?.displayName,
+          title: acceptedProperty?.title,
+          location: acceptedProperty?.location,
         };
 
         const res = await axiosSecure.post('/payments', payment);
@@ -98,42 +101,50 @@ const CheckoutForm = ({ id }) => {
             showConfirmButton: false,
             timer: 1500,
           });
-          // navigate('/dashboard/paymentHistory');
+          event.target.reset();
+          navigate('/dashboard/bought-properties');
         }
       }
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: '16px',
-              color: '#424770',
-              '::placeholder': {
-                color: '#aab7c4',
+    <div className="w-full rounded-lg md:w-[50%] mx-auto bg-orange-100 p-2 md:p-10">
+      <form onSubmit={handleSubmit}>
+        <CardElement
+          options={{
+            style: {
+              base: {
+                fontSize: '16px',
+                color: '#040c16',
+                '::placeholder': {
+                  color: '#040c16',
+                },
+              },
+              invalid: {
+                color: '#9e2146',
               },
             },
-            invalid: {
-              color: '#9e2146',
-            },
-          },
-        }}
-      />
-      <button
-        className="btn btn-sm btn-primary my-4"
-        type="submit"
-        disabled={!stripe || !clientSecret}
-      >
-        Pay
-      </button>
-      <p className="text-red-600">{error}</p>
-      {transactionId && (
-        <p className="text-green-600"> Your transaction id: {transactionId}</p>
-      )}
-    </form>
+          }}
+        />
+        <div className="w-full flex flex-col justify-center items-center">
+          <button
+            className="btn bg-blue-500 w-32 text-white  my-4"
+            type="submit"
+            disabled={!stripe || !clientSecret}
+          >
+            Pay
+          </button>
+          <p className="text-red-600">{error}</p>
+          {transactionId && (
+            <p className="text-green-600">
+              {' '}
+              Your transaction id: {transactionId}
+            </p>
+          )}
+        </div>
+      </form>
+    </div>
   );
 };
 

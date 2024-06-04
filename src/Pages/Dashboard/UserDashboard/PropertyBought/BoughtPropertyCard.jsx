@@ -17,6 +17,7 @@ const BoughtPropertyCard = ({ property, refetch }) => {
     OfferedAmount,
     location,
     image,
+    transactionId,
   } = property;
   console.log(property);
   console.log(buyingDate);
@@ -123,15 +124,13 @@ const BoughtPropertyCard = ({ property, refetch }) => {
               </div>
             )}
             {status === 'Bought' && (
-              <div className="flex mb-3 justify-between items-start md:items-center mt-3">
-                <span className=" bg-blue-500 rounded-3xl  text-white py-1 px-2 duration-500">
-                  {status}
-                </span>
-                <Link to={`${_id}`}>
-                  <span className="bg-blue-500  rounded-3xl  text-white py-1 px-2 duration-500 font-bold">
-                    Transection Id
-                  </span>
-                </Link>
+              <div className=" my-3  ">
+                <p className="text-sm">transactionId: {transactionId}</p>
+                <div className="flex justify-end">
+                  <p className=" bg-blue-500 text-center w-20 rounded-3xl  text-white py-1 px-2 duration-500">
+                    {status}
+                  </p>
+                </div>
               </div>
             )}
           </div>
