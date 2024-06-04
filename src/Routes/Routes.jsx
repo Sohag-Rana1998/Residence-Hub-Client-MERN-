@@ -23,6 +23,7 @@ import UpdateProperty from '../Pages/Dashboard/AgentsDashboard/UpdateProperty/Up
 import AdvertiseProperty from '../Pages/Dashboard/AdminDashboard/AdvertiseProperty/AdvertiseProperty';
 import ViewDetails from '../Pages/ViewDetails/ViewDetails';
 import MakeOffer from '../Pages/Dashboard/UserDashboard/WishList/MakeOffer';
+import Payment from '../Pages/Dashboard/UserDashboard/PropertyBought/Payment';
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
           {
             path: 'wishlist/:id',
             element: <MakeOffer />,
+          },
+          {
+            path: 'bought-properties/:id',
+            element: <Payment />,
           },
 
           // Agents routes

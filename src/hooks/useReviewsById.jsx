@@ -3,7 +3,7 @@ import useAxiosSecure from './useAxiosSecure';
 const useReviewsById = id => {
   const axiosSecure = useAxiosSecure();
   const {
-    data: reviews = [],
+    data: reviews = {},
     isLoading,
     refetch: reload,
   } = useQuery({

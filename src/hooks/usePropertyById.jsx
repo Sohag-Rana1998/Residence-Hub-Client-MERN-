@@ -3,7 +3,7 @@ import useAxiosSecure from './useAxiosSecure';
 const usePropertyById = id => {
   const axiosSecure = useAxiosSecure();
   const {
-    data: property = [],
+    data: property = {},
     isLoading,
     refetch,
   } = useQuery({
