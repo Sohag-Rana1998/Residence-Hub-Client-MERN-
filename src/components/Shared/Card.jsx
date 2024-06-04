@@ -67,13 +67,17 @@ const Card = ({ estate, refetch }) => {
     <div className="w-full">
       <div className="w-full  h-full  rounded-2xl shadow-2xl  ">
         <div className="m-0 p-0 ">
-          <div className="relative h-80 rounded-t-2xl overflow-hidden">
+          <div className="relative h-64 rounded-t-2xl overflow-hidden">
             <img
               src={image}
               className="w-full   h-full hover:scale-[110%] duration-700"
               alt="ui/ux review check"
             />
-            <button className="px-8 py-3 rounded-bl-3xl bg-blue-500 absolute z-10 right-0 top-0 text-white font-bold bg-opacity-80">
+            <button
+              className={`px-8 py-3 rounded-bl-3xl ${
+                status === 'Verified' ? 'bg-blue-500' : 'bg-red-400 '
+              }  absolute z-10 right-0 top-0 text-white font-bold bg-opacity-80`}
+            >
               {status}
             </button>
 
@@ -86,7 +90,17 @@ const Card = ({ estate, refetch }) => {
           </div>
         </div>
         <CardBody className="px-3 h-auto  ">
-          <div className="flex h-full flex-col md:flex-row justify-between ">
+          <div>
+            <p className="text-xl font-semibold">{title}</p>
+            <p className="font-semibold text-lg">
+              <span className="font-bold">Area:</span>
+              {area}
+            </p>
+            <span className="font-semibold text-sm  ">
+              Price Range: ${minimumPrice}-{maximumPrice}
+            </span>
+          </div>
+          {showDetailsbtn || (
             <div>
               {estate?.agentImg && (
                 <img src={estate.agentImg} className="w-12 h-12 rounded-full" />
@@ -97,22 +111,24 @@ const Card = ({ estate, refetch }) => {
                 {agentName}
               </p>
             </div>
-            <div className="mt-3 md:mt-0">
-              <span className="font-semibold text-sm bg-blue-500 p-2 text-white rounded-3xl">
-                Price Range: ${minimumPrice}-{maximumPrice}
-              </span>
-            </div>
-          </div>
-          <div className="flex h-full flex-col justify-between">
-            <p className="text-xl font-semibold">{title}</p>
-            <div>
-              <p className="font-semibold text-lg">
-                <span className="font-bold">Area:</span>
-                {area}
-              </p>
-            </div>
+          )}
+
+          <div className="">
             {showDetailsbtn && (
-              <div className="flex w-full justify-end md:items-center mt-3">
+              <div className="flex w-full justify-between md:items-center mt-3">
+                <div>
+                  {estate?.agentImg && (
+                    <img
+                      src={estate.agentImg}
+                      className="w-12 h-12 rounded-full"
+                    />
+                  )}
+
+                  <p className="font-semibold text-sm mt-1">
+                    <span className="font-bold">Agent Name:</span>
+                    {agentName}
+                  </p>
+                </div>
                 <Link to={`/view-details/${_id}`}>
                   <button className="bg-blue-600 btn mb-2  hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
                     View Details

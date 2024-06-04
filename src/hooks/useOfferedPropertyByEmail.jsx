@@ -2,26 +2,26 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from './useAxiosSecure';
 import useAuth from './useAuth';
 
-const useWishlistDataByEmail = () => {
+const useOfferedPropertyByEmail = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const {
-    data: wishlistProperties = [],
+    data: offeredProperties = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['wishlist'],
+    queryKey: ['offeredProperties'],
     queryFn: async () => {
       if (user?.email) {
         const { data } = await axiosSecure.get(
-          `/wishlist?email=${user?.email}`
+          `/offered-property?email=${user?.email}`
         );
         console.log(data);
         return data;
       }
     },
   });
-  return { wishlistProperties, isLoading, refetch };
+  return { offeredProperties, isLoading, refetch };
 };
 
-export default useWishlistDataByEmail;
+export default useOfferedPropertyByEmail;

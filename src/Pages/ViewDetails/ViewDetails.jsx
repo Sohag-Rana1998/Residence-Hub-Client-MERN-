@@ -20,11 +20,11 @@ const ViewDetails = () => {
   // const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState(0); // Initial value
   const [modalLoading, setModalLoading] = useState(true);
-  const applicationDate = new Date();
+
   const { property, isLoading, refetch } = usePropertyById(id);
 
   const { reviews, reload } = useReviewsById(id);
-
+  console.log(reviews);
   const {
     title,
     agentName,
@@ -34,12 +34,13 @@ const ViewDetails = () => {
     status,
     area,
     location,
+    facilities,
     image,
     agentImg,
     agentEmail,
   } = property;
 
-  const present = new Date(applicationDate).toLocaleDateString();
+  const present = new Date();
 
   const { mutateAsync: mutateAsync1 } = useMutation({
     mutationFn: async propertyData => {
@@ -49,14 +50,14 @@ const ViewDetails = () => {
       );
       console.log(data);
       if (data.message) {
-        toast.success(data.message);
+        toast.error(data.message);
       }
       if (data.insertedId) {
         reload();
         refetch();
         Swal.fire({
           icon: 'success',
-          title: 'Your Review Added Successfully',
+          title: 'Your Property Added Successfully',
           showConfirmButton: false,
           timer: 1500,
         });
@@ -72,7 +73,7 @@ const ViewDetails = () => {
     const email = user?.email;
     const name = user?.displayName;
     const propertyId = id;
-
+    console.log(email);
     const propertyData = {
       propertyId,
       title,
@@ -83,6 +84,7 @@ const ViewDetails = () => {
       status,
       area,
       location,
+      facilities,
       agentImg,
       agentName,
       agentEmail,
@@ -135,7 +137,10 @@ const ViewDetails = () => {
 
     const reviewData = {
       propertyId: id,
+      propertyTitle: title,
       name: data.name,
+      agentName: agentName,
+      email: user?.email,
       photo: user?.photoURL,
       review: data.review,
       star: rating,
@@ -150,7 +155,7 @@ const ViewDetails = () => {
       console.log(err.message);
     }
   };
-
+  console.log(present);
   return isLoading ? (
     <div className="w-[80%] mx-auto min-h-screen ">
       {/* <SkeletonTheme baseColor="#a2a2b2">
@@ -168,7 +173,6 @@ const ViewDetails = () => {
       <Helmet>
         <title>Job Portal | Details </title>
       </Helmet>
-
       <div className="h-32 mb-10 bg-[url(https://i.ibb.co/PtcPs7P/6.jpg)] bg-no-repeat bg-cover bg-center md:h-40  w-full rounded-xl flex justify-between items-center">
         <h1 className="text-2xl h-full text-white flex items-center  w-full md:text-4xl font-bold   justify-center">
           Property Details
@@ -205,6 +209,7 @@ const ViewDetails = () => {
                     <span className="font-bold">Details About The Job: </span>
                     {description}
                   </p>
+                  <p> Facilities:{facilities}</p>
                 </div>
               </div>
               <div>
@@ -334,7 +339,12 @@ const ViewDetails = () => {
                           <h3 className="">{review.name}</h3>
                         </div>
                         <div>
-                          <p>Date: {review.date}</p>
+                          <div>
+                            {new Date(review.date).toLocaleDateString()}
+                          </div>
+                          <div>
+                            {new Date(review.date).toLocaleTimeString()}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -385,7 +395,7 @@ const ViewDetails = () => {
                                 name="name"
                                 type="text"
                                 {...register('name')}
-                                value={user?.displayName}
+                                defaultValue={user?.displayName}
                                 readOnly
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                               />

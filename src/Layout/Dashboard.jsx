@@ -4,7 +4,7 @@ import useRole from '../hooks/userRole';
 
 const Dashboard = () => {
   const { loggedUser } = useRole();
-
+  console.log(loggedUser);
   return (
     <div className="flex h-screen  pt-[50px]  items-stretch  mx-auto">
       <div className="w-64 bg-[#1b71c7] text-white min-h-screen">
@@ -19,7 +19,7 @@ const Dashboard = () => {
           </Link>
         </div>
         <ul className="menu px-3 mt-10">
-          {loggedUser?.status === 'Admin' && (
+          {loggedUser?.role === 'Admin' && (
             <>
               <li className="mb-3">
                 <NavLink
@@ -94,7 +94,7 @@ const Dashboard = () => {
               </li>
             </>
           )}
-          {loggedUser?.status === 'Agent' && (
+          {loggedUser?.role === 'Agent' && (
             <>
               <li className="mb-3">
                 <NavLink
@@ -140,20 +140,6 @@ const Dashboard = () => {
               </li>
               <li className="mb-3">
                 <NavLink
-                  to={'/dashboard/sold-properties'}
-                  className={({ isActive, isPending }) =>
-                    isActive
-                      ? 'border-2 w-full bg-black/30 font-bold text-white'
-                      : isPending
-                      ? 'pending'
-                      : ''
-                  }
-                >
-                  My Sold Properties
-                </NavLink>
-              </li>
-              <li className="mb-3">
-                <NavLink
                   to={'/dashboard/requested-properties'}
                   className={({ isActive, isPending }) =>
                     isActive
@@ -167,10 +153,25 @@ const Dashboard = () => {
                   Requested Properties
                 </NavLink>
               </li>
+
+              <li className="mb-3">
+                <NavLink
+                  to={'/dashboard/sold-properties'}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
+                      : isPending
+                      ? 'pending'
+                      : ''
+                  }
+                >
+                  My Sold Properties
+                </NavLink>
+              </li>
             </>
           )}
 
-          {loggedUser?.status || (
+          {loggedUser?.role || (
             <>
               <li className="mb-3">
                 <NavLink

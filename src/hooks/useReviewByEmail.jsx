@@ -2,25 +2,24 @@ import { useQuery } from '@tanstack/react-query';
 import useAuth from './useAuth';
 import useAxiosSecure from './useAxiosSecure';
 
-const useRole = () => {
+const useReviewByEmail = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-
   const {
-    data: loggedUser = {},
+    data: reviewData = [],
     refetch,
-    isPending,
+    isLoading,
   } = useQuery({
-    queryKey: ['logged-user'],
+    queryKey: ['ReviewByEmail'],
     queryFn: async () => {
       if (user?.email) {
-        const { data } = await axiosSecure.get(`/user?email=${user?.email}`);
+        const { data } = await axiosSecure.get(`/reviews?email=${user?.email}`);
+        console.log(data);
         return data;
       }
     },
   });
-
-  return { loggedUser, refetch, isPending };
+  return { reviewData, refetch, isLoading };
 };
 
-export default useRole;
+export default useReviewByEmail;

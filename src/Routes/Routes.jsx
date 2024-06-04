@@ -22,6 +22,7 @@ import MyReviews from '../Pages/Dashboard/UserDashboard/MyReviews/MyReviews';
 import UpdateProperty from '../Pages/Dashboard/AgentsDashboard/UpdateProperty/UpdateProperty';
 import AdvertiseProperty from '../Pages/Dashboard/AdminDashboard/AdvertiseProperty/AdvertiseProperty';
 import ViewDetails from '../Pages/ViewDetails/ViewDetails';
+import MakeOffer from '../Pages/Dashboard/UserDashboard/WishList/MakeOffer';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
           {
             path: 'my-reviews',
             element: <MyReviews />,
+          },
+          {
+            path: 'wishlist/:id',
+            element: <MakeOffer />,
           },
 
           // Agents routes

@@ -40,11 +40,11 @@ const SignIn = () => {
     const password = data.password;
 
     const user_captcha_value = captChaRef.current.value;
-    if (validateCaptcha(user_captcha_value)) {
-      console.log(user_captcha_value);
-    } else {
-      return toast('CaptCha Not Verified');
-    }
+    // if (validateCaptcha(user_captcha_value)) {
+    //   console.log(user_captcha_value);
+    // } else {
+    //   return toast('CaptCha Not Verified');
+    // }
 
     signIn(email, password)
       .then(() => {

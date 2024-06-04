@@ -11,7 +11,7 @@ const AllProperties = () => {
   console.log(loggedUser);
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 3;
   const [search, setSearch] = useState('');
   const [count, setCount] = useState(0);
   const [loader, setLoader] = useState(false);
@@ -88,7 +88,7 @@ const AllProperties = () => {
               </form>
             </div>
           </div>
-          <div className="grid grid-cols-1 bg-brown-50 px-10 py-5 rounded-md gap-8  md:grid-cols-2 ">
+          <div className="grid grid-cols-1 bg-brown-50 px-10 py-5 rounded-md gap-5  md:grid-cols-2 lg:grid-cols-3 ">
             {verifiedProperties &&
               verifiedProperties.map(property => (
                 <Card key={property._id} estate={property} refetch={refetch} />
@@ -96,7 +96,7 @@ const AllProperties = () => {
           </div>
           <div>
             {count > 4 ? (
-              <div className="flex justify-center items-center my-5 bg-blue-400 rounded-xl p-3">
+              <div className="flex justify-center items-center text-white my-5 bg-blue-500 rounded-xl p-3">
                 <div className="flex">
                   <a
                     onClick={() => {
@@ -108,7 +108,7 @@ const AllProperties = () => {
                     className={
                       currentPage == 1
                         ? ' hidden'
-                        : 'px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  dark:bg-gray-80 cursor-pointer dark:text-gray-600'
+                        : 'px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  dark:bg-gray-80 cursor-pointer hover:bg-blue-500 hover:text-white'
                     }
                   >
                     <div className="flex items-center -mx-1">
@@ -142,8 +142,8 @@ const AllProperties = () => {
                       key={page}
                       className={
                         currentPage == page
-                          ? 'px-4 py-2 hidden md:block mx-1 text-gray-700 transition-colors duration-300 transform bg-blue-500 rounded-md sm:inline dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200'
-                          : 'px-4 py-2 hidden md:block mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:inline dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200'
+                          ? 'px-4 py-2 hidden md:block mx-1 transition-colors duration-300 transform bg-gray-500 rounded-md sm:inline    hover:bg-blue-500   hover:text-white  '
+                          : 'px-4 py-2 hidden md:block mx-1 text-gray-700 transition-colors  duration-300 transform bg-white rounded-md sm:inline hover:bg-blue-500  hover:text-white  '
                       }
                     >
                       {page}

@@ -40,7 +40,6 @@ const SignUp = () => {
         };
         axiosPublic.post('/users', userInfo).then(res => {
           console.log(res.data);
-
           console.log(result.user);
           updateUserProfile(data.name, data.photo);
           reset();

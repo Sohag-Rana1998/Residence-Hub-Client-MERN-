@@ -7,9 +7,9 @@ const useReviewsById = id => {
     isLoading,
     refetch: reload,
   } = useQuery({
-    queryKey: ['reviews'],
+    queryKey: ['reviewsById'],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/reviews?id=${id}`);
+      const { data } = await axiosSecure.get(`/reviews/${id}`);
       console.log(data);
       return data;
     },
