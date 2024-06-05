@@ -50,11 +50,7 @@ const Profile = ({ user, refetch }) => {
           <div className="px-5 mt-5">
             <div>
               <h2 className="font-bold text-4xl">{user?.name || 'Unknown'}</h2>
-              <h4 className="text-xl font-bold">
-                {(user?.role === 'Admin' && 'Admin') ||
-                  (user?.role === 'Agent' && 'Agent') ||
-                  ''}
-              </h4>
+              <h4 className="text-xl font-bold">{user?.role}</h4>
             </div>
             <div className="mt-5">
               <p className=" font-semibold flex items-center gap-2">

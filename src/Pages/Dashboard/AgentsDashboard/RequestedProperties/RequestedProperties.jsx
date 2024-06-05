@@ -106,8 +106,8 @@ const RequestedProperties = () => {
     <div>
       <div>
         <SectionTitle
-          heading={'Manage Properties'}
-          subheading={'Home/dashboard/ManageProperties'}
+          heading={'Requested Properties'}
+          subheading={'Home/dashboard/Requested Properties'}
         />
       </div>
       <div>

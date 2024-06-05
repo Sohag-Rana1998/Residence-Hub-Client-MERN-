@@ -47,7 +47,7 @@ const SignUp = () => {
             icon: 'success',
             title:
               'Congratulation! Your account has been registered successfully',
-            showConfirmButton: true,
+            timer: 1500,
           });
           navigate(location.state || '/');
         });

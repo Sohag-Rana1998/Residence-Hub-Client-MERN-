@@ -4,12 +4,13 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 import { toast } from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import usePropertyById from '../../../../hooks/usePropertyById';
 import useAuth from '../../../../hooks/useAuth';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 const UpdateProperty = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const { property, refetch, isLoading } = usePropertyById(id);
@@ -57,6 +58,7 @@ const UpdateProperty = () => {
         timer: 1500,
       });
       reset();
+      navigate('/dashboard/added-properties');
       refetch();
     },
   });
@@ -298,7 +300,7 @@ const UpdateProperty = () => {
           <div>
             <input
               type="submit"
-              value="Add Property"
+              value="Update Property"
               className="w-full btn px-8 mt-4 py-3 font-semibold cursor-pointer rounded-md bg-[#399edd] text-white hover:text-black"
             />
           </div>

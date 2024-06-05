@@ -12,9 +12,7 @@ const ManageUsers = () => {
   console.log(users);
   const { mutateAsync } = useMutation({
     mutationFn: async userRole => {
-      const { data } = await axiosSecure.patch(`/users/role/${userRole.id}`, {
-        role: userRole.role,
-      });
+      const { data } = await axiosSecure.patch(`/users/role`, userRole);
       return data;
     },
     onSuccess: data => {
@@ -51,12 +49,8 @@ const ManageUsers = () => {
     },
   });
 
-  const handleFraud = id => {
-    console.log(id);
-  };
-
-  const handleChangeRole = async (id, role) => {
-    const userRole = { id: id, role: role };
+  const handleChangeRole = async (id, role, email) => {
+    const userRole = { id: id, role: role, email: email };
     console.log(userRole);
     Swal.fire({
       title: 'Are you sure?',
@@ -102,8 +96,7 @@ const ManageUsers = () => {
           subheading={'Home/Dashboard/Manage Users'}
         />
       </div>
-      <div className="w-full text-3xl mt-5 font-bold cinzel flex justify-evenly items-center">
-        <div>All Users: </div>
+      <div className="w-full text-3xl mt-5 font-bold ">
         <div>Total Users: {users?.length}</div>
       </div>
 
@@ -129,42 +122,64 @@ const ManageUsers = () => {
             <tbody>
               {/* row 1 */}
               {users?.map((user, index) => (
-                <tr key={user._id}>
+                <tr key={user?._id}>
                   <th>{index + 1}</th>
 
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
+                  <td>{user?.name}</td>
+                  <td>{user?.email}</td>
                   <td>{user?.role || 'User'}</td>
 
-                  <td className="">
-                    <button
-                      onClick={() => handleChangeRole(user._id, 'Admin')}
-                      className="btn"
-                    >
-                      {' '}
-                      Make Admin
-                    </button>
-                  </td>
-                  <td className="">
-                    <button
-                      onClick={() => handleChangeRole(user._id, 'Agent')}
-                      className="btn"
-                    >
-                      Make Agent
-                    </button>
-                  </td>
-                  <td className="">
-                    <button
-                      onClick={() => handleFraud(user._id)}
-                      className="btn"
-                    >
-                      Mark as Fraud
-                    </button>
-                  </td>
+                  {user?.role === 'Fraud' || (
+                    <>
+                      <td className="">
+                        <button
+                          onClick={() =>
+                            handleChangeRole(user._id, 'Admin', user?.email)
+                          }
+                          className="btn"
+                        >
+                          {' '}
+                          Make Admin
+                        </button>
+                      </td>
+                      <td className="">
+                        <button
+                          onClick={() =>
+                            handleChangeRole(user._id, 'Agent', user?.email)
+                          }
+                          className="btn"
+                        >
+                          Make Agent
+                        </button>
+                      </td>
+                      <td className="">
+                        {user?.role === 'Agent' && (
+                          <button
+                            onClick={() =>
+                              handleChangeRole(user._id, 'Fraud', user?.email)
+                            }
+                            className="btn"
+                          >
+                            Mark as Fraud
+                          </button>
+                        )}
+                      </td>
+                    </>
+                  )}
+                  {user?.role === 'Fraud' && (
+                    <>
+                      <td></td>
+                      <td>
+                        <span className="w-32 btn text-center py-3 text-white bg-red-500">
+                          Fraud
+                        </span>
+                      </td>
+                    </>
+                  )}
                   <th>
                     <button
                       onClick={() => handleDelete(user._id)}
-                      className="btn bg-red-600 "
+                      className="btn bg-red-500 "
                     >
                       <RiDeleteBin5Line className="text-white text-xl" />
                     </button>

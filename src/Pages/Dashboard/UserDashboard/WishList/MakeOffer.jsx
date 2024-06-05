@@ -5,7 +5,7 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useWishListDataById from '../../../../hooks/useWishListData';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -16,7 +16,7 @@ const MakeOffer = () => {
   const { id } = useParams();
   const [startDate, setStartDate] = useState(new Date());
   const { property, refetch, isLoading } = useWishListDataById(id);
-
+  const navigate = useNavigate();
   const {
     _id,
     title,
@@ -57,6 +57,7 @@ const MakeOffer = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate('/dashboard/bought-properties');
       }
     },
   });

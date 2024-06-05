@@ -4,7 +4,7 @@ import useAllProperties from '../../../../hooks/useAllProperties';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
-
+import { MdVerified } from 'react-icons/md';
 const ManageProperties = () => {
   const { properties, refetch } = useAllProperties();
   const axiosSecure = useAxiosSecure();
@@ -63,6 +63,9 @@ const ManageProperties = () => {
           subheading={'Home/dashboard/ManageProperties'}
         />
       </div>
+      <div className="w-full text-3xl mt-5 font-bold  ">
+        <div>Total Properties : {properties?.length}</div>
+      </div>
       <div>
         <div className="mt-5">
           <div className="overflow-x-auto">
@@ -95,20 +98,8 @@ const ManageProperties = () => {
                     <td>
                       ${property.minimumPrice}-{property.maximumPrice}
                     </td>
-                    {property.status === 'Verified' ||
-                    property.status === 'Rejected' ? (
-                      <td className="">
-                        <button
-                          className={`btn ${
-                            property.status === 'Rejected'
-                              ? 'bg-red-400'
-                              : 'bg-blue-500'
-                          }  text-white`}
-                        >
-                          {property.status}
-                        </button>
-                      </td>
-                    ) : (
+
+                    {property.status === 'Pending' && (
                       <>
                         <td className="">
                           <button
@@ -129,6 +120,32 @@ const ManageProperties = () => {
                           >
                             Reject
                           </button>
+                        </td>
+                      </>
+                    )}
+
+                    {property.status === 'Rejected' && (
+                      <>
+                        <td className="">
+                          <span
+                            className={`px-5 py-3 rounded-3xl bg-red-500 cursor-not-allowed
+                                 text-white`}
+                          >
+                            {property.status}
+                          </span>
+                        </td>
+                      </>
+                    )}
+
+                    {property.status === 'Verified' && (
+                      <>
+                        <td className="">
+                          <span
+                            className="px-4 py-3 rounded-3xl bg-blue-500 flex items-center justify-center gap-1 cursor-not-allowed
+                                 text-white"
+                          >
+                            {property.status} <MdVerified />
+                          </span>
                         </td>
                       </>
                     )}

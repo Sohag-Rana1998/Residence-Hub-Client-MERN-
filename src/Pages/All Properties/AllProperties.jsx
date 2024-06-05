@@ -88,7 +88,7 @@ const AllProperties = () => {
               </form>
             </div>
           </div>
-          <div className="grid grid-cols-1 bg-brown-50 px-10 py-5 rounded-md gap-5  md:grid-cols-2 lg:grid-cols-3 ">
+          <div className="grid grid-cols-1  px-10 py-5 rounded-md gap-5  md:grid-cols-2 lg:grid-cols-3 ">
             {verifiedProperties &&
               verifiedProperties.map(property => (
                 <Card key={property._id} estate={property} refetch={refetch} />

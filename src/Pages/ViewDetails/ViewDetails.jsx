@@ -189,13 +189,13 @@ const ViewDetails = () => {
                   className="w-full rounded-2xl  h-full hover:scale-[105%] duration-700"
                   alt="ui/ux review check"
                 />
-                <span className="bg-blue-500 bottom-0 right-0 absolute py-3 px-5 text-white rounded-br-2xl text-sm font-bold">
+                <span className="bg-blue-500 bottom-0 right-0 absolute py-3 px-5 text-white rounded-br-2xl  rounded-tl-2xl text-sm font-bold">
                   {status}
                 </span>
               </div>
             </div>
 
-            <div className="flex w-full flex-col  justify-between h-auto  ">
+            <div className="flex  w-full flex-col  justify-between h-auto  ">
               <div>
                 <div>
                   <div className="">

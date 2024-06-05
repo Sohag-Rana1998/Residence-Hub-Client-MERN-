@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { CardBody } from '@material-tailwind/react';
+import { GrLinkNext } from 'react-icons/gr';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
@@ -74,22 +74,22 @@ const Card = ({ estate, refetch }) => {
               alt="ui/ux review check"
             />
             <button
-              className={`px-8 py-3 rounded-bl-3xl ${
+              className={`px-3 py-2 rounded-bl-3xl ${
                 status === 'Verified' ? 'bg-blue-500' : 'bg-red-400 '
               }  absolute z-10 right-0 top-0 text-white font-bold bg-opacity-80`}
             >
               {status}
             </button>
 
-            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 p-2 rounded-t-lg ">
+            <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 p-2 rounded-t-lg ">
               <p className=" font-sm text-white text-sm flex items-center gap-2">
                 <FaLocationDot />
                 {location}
               </p>
-            </p>
+            </div>
           </div>
         </div>
-        <CardBody className="px-3 h-auto  ">
+        <div className="px-3 pb-3 h-auto  ">
           <div>
             <p className="text-xl font-semibold">{title}</p>
             <p className="font-semibold text-lg">
@@ -131,7 +131,7 @@ const Card = ({ estate, refetch }) => {
                 </div>
                 <Link to={`/view-details/${_id}`}>
                   <button className="bg-blue-600 btn mb-2  hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
-                    View Details
+                    View Details <GrLinkNext className="text-xl" />
                   </button>
                 </Link>
               </div>
@@ -153,7 +153,7 @@ const Card = ({ estate, refetch }) => {
               </div>
             )}
           </div>
-        </CardBody>
+        </div>
       </div>
     </div>
   );

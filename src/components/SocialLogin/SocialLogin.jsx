@@ -2,6 +2,7 @@ import { FaGoogle } from 'react-icons/fa';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
@@ -18,6 +19,11 @@ const SocialLogin = () => {
       };
       axiosPublic.post('/users', userInfo).then(res => {
         console.log(res.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Login successfully',
+          timer: 1500,
+        });
         navigate('/');
       });
     });

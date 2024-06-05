@@ -6,8 +6,10 @@ import { toast } from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
+import useRole from '../../../../hooks/userRole';
 const AddProperty = () => {
   const { user } = useAuth();
+  const { loggedUser, refetch } = useRole();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
@@ -37,6 +39,9 @@ const AddProperty = () => {
     },
   });
   const onSubmit = async data => {
+    if (loggedUser?.role === 'Fraud')
+      return toast.error('You are not allowed to add any properties');
+
     console.log(data);
     // image upload to imgbb and then get an url
     const imageFile = { image: data.image[0] };

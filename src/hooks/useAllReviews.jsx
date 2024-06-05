@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from './useAxiosPublic';
+import useAxiosSecure from './useAxiosSecure';
 
 const useAllReviews = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {
     data: allReviews = [],
     isLoading,
@@ -10,7 +10,7 @@ const useAllReviews = () => {
   } = useQuery({
     queryKey: ['allReviews'],
     queryFn: async () => {
-      const { data } = await axiosPublic.get('/all-reviews');
+      const { data } = await axiosSecure.get('/all-reviews');
       console.log(data);
       return data;
     },

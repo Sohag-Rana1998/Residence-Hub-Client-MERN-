@@ -1,13 +1,10 @@
 import Card from '../../../../components/Shared/Card';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
-import useAuth from '../../../../hooks/useAuth';
 
 import usePropertyByAgent from '../../../../hooks/usePropertyByAgent';
 
 const MyAddedProperties = () => {
-  const { user } = useAuth();
-  const email = user?.email;
-  const { agentProperties, refetch } = usePropertyByAgent(email);
+  const { agentProperties, refetch } = usePropertyByAgent();
   console.log(agentProperties);
   return (
     <div>
