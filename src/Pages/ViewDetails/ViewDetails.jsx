@@ -226,7 +226,7 @@ const ViewDetails = () => {
       </SkeletonTheme> */}
     </div>
   ) : (
-    <div className=" ">
+    <div className="">
       <Helmet>
         <title>Job Portal | Details </title>
       </Helmet>
@@ -255,52 +255,58 @@ const ViewDetails = () => {
             <div className="flex  w-full flex-col  justify-between h-auto  ">
               <div>
                 <div>
-                  <div className="">
-                    <h3 className="text-2xl font-bold">Job Title: {title}</h3>
-                    <h4 className="flex gap-2 items-center text-xl font-semibold">
-                      <FaLocationDot /> {location}
-                    </h4>
+                  <div className="flex justify-between flex-col lg:flex-row items-start lg:items-center">
+                    <div>
+                      <h3 className="text-2xl font-bold">{title}</h3>
+                      <h4 className="flex gap-2 items-center  font-semibold">
+                        <FaLocationDot /> {location}
+                      </h4>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-blue-500">
+                        ${minimumPrice}-${maximumPrice}
+                      </h3>
+                    </div>
                   </div>
 
-                  <p className="text-lg mt-2">
-                    <span className="font-bold">Details About The Job: </span>
-                    {description}
-                  </p>
-                  <p> Facilities:{facilities}</p>
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">
-                  <div>
-                    <img
-                      src={agentImg}
-                      alt=""
-                      className="w-12 h-12 rounded-full"
-                    />
+                  <div className="text-lg mt-2 border p-3">
+                    <span className="font-bold"> About Property: </span>
+                    <div>
+                      <p>{description}</p>
+                      <p> Facilities:{facilities}</p>
+                    </div>
+                    <div className="font-bold mt-2">
+                      <div>
+                        <img
+                          src={agentImg}
+                          alt=""
+                          className="w-12 h-12 rounded-full"
+                        />
+                      </div>
+                      <h4>Agent Name: {agentName}</h4>
+                      <h4>Agent Email: {agentEmail}</h4>
+                    </div>
+                    <div className="flex justify-between mt-4 flex-col md:flex-row gap-2">
+                      <label
+                        onClick={() => {
+                          setModalLoading(false);
+                          setTimeout(setModalLoading, 500, true);
+                        }}
+                        htmlFor="my_modal_5"
+                        className="btn btn-sm  bg-red-500 text-white md:w-48  rounded-3xl hover:bg-gray-500 "
+                      >
+                        Report this property
+                      </label>
+
+                      <button
+                        onClick={() => handleAddToWishList(id)}
+                        className="btn rounded-3xl text-white w-full md:w-40  bg-blue-500"
+                      >
+                        Add to Wishlist
+                      </button>
+                    </div>
                   </div>
-                  <h4>Agent Name: {agentName}</h4>
-                  <h4>Agent Email: {agentEmail}</h4>
                 </div>
-              </div>
-
-              <div className="flex justify-between mt-4 flex-col md:flex-row gap-2">
-                <label
-                  onClick={() => {
-                    setModalLoading(false);
-                    setTimeout(setModalLoading, 500, true);
-                  }}
-                  htmlFor="my_modal_5"
-                  className="btn btn-sm  bg-red-500 text-white md:w-48  rounded-3xl hover:bg-gray-500 "
-                >
-                  Report this property
-                </label>
-
-                <button
-                  onClick={() => handleAddToWishList(id)}
-                  className="btn rounded-3xl text-white w-full md:w-32  bg-blue-500"
-                >
-                  Add to Wishlist
-                </button>
               </div>
             </div>
           </div>
@@ -380,38 +386,71 @@ const ViewDetails = () => {
           </div>
         </div>
         <div>
-          <div>
-            <div>
-              <h3 className="text-3xl font-bold">Reviews:</h3>
+          <div className="mb-5 mt-10 w-full lg:w-[70%]">
+            <div className="flex items-center gap-2">
+              <div className="text-white text-center p-7 rounded-xl border bg-blue-500">
+                <div>
+                  <h1 className="text-7xl font-bold">5.0</h1>
+                  <p>Excellent</p>
+                </div>
+                <p>Out of 5</p>
+              </div>
+              <div className="border flex-1 px-5 py-12 rounded-xl shadow-lg h-full flex justify-between flex-col md:flex-row items-center">
+                <div>
+                  <Rating value={5} style={{ maxWidth: 140 }} />
+                  <p className="text-xl font-bold">Wonderful Score</p>
+                  <p className="text-sm">Place a review</p>
+                </div>
+                <label
+                  onClick={() => {
+                    setModalLoading(false);
+                    setTimeout(setModalLoading, 500, true);
+                  }}
+                  htmlFor="my_modal_6"
+                  className="btn bg-blue-500 w-full md:w-40 rounded-3xl hover:bg-gray-500 text-white"
+                >
+                  Add a review
+                </label>
+              </div>
             </div>
           </div>
+
+          <div>
+            <h3 className="text-3xl font-bold">Reviews:</h3>
+          </div>
+
           <div className="w-full lg:w-[70%]">
             {reviews && reviews?.length > 0 ? (
               <div className="border shadow-md p-5">
                 {reviews.map(review => (
                   <div key={review._id} className="mb-4 bg-gray-100 p-5">
                     <div>
-                      <div className="flex justify-center items-center flex-col ">
-                        <p className="text-center">{review.review}</p>
-
-                        <Rating style={{ maxWidth: 140 }} value={review.star} />
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={review.photo}
+                          className="w-16 h-16 rounded-full"
+                          alt=""
+                        />
+                        <div>
+                          <Rating
+                            style={{ maxWidth: 140 }}
+                            value={review.star}
+                          />
+                          <h3 className="font-bold">By:{review.name}</h3>
+                        </div>
+                      </div>
+                      <div className="mt-3 ">
+                        <p className="">{review.review}</p>
                       </div>
 
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <img
-                            src={review.photo}
-                            className="w-12 h-12 rounded-full"
-                            alt=""
-                          />
-                          <h3 className="">{review.name}</h3>
-                        </div>
-                        <div>
+                      <div>
+                        <div className="flex gap-3 items-center mt-4">
                           <div>
+                            Posted on:{' '}
                             {new Date(review.date).toLocaleDateString()}
                           </div>
                           <div>
-                            {new Date(review.date).toLocaleTimeString()}
+                            At: {new Date(review.date).toLocaleTimeString()}
                           </div>
                         </div>
                       </div>
@@ -422,19 +461,6 @@ const ViewDetails = () => {
             ) : (
               <></>
             )}
-            <div className="my-5 flex justify-end">
-              {' '}
-              <label
-                onClick={() => {
-                  setModalLoading(false);
-                  setTimeout(setModalLoading, 500, true);
-                }}
-                htmlFor="my_modal_6"
-                className="btn bg-blue-500 w-full md:w-40 rounded-3xl hover:bg-gray-500 text-white"
-              >
-                Add a review
-              </label>
-            </div>
           </div>
         </div>
         <div className="w-full lg:hidden block  border rounded-2xl shadow-md p-5  "></div>

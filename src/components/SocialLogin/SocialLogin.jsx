@@ -41,7 +41,7 @@ const SocialLogin = () => {
           onClick={handleGoogleSignIn}
           aria-label="Login with Google"
           type="button"
-          className="flex items-center justify-center font-bold text-blue-500 w-full p-3 space-x-4 border-2 rounded-md focus:ring-2 focus:ring-offset-1 border-[#399edd] focus:dark:ring-violet-600"
+          className="flex btn bg-blue-500 items-center justify-center font-bold text-white w-full  space-x-4 border-2 rounded-md focus:ring-2 focus:ring-offset-1 border-[#399edd] "
         >
           <FaGoogle className="" />
           <p>Login with Google</p>

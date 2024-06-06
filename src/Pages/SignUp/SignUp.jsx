@@ -13,14 +13,16 @@ import Swal from 'sweetalert2';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const axiosPublic = useAxiosPublic();
   const [type, setType] = useState(false);
   const { updateUserProfile, createUser } = useAuth();
+  const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
+  const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
   const {
     register,
@@ -29,30 +31,47 @@ const SignUp = () => {
     reset,
   } = useForm();
 
-  const onSubmit = data => {
-    createUser(data.email, data.password)
-      .then(result => {
-        navigate(location.state || '/');
+  const onSubmit = async data => {
+    // image upload to imgbb and then get an url
+    const imageFile = { image: data.photo[0] };
+
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
+    console.log(res.data.data);
+    if (res.data.success) {
+      const photo = res?.data?.data?.display_url;
+
+      try {
+        //2. User Registration
+        const result = await createUser(data.email, data.password);
+        console.log(result);
+
+        // 3. Save username and photo in firebase
+        await updateUserProfile(data.name, photo);
         const userInfo = {
           name: data.name,
           email: data.email,
-          photo: data.photo,
+          photo: photo,
         };
-        axiosPublic.post('/users', userInfo).then(res => {
-          console.log(res.data);
-          console.log(result.user);
-          updateUserProfile(data.name, data.photo);
-          reset();
-          Swal.fire({
-            icon: 'success',
-            title:
-              'Congratulation! Your account has been registered successfully',
-            timer: 1500,
-          });
-          navigate(location.state || '/');
+        const { data: data1 } = await axiosPublic.post('/users', userInfo);
+        console.log(data1);
+        reset();
+        Swal.fire({
+          icon: 'success',
+          title:
+            'Congratulation! Your account has been registered successfully',
+          timer: 1500,
+          showConfirmButton: false,
         });
-      })
-      .catch(errors => console.log(errors.message));
+        navigate(location.state || '/');
+      } catch (err) {
+        console.log(err);
+        toast.error(err.message);
+      }
+    }
   };
 
   const [loading, setLoading] = useState(true);
@@ -64,21 +83,21 @@ const SignUp = () => {
       <span className="loading loading-spinner loading-lg"></span>
     </div>
   ) : (
-    <div className="flex  min-h-screen container mx-auto  flex-col justify-between items-center mb-10 ">
+    <div className=" container mx-auto   ">
       <Helmet>
-        <title>Bistro Boss Restaurant | Register</title>
+        <title>Heaven Residence | Register</title>
       </Helmet>
-      <div className="flex flex-col px-2 md:px-20 md:flex-row-reverse  items-center  p-5 ">
-        <div className=" w-full  md:w-[50%]">
+      <div className="flex flex-col md:flex-row-reverse  items-center border p-5">
+        <div className=" w-full hidden md:block md:w-[50%]">
           <img
             className="h-[500px]"
             src="https://i.postimg.cc/W3LwZndC/Register.jpg"
             alt=""
           />
         </div>
-        <div className="w-full h-auto md:w-[50%] px-20">
-          <div className="flex flex-col  justify-center items-center  w-full  ">
-            <div className="mb-4 h-20 rounded-3xl w-60 shadow-lg bg-[#399edd] flex justify-center items-center text-3xl font-extrabold text-white">
+        <div className="w-full md:w-[50%] ">
+          <div className="w-[80%] mx-auto  ">
+            <div className="mb-4 h-20 rounded-3xl w-full shadow-lg bg-[#399edd] flex justify-center items-center text-3xl font-extrabold text-white">
               <h3>Sign Up</h3>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -107,10 +126,10 @@ const SignUp = () => {
                     htmlFor="photo"
                     className="block mb-2 font-bold text-sm"
                   >
-                    Your Photo URL
+                    Your Profile Picture
                   </label>
                   <input
-                    type="text"
+                    type="file"
                     name="photo"
                     id="photo"
                     {...register('photo', { required: true })}

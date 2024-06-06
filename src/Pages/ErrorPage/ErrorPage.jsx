@@ -2,10 +2,18 @@ import { Link } from 'react-router-dom';
 
 const ErrorPage = () => {
   return (
-    <div className="min-h-screen w-screen flex justify-center items-center flex-col">
-      <h3 className="text-5xl">404 Page</h3>
+    <div className="min-h-screen  w-screen flex justify-center items-center flex-col">
+      <div className="h-[530px]  mx-auto">
+        <img
+          className="h-full w-full mx-auto"
+          src="https://i.postimg.cc/BQJZS932/404.png "
+          alt=""
+        />
+      </div>
       <Link to={'/'}>
-        <button className="btn bg-teal-200">Go Back Home</button>
+        <button className="btn bg-blue-500 text-white mb-5">
+          Go Back Home
+        </button>
       </Link>
     </div>
   );

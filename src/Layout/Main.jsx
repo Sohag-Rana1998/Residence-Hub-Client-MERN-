@@ -4,11 +4,11 @@ import NavBar from '../components/Shared/NavBar';
 
 const Main = () => {
   return (
-    <div className="container mx-auto">
+    <div className=" mx-auto font-jost">
       <div>
         <NavBar />
       </div>
-      <div style={{ height: 'calc(100vh - 84px' }} className="mt-auto">
+      <div className="mt-auto   min-h-[calc(100vh-84px)]">
         <Outlet />
       </div>
       <Toaster />

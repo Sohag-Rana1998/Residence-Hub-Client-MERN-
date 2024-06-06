@@ -7,7 +7,7 @@ import useAllReviews from '../../../../hooks/useAllReviews';
 
 const ManageReviews = () => {
   const axiosSecure = useAxiosSecure();
-  const { allReviews, refetch, isLoading } = useAllReviews();
+  const { allReviews, refetch } = useAllReviews();
   console.log(allReviews);
 
   //   delete
@@ -63,7 +63,7 @@ const ManageReviews = () => {
         {allReviews?.map(review => (
           <div
             key={review._id}
-            className="mb-4 bg-gray-100 p-5 rounded-sm hover:scale-105 duration-500"
+            className="mb-4 bg-gray-100 p-5 text-black rounded-sm hover:scale-105 duration-500"
           >
             <div className="">
               <div className="flex justify-center items-center flex-col ">
@@ -84,18 +84,23 @@ const ManageReviews = () => {
               </div>
 
               <div>
-                <div>
+                <div className="flex items-center gap-2">
                   <img
                     src={review.photo}
                     className="h-12 w-12 rounded-full"
                     alt=""
                   />
-                  <h3>Name:{review?.name}</h3>
-                  <h3>Email:{review?.email}</h3>
-                </div>
-                <div className="flex justify-between items-start">
                   <div>
-                    <div>{new Date(review.date).toLocaleDateString()}</div>
+                    <h3>Name:{review?.name}</h3>
+                    <h3>Email:{review?.email}</h3>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <div>
+                      {' '}
+                      Posted on:{new Date(review.date).toLocaleDateString()}
+                    </div>
                   </div>
                   <div>
                     <button

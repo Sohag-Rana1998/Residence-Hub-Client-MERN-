@@ -5,104 +5,81 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
 
 // import required modules
-import { Pagination, Navigation, EffectFade, Autoplay } from 'swiper/modules';
-import { Button } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
+import { Pagination, Navigation } from 'swiper/modules';
 
-const Banner = () => {
+export default function Banner() {
   return (
-    <div className=" relative mx-auto">
-      <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        effect={'fade'}
-        fadeEffect={{ crossFade: true }}
-        slidesPerView={1}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        modules={[Autoplay, EffectFade, Pagination, Navigation]}
-        className="mySwiper h-[550px]"
-      >
-        <SwiperSlide>
-          <img
-            src="https://i.ibb.co/tHLXr9K/image-2.jpg"
-            alt="image 1"
-            className="h-full w-full object-cover"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          {' '}
-          <img
-            src="https://i.ibb.co/yFgKDNH/villa-1900-1900x790.webp"
-            alt="image 5"
-            className="h-full w-full object-cover"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://i.ibb.co/ng0pBKZ/Golf-Oasis-Pool.jpg"
-            alt="image 4"
-            className="h-full w-full object-cover"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          {' '}
-          <img
-            src="https://i.ibb.co/0Ycz8vn/image-1.jpg"
-            alt="image 2"
-            className="h-full w-full object-cover"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          {' '}
-          <img
-            src="https://i.ibb.co/0yV33WH/image-3.jpg"
-            alt="image 3"
-            className="h-full w-full object-cover"
-          />
-        </SwiperSlide>
-      </Swiper>
-      <div>
-        <div className=" absolute z-20 left-0 top-10 mx-16  lg:left-24 md:top-28 text-white animate__animated animate__fadeInDown ">
-          <p className="font-bold mb-5 ">Luxury Houses</p>
-          <h1 className=" text-3xl md:text-5xl font-bold  border-l-2 border-white pl-5 ">
-            Luxury <br /> Residence Here
-          </h1>
-          <p className="mt-5">
-            Whether you&apos;re looking to sell or let your home or want to buy
-            or rent a <br /> home, we really are the people for you to come to.
-          </p>
-          <div className="mt-5 flex flex-col  md:flex-row w-full md:w-full mx-auto md:mr-auto gap-5">
-            <Link to="/buy-house">
-              <Button
-                size="lg"
-                className="px-4 w-40 md:w-32 md:px-10 bg-teal-500 hover:bg-blue-gray-900"
-              >
-                Buy
-              </Button>
-            </Link>
-            <Link to="/rent-house">
-              <Button
-                size="lg"
-                className="px-4 w-40 md:w-32 md:px-10 bg-teal-500 hover:bg-blue-gray-900"
-              >
-                Rent
-              </Button>
-            </Link>
-          </div>
-        </div>
+    <>
+      {' '}
+      <div className=" mx-auto">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={30}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper h-[650px]"
+        >
+          <SwiperSlide>
+            <div className="bg-[url(https://i.postimg.cc/Ssb0P9kL/banner-2.jpg)] h-full w-full bg-cover bg-center bg-no-repeat flex justify-center items-center flex-col text-white text-center">
+              <h1 className="text-3xl md:text-5xl font-bold pl-5 ">
+                Discover A Beautiful <br /> House With Us
+              </h1>
+              <p className="mt-5">
+                Whether you&apos;re looking to sell or let your home or <br />{' '}
+                want to buy a home, we really are the people for you to come to.
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="bg-[url(https://i.postimg.cc/6pxmtXDw/banner-5.jpg)] h-full w-full bg-cover bg-center bg-no-repeat ">
+              <div className="h-full w-full bg-black/25  flex justify-center items-center flex-col text-white text-center">
+                <h1 className="text-3xl md:text-5xl font-bold    pl-5 ">
+                  Your Gateway to Exceptional <br /> Living
+                </h1>
+                <p className="mt-5">
+                  Unlock the door to exceptional living with <br /> our
+                  handpicked selection of homes. Discover the epitome of
+                  elegance and comfort
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="bg-[url(https://i.postimg.cc/g2HF7DgY/banner-3.jpg)] h-full w-full bg-cover bg-center bg-no-repeat ">
+              <div className="h-full w-full bg-black/25  flex justify-center items-center flex-col text-white text-center">
+                <h1 className="text-3xl md:text-5xl font-bold    pl-5 ">
+                  Discover Endless Possibilities
+                </h1>
+                <p className="mt-5">
+                  Embark on a journey of discovery with our <br /> diverse range
+                  of properties. Explore endless possibilities for your next
+                  chapter.
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="bg-[url(https://i.ibb.co/tHLXr9K/image-2.jpg)] h-full w-full bg-cover bg-center bg-no-repeat ">
+              <div className="h-full w-full bg-black/10  flex justify-center items-center flex-col text-white text-center">
+                <h1 className="text-3xl md:text-5xl font-bold    pl-5 ">
+                  Your Dream Home Awaits
+                </h1>
+                <p className="mt-5">
+                  Discover a world of possibilities with our extensive
+                  collection of homes. <br /> Find the perfect fit for your
+                  lifestyle today!
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
-    </div>
+    </>
   );
-};
-
-export default Banner;
+}

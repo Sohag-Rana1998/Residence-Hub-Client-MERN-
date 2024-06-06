@@ -1,6 +1,6 @@
 import { Avatar } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
@@ -11,34 +11,19 @@ import useRole from '../../hooks/userRole';
 
 const NavBar = () => {
   const { loggedUser } = useRole();
-  const localTheme = localStorage.getItem('theme');
   const { user, logOut } = useAuth();
-  const [theme, setTheme] = useState(localTheme);
-  // const { isAdmin } = useAdmin();
-  const [type, setType] = useState(false);
-  // const { cart } = useCartsData();
-  // console.log(cart);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
-    const localTheme = localStorage.getItem('theme');
-    if (localTheme == 'synthwave') {
-      setType(true);
-    } else {
-      setType(false);
-    }
-    document.querySelector('html').setAttribute('data-theme', localTheme);
-  }, [theme]);
+    const handleScroll = () => {
+      const scrollPosition = window.pageYOffset;
+      setIsScrolled(scrollPosition > 50); // Adjust scroll threshold (default 50px)
+    };
 
-  const handleToggle = e => {
-    setType(!type);
+    window.addEventListener('scroll', handleScroll);
 
-    if (e.target.checked) {
-      setTheme('synthwave');
-    } else {
-      setTheme('light');
-    }
-  };
+    return () => window.removeEventListener('scroll', handleScroll); // Cleanup
+  }, []);
 
   const handleLogout = () => {
     logOut()
@@ -57,65 +42,13 @@ const NavBar = () => {
     // console.log(user);
   };
 
-  //https://i.postimg.cc/66LCsndF/light.png
-  //https://i.postimg.cc/RFxv43cD/dark.png
-  const themeButton = (
-    <>
-      {/* <a className=" h-12  w-12 bg-black rounded-full">
-        <img
-          className="w-full h-full p-1"
-          src="https://i.postimg.cc/66LCsndF/light.png"
-          alt=""
-        />
-      </a> */}
-      <label className="cursor-pointer grid place-items-center">
-        <input
-          onChange={handleToggle}
-          type="checkbox"
-          value="synthwave"
-          className="toggle theme-controller h-7 md:h-7 w-14 bg-orange-500 row-start-1 col-start-1 col-span-2"
-          checked={type}
-        />
-        <svg
-          className="col-start-1 row-start-1 stroke-base-100 fill-base-100"
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="5" />
-          <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-        </svg>
-        <svg
-          className="col-start-2 row-start-1 stroke-base-100 fill-base-100"
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </label>
-    </>
-  );
-
   const Links = (
     <div className="flex flex-col inter   lg:flex-row gap-1">
       <li>
         <NavLink
           to="/"
           className={({ isActive, isPending }) =>
-            isActive ? 'border-2 font-bold ' : isPending ? 'pending' : ''
+            isActive ? 'border-2 font-bold  ' : isPending ? ' font-bold ' : ''
           }
         >
           HOME
@@ -128,7 +61,7 @@ const NavBar = () => {
             isActive ? 'border-2 font-bold ' : isPending ? 'pending' : ''
           }
         >
-          All Properties
+          ALL PROPERTIES
         </NavLink>
       </li>
       <li>
@@ -150,9 +83,9 @@ const NavBar = () => {
 
   return (
     <div
-      className={`flex justify-between items-center  container fixed z-50 mx-auto  ${
-        type ? 'bg-[#1A103D]' : 'bg-white'
-      } `}
+      className={`flex fixed top-0 border-b-2 w-screen px-4 py-2 transition duration-300 ease-in-out ${
+        isScrolled ? 'bg-white text-black' : 'bg-transparent text-blue-500'
+      } justify-between ease-in-out items-center    z-50 mx-auto `}
     >
       <div className="flex items-center justify-center pl-2">
         <div className="dropdown">
@@ -181,31 +114,21 @@ const NavBar = () => {
               <div className=" ">
                 {user ? (
                   <div className="">
-                    <Avatar
-                      title={user?.displayName || ''}
-                      src={
-                        (user && user?.photoURL) ||
-                        'https://i.ibb.co/zmbRY07/images.png'
-                      }
-                      className="mr-4 mb-2 cursor-pointer bg-no-repeat bg-cover bg-[url(https://i.ibb.co/zmbRY07/images.png)]"
-                    />
-
-                    <Link to={'/user-profile'}>
-                      <button className="btn w-32  bg-blue-600 hover:bg-blue-gray-900   ">
-                        User Profile
+                    <div className="block lg:hidden mb-2">
+                      <button
+                        onClick={handleLogout}
+                        className="w-24 text-white font-bold border-none btn bg-blue-500 hover:bg-gray-900  rounded-lg "
+                      >
+                        Log Out
                       </button>
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="btn w-32  bg-blue-600 hover:bg-blue-gray-900   "
-                    >
-                      Log Out
-                    </button>
+                    </div>
                   </div>
                 ) : (
                   <div>
                     <Link to={'/login'}>
-                      <button className="btn w-32 btn-bg mr-3 ">Sign In</button>
+                      <button className="btn w-32 bg-blue-500 mr-3 ">
+                        Sign In
+                      </button>
                     </Link>
                   </div>
                 )}
@@ -234,50 +157,37 @@ const NavBar = () => {
       <div className=" ">
         <div className="flex  ">
           {user ? (
-            <div className="flex gap-3 justify-between items-center">
-              {themeButton}
+            <div className="flex gap-3 justify-between items-center mr-3">
               <nav className="relative parent ">
                 <ul className="flex items-start gap-2">
                   <li>
-                    <div className="flex items-center gap-3">
+                    <div className="flex  items-center gap-3">
+                      <h2 className="font-bold lg:block hidden">
+                        {user?.displayName || ''}
+                      </h2>
                       <Avatar
                         src={
                           (user && user?.photoURL) ||
                           'https://i.ibb.co/zmbRY07/images.png'
                         }
-                        className="mr-4 cursor-pointer bg-no-repeat bg-cover bg-[url(https://i.ibb.co/zmbRY07/images.png)]"
+                        className="mr-4  bg-no-repeat bg-cover bg-[url(https://i.ibb.co/zmbRY07/images.png)]"
                       />
                     </div>
-                    <ul className="dropDown">
-                      <div className="w-auto bg-[#006740] bg-opacity-50 dropdownMenu duration-500   z-10   rounded-xl p-3   ">
-                        <div className="flex flex-col  items-end">
-                          <h2 className="w-full hover:bg-blue-500 bg-gray-500  font-bold  p-2 rounded-md mb-2">
-                            {user?.displayName || ''}
-                          </h2>
-                          <Link to={'/user-profile'}>
-                            <button className="btn  hover:bg-blue-500 mb-2 bg-gray-500 ">
-                              User Profile
-                            </button>
-                          </Link>
-                          <button
-                            onClick={handleLogout}
-                            className="btn hover:bg-blue-500 bg-gray-500 "
-                          >
-                            Log Out
-                          </button>
-                        </div>
-                      </div>
-                    </ul>
                   </li>
                 </ul>
               </nav>
+              <button
+                onClick={handleLogout}
+                className="w-28 hidden md:block text-white font-bold border-none btn bg-blue-500 hover:bg-gray-900  rounded-lg "
+              >
+                Log Out
+              </button>
             </div>
           ) : (
-            <div className="flex items-center gap-3">
-              {themeButton}
+            <div className="flex items-center gap-3 mr-5">
               <div>
                 <Link to={'/login'}>
-                  <button className="w-24 font-bold  inter  py-1 px-1 rounded-lg">
+                  <button className="w-28 text-white font-bold border-none btn bg-blue-500   py-1 px-1 rounded-lg">
                     Sign In
                   </button>
                 </Link>

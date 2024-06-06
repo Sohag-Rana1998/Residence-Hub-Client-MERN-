@@ -56,7 +56,7 @@ const ManageProperties = () => {
     });
   };
   return (
-    <div>
+    <div className="container mx-auto">
       <div>
         <SectionTitle
           heading={'Manage Properties'}

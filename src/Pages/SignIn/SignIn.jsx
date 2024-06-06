@@ -4,23 +4,23 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom';
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  validateCaptcha,
-} from 'react-simple-captcha';
+// import {
+//   loadCaptchaEnginge,
+//   LoadCanvasTemplate,
+//   validateCaptcha,
+// } from 'react-simple-captcha';
 
 import { Helmet } from 'react-helmet-async';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
-import { toast } from 'react-hot-toast';
+// import { toast } from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import { useForm } from 'react-hook-form';
 
 const SignIn = () => {
-  const captChaRef = useRef();
+  // const captChaRef = useRef();
   const [type, setType] = useState(false);
   const location = useLocation();
   const { signIn } = useAuth();
@@ -39,7 +39,7 @@ const SignIn = () => {
     const email = data.email;
     const password = data.password;
 
-    const user_captcha_value = captChaRef.current.value;
+    // const user_captcha_value = captChaRef.current.value;
     // if (validateCaptcha(user_captcha_value)) {
     //   console.log(user_captcha_value);
     // } else {
@@ -69,26 +69,26 @@ const SignIn = () => {
       });
   };
 
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  // useEffect(() => {
+  //   loadCaptchaEnginge(6);
+  // }, []);
 
   return (
-    <div className="flex container mx-auto  flex-col justify-between items-center mb-10 ">
+    <div className="container mx-auto   ">
       <Helmet>
-        <title>Bistro Boss Restaurant | Login</title>
+        <title>Heaven Residence | Login</title>
       </Helmet>
       <div className="flex flex-col md:flex-row   min-h-screen  items-center border p-5">
-        <div className=" w-full  md:w-[50%]">
+        <div className=" w-full hidden md:block md:w-[50%]">
           <img
             className="h-[500px]"
             src="https://i.postimg.cc/W3LwZndC/Register.jpg"
             alt=""
           />
         </div>
-        <div className="w-full md:w-[50%] ">
-          <div className="flex flex-col  justify-center  items-center w-full  ">
-            <div className="mb-4 h-20 rounded-3xl w-60 shadow-lg bg-[#399edd] flex justify-center items-center text-3xl font-extrabold text-white">
+        <div className="w-full md:w-[50%] h-[500px]">
+          <div className="w-[80%] mx-auto  ">
+            <div className="mb-4 h-20 rounded-3xl w-full shadow-lg bg-[#399edd] flex justify-center items-center text-3xl font-extrabold text-white">
               <h3>Sign In</h3>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -150,7 +150,7 @@ const SignIn = () => {
                   </div>
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <label className="block font-bold mb-2 text-sm">
                   <LoadCanvasTemplate />
                 </label>
@@ -163,7 +163,7 @@ const SignIn = () => {
                   placeholder="Type the text above in captcha"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                 />
-              </div>
+              </div> */}
               <div className="space-y-2">
                 <div>
                   <input
@@ -172,18 +172,17 @@ const SignIn = () => {
                     className="w-full btn px-8 py-3 cursor-pointer font-semibold rounded-md bg-[#399edd] text-gray-50"
                   />
                 </div>
-                <p className="px-6 text-sm text-center text-gray-600">
-                  Don&apos;t have an account yet?
+                <p className="px-6  text-center text-gray-600">
+                  <span className="mr-2"> Don&apos;t have an account yet?</span>
                   <Link to={'/register'}>
                     <button
                       rel="noopener noreferrer"
                       href="#"
-                      className="hover:underline text-[#399edd] cursor-pointer font-bold text-xl "
+                      className="hover:underline text-[#399edd] cursor-pointer font-bold  "
                     >
                       Sign up
                     </button>
                   </Link>
-                  .
                 </p>
               </div>
             </form>

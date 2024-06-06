@@ -6,15 +6,19 @@ const Dashboard = () => {
   const { loggedUser } = useRole();
   console.log(loggedUser);
   return (
-    <div className="flex h-screen  pt-16   mx-auto">
-      <div className="w-64 bg-[#1b71c7]  text-white ">
-        <div className="flex justify-center px-4">
+    <div className="flex h-screen pt-16   mx-auto">
+      <div className="w-64 pt-5 bg-[#1b71c7]  text-white ">
+        <div className=" px-4">
           <Link to={'/'}>
-            <div className="">
-              <h3 className="text-2xl font-extrabold tracking-[5.4px]">
-                Heaven
+            <div className="flex justify-center flex-col items-center">
+              <img
+                className="h-16 w-16 rounded-full"
+                src="https://i.postimg.cc/28Rn2bJ4/white-logo.png"
+                alt=""
+              />
+              <h3 className="text-3xl font-extrabold tracking-[5.4px]">
+                {"Heaven's"}
               </h3>
-              <h4 className="text-xl tracking-[5.4px]">Residence</h4>
             </div>
           </Link>
         </div>
@@ -281,7 +285,7 @@ const Dashboard = () => {
       </div>
       <div
         style={{ scrollbarWidth: 'none' }}
-        className="flex-1    overflow-y-scroll "
+        className="flex-1    overflow-y-scroll  "
       >
         <Outlet />
       </div>

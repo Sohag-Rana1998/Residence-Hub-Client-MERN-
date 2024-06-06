@@ -1,9 +1,11 @@
 import Banner from './Banner';
+import TrustedCompany from './TrustedCompany';
 
 const Home = () => {
   return (
     <div>
       <Banner />
+      <TrustedCompany />
     </div>
   );
 };
