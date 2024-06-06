@@ -24,6 +24,10 @@ import AdvertiseProperty from '../Pages/Dashboard/AdminDashboard/AdvertiseProper
 import ViewDetails from '../Pages/ViewDetails/ViewDetails';
 import MakeOffer from '../Pages/Dashboard/UserDashboard/WishList/MakeOffer';
 import Payment from '../Pages/Dashboard/UserDashboard/PropertyBought/Payment';
+import ReportedProperty from '../Pages/Dashboard/AdminDashboard/ReportedProperty/ReportedProperty';
+import PrivateRoute from './PrivateRoute';
+import AgentRoute from './AgentRoute';
+import AdminRoute from './AdminRoute';
 
 const router = createBrowserRouter([
   {
@@ -49,11 +53,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/view-details/:id',
-        element: <ViewDetails />,
+        element: (
+          <PrivateRoute>
+            <ViewDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/dashboard',
-        element: <Dashboard />,
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
         children: [
           // User Routes
 
@@ -86,49 +98,101 @@ const router = createBrowserRouter([
 
           {
             path: 'agent-profile',
-            element: <AgentProfile />,
+            element: (
+              <AgentRoute>
+                <AgentProfile />
+              </AgentRoute>
+            ),
           },
           {
             path: 'add-property',
-            element: <AddProperty />,
+            element: (
+              <AgentRoute>
+                <AddProperty />
+              </AgentRoute>
+            ),
           },
           {
             path: 'added-properties',
-            element: <MyAddedProperties />,
+            element: (
+              <AgentRoute>
+                <MyAddedProperties />
+              </AgentRoute>
+            ),
           },
           {
             path: 'requested-properties',
-            element: <RequestedProperties />,
+            element: (
+              <AgentRoute>
+                <RequestedProperties />
+              </AgentRoute>
+            ),
           },
           {
             path: 'sold-properties',
-            element: <MySoldProperties />,
+            element: (
+              <AgentRoute>
+                <MySoldProperties />
+              </AgentRoute>
+            ),
           },
           {
             path: 'added-properties/:id',
-            element: <UpdateProperty />,
+            element: (
+              <AgentRoute>
+                <UpdateProperty />
+              </AgentRoute>
+            ),
           },
 
           // Admin Routes
           {
             path: 'admin-profile',
-            element: <AdminProfile />,
+            element: (
+              <AdminRoute>
+                <AdminProfile />
+              </AdminRoute>
+            ),
           },
           {
             path: 'manage-properties',
-            element: <ManageProperties />,
+            element: (
+              <AdminRoute>
+                <ManageProperties />
+              </AdminRoute>
+            ),
           },
           {
             path: 'manage-users',
-            element: <ManageUsers />,
+            element: (
+              <AdminRoute>
+                <ManageUsers />
+              </AdminRoute>
+            ),
           },
           {
             path: 'manage-reviews',
-            element: <ManageReviews />,
+            element: (
+              <AdminRoute>
+                <ManageReviews />
+              </AdminRoute>
+            ),
           },
           {
             path: 'advertise-property',
-            element: <AdvertiseProperty />,
+            element: (
+              <AdminRoute>
+                <AdvertiseProperty />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: 'reported-properties',
+            element: (
+              <AdminRoute>
+                <ReportedProperty />
+              </AdminRoute>
+            ),
           },
         ],
       },

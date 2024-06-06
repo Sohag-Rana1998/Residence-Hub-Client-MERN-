@@ -116,20 +116,19 @@ const AdvertiseProperty = () => {
       </SkeletonTheme> */}
     </div>
   ) : (
-    <div className="max-w-7xl container mx-auto px-5 ">
+    <div className=" container mx-auto ">
       <Helmet>
         <title>Heaven Residence | Advertise</title>
       </Helmet>
       <div>
         <div>
-          <div className="mt-10">
+          <div className="">
             <SectionTitle
               heading={'Advertise Property'}
               subheading={'Home/Dashboard/Advertise Properties'}
             />
           </div>
 
-          <div className="divider w-full mb-10 px-0 md:px-32 "></div>
           <div>
             <div>
               <div className=" w-[80%] mx-auto md:w-full block md:flex mb-5  md:justify-end ">

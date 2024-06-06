@@ -13,13 +13,12 @@ import { Helmet } from 'react-helmet-async';
 import { FaEnvelope } from 'react-icons/fa';
 
 const Profile = ({ user, refetch }) => {
-  console.log(refetch);
   return (
     <div className="container  mx-auto    rounded-lg ">
       <Helmet>
         <title>Heaven Residence | Profile</title>
       </Helmet>
-      <div className="rounded-t-lg w-full h-32 md:text-right text-center text-white p-5  bg-[#006770] overflow-hidden">
+      <div className=" w-full h-32 md:text-right text-center text-white p-5  bg-[#006770] overflow-hidden">
         <h3 className="text-3xl font-bold">Profile</h3>
         <h3 className="text-sm">Home/Dashboard/Profile</h3>
       </div>

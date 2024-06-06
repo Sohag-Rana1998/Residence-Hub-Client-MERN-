@@ -8,9 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 const Card = ({ estate, refetch }) => {
   const location1 = useLocation();
-
   const showDetailsbtn = location1.pathname.includes('/all-properties');
-
   const axiosSecure = useAxiosSecure();
   const {
     _id,
@@ -100,58 +98,30 @@ const Card = ({ estate, refetch }) => {
               Price Range: ${minimumPrice}-{maximumPrice}
             </span>
           </div>
-          {showDetailsbtn || (
-            <div>
-              {estate?.agentImg && (
-                <img src={estate.agentImg} className="w-12 h-12 rounded-full" />
-              )}
-
-              <p className="font-semibold text-sm mt-1">
-                <span className="font-bold">Agent Name:</span>
-                {agentName}
-              </p>
-            </div>
-          )}
 
           <div className="">
-            {showDetailsbtn && (
-              <div className="flex w-full justify-between md:items-center mt-3">
-                <div>
-                  {estate?.agentImg && (
-                    <img
-                      src={estate.agentImg}
-                      className="w-12 h-12 rounded-full"
-                    />
-                  )}
+            <div className="flex w-full justify-between md:items-center mt-3">
+              <div>
+                <img
+                  src={estate?.agentImg}
+                  className="w-12 h-12 rounded-full"
+                />
 
-                  <p className="font-semibold text-sm mt-1">
-                    <span className="font-bold">Agent Name:</span>
-                    {agentName}
-                  </p>
-                </div>
+                <p className="font-semibold text-sm mt-1">
+                  <span className="font-bold">Agent Name:</span>
+                  {agentName}
+                </p>
+              </div>
+              {showDetailsbtn ? (
                 <Link to={`/view-details/${_id}`}>
                   <button className="bg-blue-600 btn mb-2  hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
                     View Details <GrLinkNext className="text-xl" />
                   </button>
                 </Link>
-              </div>
-            )}
-            {showDetailsbtn || (
-              <div className="flex justify-between items-start md:items-center mt-3">
-                <button
-                  onClick={() => handleDelete(_id)}
-                  className="btn bg-red-300 hover:scale-[106%] duration-500"
-                >
-                  {' '}
-                  Delete
-                </button>
-                <Link to={`${_id}`}>
-                  <button className="bg-blue-600 btn mb-2  hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
-                    Update
-                  </button>
-                </Link>
-              </div>
-            )}
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -10,7 +10,9 @@ import useOfferedProperties from '../../../../hooks/useOfferedProperties';
 const RequestedProperties = () => {
   const { offeredProperties, refetch, isLoading } = useOfferedProperties();
   const axiosSecure = useAxiosSecure();
-
+  const requestedProperties = offeredProperties?.filter(
+    property => property.status !== 'Bought'
+  );
   const { mutateAsync } = useMutation({
     mutationFn: async propertyStatus => {
       const { data } = await axiosSecure.patch(
@@ -132,7 +134,7 @@ const RequestedProperties = () => {
 
               <tbody>
                 {/* row 1 */}
-                {offeredProperties?.map((property, index) => (
+                {requestedProperties?.map((property, index) => (
                   <tr key={property._id}>
                     <td>{index + 1}</td>
                     <td>{property.title}</td>
@@ -140,20 +142,8 @@ const RequestedProperties = () => {
                     <td>{property.buyerName}</td>
                     <td>{property.buyerEmail}</td>
                     <td>${property.OfferedAmount}</td>
-                    {property.status === 'Accepted' ||
-                    property.status === 'Rejected' ? (
-                      <td className="">
-                        <span
-                          className={`px-4 py-3 rounded-lg ${
-                            property.status === 'Rejected'
-                              ? 'bg-red-400'
-                              : 'bg-blue-500'
-                          }  text-white`}
-                        >
-                          {property.status}
-                        </span>
-                      </td>
-                    ) : (
+
+                    {property.status === 'Pending' && (
                       <>
                         <td className="">
                           <button
@@ -178,6 +168,43 @@ const RequestedProperties = () => {
                           </button>
                         </td>
                       </>
+                    )}
+
+                    {property.status === 'Accepted' && (
+                      <td className="">
+                        <span
+                          className={`px-4 py-3 rounded-lg ${
+                            property.status === 'Rejected'
+                              ? 'bg-red-400'
+                              : 'bg-blue-500'
+                          }  text-white`}
+                        >
+                          {property.status}
+                        </span>
+                      </td>
+                    )}
+                    {property.status === 'Bought' && (
+                      <td className="">
+                        <span
+                          className={`px-8 py-3 rounded-lg bg-blue-500 text-white`}
+                        >
+                          Sold
+                        </span>
+                      </td>
+                    )}
+
+                    {property.status === 'Rejected' && (
+                      <td className="">
+                        <span
+                          className={`px-4 py-3 rounded-lg ${
+                            property.status === 'Rejected'
+                              ? 'bg-red-400'
+                              : 'bg-blue-500'
+                          }  text-white`}
+                        >
+                          {property.status}
+                        </span>
+                      </td>
                     )}
                   </tr>
                 ))}

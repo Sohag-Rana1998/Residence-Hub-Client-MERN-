@@ -110,16 +110,12 @@ const NavBar = () => {
   );
 
   const Links = (
-    <div className="flex flex-col inter text-white  lg:flex-row gap-1">
+    <div className="flex flex-col inter   lg:flex-row gap-1">
       <li>
         <NavLink
           to="/"
           className={({ isActive, isPending }) =>
-            isActive
-              ? 'border-2 font-bold text-[#EEFF25]'
-              : isPending
-              ? 'pending'
-              : ''
+            isActive ? 'border-2 font-bold ' : isPending ? 'pending' : ''
           }
         >
           HOME
@@ -129,11 +125,7 @@ const NavBar = () => {
         <NavLink
           to="/all-properties"
           className={({ isActive, isPending }) =>
-            isActive
-              ? 'border-2 font-bold text-[#EEFF25]'
-              : isPending
-              ? 'pending'
-              : ''
+            isActive ? 'border-2 font-bold ' : isPending ? 'pending' : ''
           }
         >
           All Properties
@@ -147,11 +139,7 @@ const NavBar = () => {
             '/dashboard/user-profile'
           }
           className={({ isActive, isPending }) =>
-            isActive
-              ? 'border-2 font-bold text-[#EEFF25]'
-              : isPending
-              ? 'pending'
-              : ''
+            isActive ? 'border-2 font-bold ' : isPending ? 'pending' : ''
           }
         >
           DASHBOARD
@@ -162,11 +150,9 @@ const NavBar = () => {
 
   return (
     <div
-      className={
-        type
-          ? 'flex justify-between items-center container fixed z-50 text-white pt-2 mx-auto bg-[#1a103d] '
-          : '  flex justify-between items-center fixed z-50  container  text-black bg-opacity-40 pt-2 mx-auto  bg-black'
-      }
+      className={`flex justify-between items-center  container fixed z-50 mx-auto  ${
+        type ? 'bg-[#1A103D]' : 'bg-white'
+      } `}
     >
       <div className="flex items-center justify-center pl-2">
         <div className="dropdown">
@@ -205,13 +191,13 @@ const NavBar = () => {
                     />
 
                     <Link to={'/user-profile'}>
-                      <button className="btn w-32  bg-blue-600 hover:bg-blue-gray-900   text-white">
+                      <button className="btn w-32  bg-blue-600 hover:bg-blue-gray-900   ">
                         User Profile
                       </button>
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="btn w-32  bg-blue-600 hover:bg-blue-gray-900   text-white"
+                      className="btn w-32  bg-blue-600 hover:bg-blue-gray-900   "
                     >
                       Log Out
                     </button>
@@ -219,9 +205,7 @@ const NavBar = () => {
                 ) : (
                   <div>
                     <Link to={'/login'}>
-                      <button className="btn w-32 btn-bg mr-3 text-white">
-                        Sign In
-                      </button>
+                      <button className="btn w-32 btn-bg mr-3 ">Sign In</button>
                     </Link>
                   </div>
                 )}
@@ -267,17 +251,17 @@ const NavBar = () => {
                     <ul className="dropDown">
                       <div className="w-auto bg-[#006740] bg-opacity-50 dropdownMenu duration-500   z-10   rounded-xl p-3   ">
                         <div className="flex flex-col  items-end">
-                          <h2 className="w-full hover:bg-blue-500 bg-gray-500 text-white font-bold  p-2 rounded-md mb-2">
+                          <h2 className="w-full hover:bg-blue-500 bg-gray-500  font-bold  p-2 rounded-md mb-2">
                             {user?.displayName || ''}
                           </h2>
                           <Link to={'/user-profile'}>
-                            <button className="btn  hover:bg-blue-500 mb-2 bg-gray-500 text-white">
+                            <button className="btn  hover:bg-blue-500 mb-2 bg-gray-500 ">
                               User Profile
                             </button>
                           </Link>
                           <button
                             onClick={handleLogout}
-                            className="btn hover:bg-blue-500 bg-gray-500 text-white"
+                            className="btn hover:bg-blue-500 bg-gray-500 "
                           >
                             Log Out
                           </button>
@@ -293,7 +277,7 @@ const NavBar = () => {
               {themeButton}
               <div>
                 <Link to={'/login'}>
-                  <button className="w-24 font-bold text-white inter  py-1 px-1 rounded-lg">
+                  <button className="w-24 font-bold  inter  py-1 px-1 rounded-lg">
                     Sign In
                   </button>
                 </Link>

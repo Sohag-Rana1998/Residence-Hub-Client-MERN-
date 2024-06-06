@@ -6,9 +6,9 @@ const Dashboard = () => {
   const { loggedUser } = useRole();
   console.log(loggedUser);
   return (
-    <div className="flex h-screen  pt-[50px]  items-stretch  mx-auto">
-      <div className="w-64 bg-[#1b71c7] text-white min-h-screen">
-        <div className="flex justify-center p-4">
+    <div className="flex h-screen  pt-16   mx-auto">
+      <div className="w-64 bg-[#1b71c7]  text-white ">
+        <div className="flex justify-center px-4">
           <Link to={'/'}>
             <div className="">
               <h3 className="text-2xl font-extrabold tracking-[5.4px]">
@@ -21,7 +21,7 @@ const Dashboard = () => {
         <ul className="menu px-3 mt-10">
           {loggedUser?.role === 'Admin' && (
             <>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/admin-profile'}
                   className={({ isActive, isPending }) =>
@@ -36,7 +36,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
 
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/manage-properties'}
                   className={({ isActive, isPending }) =>
@@ -50,7 +50,7 @@ const Dashboard = () => {
                   Manage Properties
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/advertise-property'}
                   className={({ isActive, isPending }) =>
@@ -64,7 +64,7 @@ const Dashboard = () => {
                   Advertise Properties
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/manage-users'}
                   className={({ isActive, isPending }) =>
@@ -78,7 +78,7 @@ const Dashboard = () => {
                   Manage Users
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/manage-reviews'}
                   className={({ isActive, isPending }) =>
@@ -92,11 +92,25 @@ const Dashboard = () => {
                   Manage Reviews
                 </NavLink>
               </li>
+              <li className="mb-1">
+                <NavLink
+                  to={'/dashboard/reported-properties'}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? 'border-2 w-full bg-black/30 font-bold text-white'
+                      : isPending
+                      ? 'pending'
+                      : ''
+                  }
+                >
+                  Reported Property
+                </NavLink>
+              </li>
             </>
           )}
-          {loggedUser?.role === 'Agent' && (
+          {loggedUser?.role === 'Agent' ? (
             <>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/agent-profile'}
                   className={({ isActive, isPending }) =>
@@ -110,7 +124,7 @@ const Dashboard = () => {
                   Agent Profile
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/add-property'}
                   className={({ isActive, isPending }) =>
@@ -124,7 +138,7 @@ const Dashboard = () => {
                   Add Property
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/added-properties'}
                   className={({ isActive, isPending }) =>
@@ -138,7 +152,7 @@ const Dashboard = () => {
                   My Added Properties
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/requested-properties'}
                   className={({ isActive, isPending }) =>
@@ -154,7 +168,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
 
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/sold-properties'}
                   className={({ isActive, isPending }) =>
@@ -169,11 +183,13 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </>
+          ) : (
+            <></>
           )}
 
           {loggedUser?.role || (
             <>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/user-profile'}
                   className={({ isActive, isPending }) =>
@@ -187,7 +203,7 @@ const Dashboard = () => {
                   My Profile
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/wishlist'}
                   className={({ isActive, isPending }) =>
@@ -201,7 +217,7 @@ const Dashboard = () => {
                   Wishlist
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/bought-properties'}
                   className={({ isActive, isPending }) =>
@@ -215,7 +231,7 @@ const Dashboard = () => {
                   Property Bought
                 </NavLink>
               </li>
-              <li className="mb-3">
+              <li className="mb-1">
                 <NavLink
                   to={'/dashboard/my-reviews'}
                   className={({ isActive, isPending }) =>
@@ -233,7 +249,7 @@ const Dashboard = () => {
           )}
           <div className="divider my-5"></div>
 
-          <li className="mb-3">
+          <li className="mb-1">
             <NavLink
               to={'/'}
               className={({ isActive, isPending }) =>
@@ -247,7 +263,7 @@ const Dashboard = () => {
               HOME
             </NavLink>
           </li>
-          <li className="mb-3">
+          <li className="mb-1">
             <NavLink
               to={'/all-properties'}
               className={({ isActive, isPending }) =>
@@ -263,7 +279,10 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="flex-1  p-6 overflow-y-auto">
+      <div
+        style={{ scrollbarWidth: 'none' }}
+        className="flex-1    overflow-y-scroll "
+      >
         <Outlet />
       </div>
     </div>

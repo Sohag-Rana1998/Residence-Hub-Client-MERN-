@@ -22,11 +22,11 @@ import { useForm } from 'react-hook-form';
 const SignIn = () => {
   const captChaRef = useRef();
   const [type, setType] = useState(false);
-
+  const location = useLocation();
   const { signIn } = useAuth();
 
   const navigate = useNavigate();
-  const location = useLocation();
+
   // console.log(location);
 
   const {

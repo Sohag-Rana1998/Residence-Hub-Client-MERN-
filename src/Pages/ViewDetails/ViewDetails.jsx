@@ -105,6 +105,7 @@ const ViewDetails = () => {
     toast.success('Message sent successfully!');
   };
 
+  // For save review data on mongodb
   const { mutateAsync } = useMutation({
     mutationFn: async reviewData => {
       const { data } = await axiosSecure.post(`/add-review`, reviewData);
@@ -125,6 +126,28 @@ const ViewDetails = () => {
     },
   });
 
+  // For save report data on mongodb
+  const { mutateAsync: mutateAsync2 } = useMutation({
+    mutationFn: async reportData => {
+      const { data } = await axiosSecure.post(`/add-report`, reportData);
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      console.log('Your Report Submitted Successfully');
+      Swal.fire({
+        icon: 'success',
+        title: 'Your Report Submitted  Successfully',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      reload();
+      refetch();
+    },
+  });
+
+  // for review submission
   const {
     register,
     handleSubmit,
@@ -132,6 +155,15 @@ const ViewDetails = () => {
     formState: { errors },
   } = useForm();
 
+  // for report submission
+  const {
+    register: register1,
+    handleSubmit: handleSubmit1,
+    reset: refresh,
+    formState: { errors: error1 },
+  } = useForm();
+
+  // handle Review
   const onSubmit = async data => {
     console.log(data);
 
@@ -155,7 +187,32 @@ const ViewDetails = () => {
       console.log(err.message);
     }
   };
-  console.log(present);
+
+  // handleReport
+  const onSubmit1 = async data => {
+    console.log('kaj hochse');
+
+    const reportData = {
+      propertyId: id,
+      propertyTitle: title,
+      reporterName: data.name,
+      agentName: agentName,
+      agentEmail: agentEmail,
+      reporterEmail: user?.email,
+      reporterPhoto: user?.photoURL,
+      report: data.report,
+      date: present,
+    };
+    console.log(reportData);
+
+    try {
+      await mutateAsync2(reportData);
+      refresh();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return isLoading ? (
     <div className="w-[80%] mx-auto min-h-screen ">
       {/* <SkeletonTheme baseColor="#a2a2b2">
@@ -226,10 +283,21 @@ const ViewDetails = () => {
                 </div>
               </div>
 
-              <div className="flex justify-end">
+              <div className="flex justify-between mt-4 flex-col md:flex-row gap-2">
+                <label
+                  onClick={() => {
+                    setModalLoading(false);
+                    setTimeout(setModalLoading, 500, true);
+                  }}
+                  htmlFor="my_modal_5"
+                  className="btn btn-sm  bg-red-500 text-white md:w-48  rounded-3xl hover:bg-gray-500 "
+                >
+                  Report this property
+                </label>
+
                 <button
                   onClick={() => handleAddToWishList(id)}
-                  className="btn rounded-3xl text-white  bg-blue-500"
+                  className="btn rounded-3xl text-white w-full md:w-32  bg-blue-500"
                 >
                   Add to Wishlist
                 </button>
@@ -370,7 +438,7 @@ const ViewDetails = () => {
           </div>
         </div>
         <div className="w-full lg:hidden block  border rounded-2xl shadow-md p-5  "></div>
-        {/* Modal for update  */}
+        {/* Modal for Review */}
         <div className="w-full mx-auto">
           <input type="checkbox" id="my_modal_6" className="modal-toggle" />
           <div className="modal max-w-7xl mx-auto" role="dialog">
@@ -443,6 +511,89 @@ const ViewDetails = () => {
                       </div>
                       <div className="w-full flex justify-end mt-2">
                         <label htmlFor="my_modal_6" className="btn">
+                          Cancel
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="w-full  flex justify-center items-center">
+                  <span className="loading loading-spinner loading-lg"></span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Modal for Report */}
+        <div className="w-full mx-auto">
+          <input type="checkbox" id="my_modal_5" className="modal-toggle" />
+          <div className="modal max-w-7xl mx-auto" role="dialog">
+            <div className="modal-box !max-w-3xl !max-h-[500px] right-0 absolute!">
+              {modalLoading ? (
+                <div>
+                  <div>
+                    {/* form */}
+                    <div className="w-full">
+                      <div className="w-full  border rounded-md mt-5 p-5 shadow-md">
+                        <h3 className="text-2xl font-bold ">
+                          Add Your Report Here:
+                        </h3>
+                        <div>
+                          <form
+                            onSubmit={handleSubmit1(onSubmit1)}
+                            className=""
+                          >
+                            <div className="mb-5">
+                              <label className=" " htmlFor="name">
+                                Name
+                              </label>
+                              <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                {...register1('name')}
+                                defaultValue={user?.displayName}
+                                readOnly
+                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+                              />
+                            </div>
+
+                            <div className="mb-5">
+                              <label className="font-bold" htmlFor="review">
+                                Description
+                              </label>
+                              <textarea
+                                id="report"
+                                name="report"
+                                type="text"
+                                rows="5"
+                                placeholder="Write your issue here"
+                                {...register1('report', { required: true })}
+                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+                              ></textarea>
+                              {error1.report && (
+                                <span className="text-red-500">
+                                  This field is required
+                                </span>
+                              )}
+                            </div>
+                            <div className="mt-6">
+                              <button className="modal-action w-full flex justify-center  p-3">
+                                <label
+                                  htmlFor="my_modal_5"
+                                  className="btn w-full flex justify-center  bg-blue-500 text-white hover:bg-gray-800"
+                                >
+                                  Submit Report
+                                </label>
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <div className="w-full flex justify-end mt-2">
+                        <label htmlFor="my_modal_5" className="btn">
                           Cancel
                         </label>
                       </div>

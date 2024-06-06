@@ -8,8 +8,7 @@ const Main = () => {
       <div>
         <NavBar />
       </div>
-      <div className="">
-        {' '}
+      <div style={{ height: 'calc(100vh - 84px' }} className="mt-auto">
         <Outlet />
       </div>
       <Toaster />

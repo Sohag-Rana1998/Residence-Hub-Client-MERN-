@@ -169,11 +169,13 @@ const ManageUsers = () => {
                   {user?.role === 'Fraud' && (
                     <>
                       <td></td>
+
                       <td>
-                        <span className="w-32 btn text-center py-3 text-white bg-red-500">
+                        <span className="w-32 cursor-not-allowed hover:bg-red-500 btn text-center py-3 text-white bg-red-500">
                           Fraud
                         </span>
                       </td>
+                      <td></td>
                     </>
                   )}
                   <th>

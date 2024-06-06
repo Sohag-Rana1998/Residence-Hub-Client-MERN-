@@ -7,14 +7,16 @@ const useRole = () => {
   const { user } = useAuth();
   console.log(user);
   const {
-    data: loggedUser,
+    data: loggedUser = {},
     refetch,
     isPending,
   } = useQuery({
-    queryKey: ['userRole', user?.email],
+    queryKey: ['userRole'],
     queryFn: async () => {
       if (user?.email) {
-        const { data } = await axiosPublic.get(`/user?email=${user?.email}`);
+        const { data } = await axiosPublic.get(
+          `/logged-user-role?email=${user?.email}`
+        );
         return data;
       }
     },

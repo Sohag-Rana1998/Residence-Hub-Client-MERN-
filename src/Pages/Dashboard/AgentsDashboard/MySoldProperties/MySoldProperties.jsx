@@ -3,6 +3,11 @@ import useSoldPropertiesByEmail from '../../../../hooks/useSoldPropertiesByEmail
 
 const MySoldProperties = () => {
   const { soldData, refetch, isLoading } = useSoldPropertiesByEmail();
+  const totalPrice = soldData?.reduce(
+    (total, property) => total + parseInt(property.price),
+    0
+  );
+  console.log(totalPrice);
   return (
     <div className="w-full px-5 mt-5">
       <div>
@@ -11,11 +16,10 @@ const MySoldProperties = () => {
           subheading={'Home/Dashboard/Sold Properties'}
         />
       </div>
-      <div className="w-full text-3xl mt-5 font-bold cinzel flex justify-evenly items-center">
-        <div>All Sold Properties: </div>
-        <div>Total solds: {soldData?.length}</div>
+      <div className="w-full text-3xl mt-5 font-bold cinzel flex flex-col md:flex-row gap-2 justify-evenly items-center">
+        <div>Total Sold Properties: {soldData?.length}</div>
+        <div>All Sold Amount:{totalPrice} </div>
       </div>
-
       <div className="mt-5">
         <div className="overflow-x-auto">
           <table className="table ">
