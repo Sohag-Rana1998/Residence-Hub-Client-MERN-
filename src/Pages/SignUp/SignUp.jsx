@@ -83,7 +83,7 @@ const SignUp = () => {
       <span className="loading loading-spinner loading-lg"></span>
     </div>
   ) : (
-    <div className=" container mx-auto   ">
+    <div className=" container mx-auto  pt-20 ">
       <Helmet>
         <title>Heaven Residence | Register</title>
       </Helmet>

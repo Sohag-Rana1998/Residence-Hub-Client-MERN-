@@ -7,7 +7,7 @@ const Dashboard = () => {
   console.log(loggedUser);
   return (
     <div className="flex h-screen pt-16   mx-auto">
-      <div className="w-64 pt-5 bg-[#1b71c7]  text-white ">
+      <div className="w-64 hidden md:block pt-5 bg-[#1b71c7]  text-white ">
         <div className=" px-4">
           <Link to={'/'}>
             <div className="flex justify-center flex-col items-center">

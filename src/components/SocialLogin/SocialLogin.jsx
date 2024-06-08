@@ -41,9 +41,13 @@ const SocialLogin = () => {
           onClick={handleGoogleSignIn}
           aria-label="Login with Google"
           type="button"
-          className="flex btn bg-blue-500 items-center justify-center font-bold text-white w-full  space-x-4 border-2 rounded-md focus:ring-2 focus:ring-offset-1 border-[#399edd] "
+          className="flex btn  btn-outline items-center justify-center font-bold  w-full  space-x-4 border-2 rounded-md focus:ring-2 focus:ring-offset-1 border-[#399edd] "
         >
-          <FaGoogle className="" />
+          <img
+            src="https://docs.material-tailwind.com/icons/google.svg"
+            alt="metamask"
+            className="h-6 w-6"
+          />{' '}
           <p>Login with Google</p>
         </button>
       </div>

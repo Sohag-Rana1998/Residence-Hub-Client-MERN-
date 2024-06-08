@@ -4,27 +4,33 @@ import { ScrollRestoration } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useVerifiedProperty from '../../hooks/useVerifiedProperty';
 import Card from '../../components/Shared/Card';
-import useRole from '../../hooks/userRole';
+import { useForm } from 'react-hook-form';
+import { FaFilter } from 'react-icons/fa';
 
 const AllProperties = () => {
-  const { loggedUser, isPending } = useRole();
-  console.log(loggedUser);
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const [search, setSearch] = useState('');
   const [count, setCount] = useState(0);
   const [loader, setLoader] = useState(false);
+  const [modalLoading, setModalLoading] = useState(true);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+  console.log(loader);
   const { verifiedProperties, refetch, isLoading } = useVerifiedProperty(
     currentPage,
     itemsPerPage,
-    search
+    search,
+    minPrice,
+    maxPrice
   );
 
+  console.log(isLoading);
   useEffect(() => {
     const getCount = async () => {
       const { data } = await axiosSecure.get(
-        `/count-properties?status=Verified&search=${search}`
+        `/count-properties?status=Verified&search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`
       );
 
       if (data) {
@@ -33,8 +39,9 @@ const AllProperties = () => {
     };
     getCount();
     setLoader(true);
+    setTimeout(refetch, 500);
     setTimeout(setLoader, 1000, false);
-  }, [search, axiosSecure]);
+  }, [search, axiosSecure, maxPrice, minPrice, refetch]);
   console.log(count);
 
   const totalPage = Math.ceil(parseInt(count) / itemsPerPage);
@@ -43,9 +50,28 @@ const AllProperties = () => {
 
   const handleSearch = async e => {
     e.preventDefault();
+    setMinPrice(0);
+    setMaxPrice(0);
     const searchText = e.target.search.value;
     setSearch(searchText);
     setTimeout(refetch, 500);
+    e.target.reset();
+  };
+
+  // for review submission
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  // handle Review
+  const onSubmit = async data => {
+    setSearch('');
+    setMinPrice(data.min_price);
+    setMaxPrice(data.max_price);
+    reset();
   };
 
   return (
@@ -62,30 +88,46 @@ const AllProperties = () => {
                   Explore All Properties
                 </h2>
                 <p className="text-white">
-                  Unleash your potential on our job portal. Find tailored
-                  opportunities, connect with top employers, <br /> and elevate
-                  your career. Your next big opportunity awaits. Explore today!
+                  Unlock the door to exceptional living with <br /> our
+                  handpicked selection of homes. Discover the epitome of
+                  elegance and comfort.
                 </p>
               </div>
             </div>
           </div>
 
           <div>
-            <div className=" w-[80%] mx-auto md:w-full block md:flex mb-5  md:justify-end ">
-              <form onSubmit={handleSearch}>
-                <label htmlFor="search"></label>
-                <input
-                  className="input bg-gray-200 w-full md:w-60 border mb-5 mr-3"
-                  id="search"
-                  name="search"
-                  placeholder="Search By Job Title"
-                  type="text"
-                  required
-                />
-                <button className="btn w-full md:w-40 py-[14px] px-4 rounded-lg hover:bg-gray-900 font-bold text-white bg-blue-500">
-                  Search
-                </button>
-              </form>
+            <div className=" flex px-2 md:px-10 flex-col md:flex-row justify-between gap-3 items-center mx-auto w-full  mb-5  ">
+              <div className="w-[90%] md:w-full">
+                <label
+                  onClick={() => {
+                    setModalLoading(false);
+                    setTimeout(setModalLoading, 500, true);
+                  }}
+                  htmlFor="my_modal_7"
+                  className="btn bg-blue-500 flex items-center w-full md:w-48 rounded-xl hover:bg-gray-500 text-white"
+                >
+                  <FaFilter /> Filter By Price Range
+                </label>
+              </div>
+              <div className="flex justify-end w-[90%] md:w-full ">
+                <form onSubmit={handleSearch} className="w-full md:w-[60%] ">
+                  <label htmlFor="search"></label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      className="input bg-gray-200 w-full  border "
+                      id="search"
+                      name="search"
+                      placeholder="Search By Location (USA)"
+                      type="text"
+                      required
+                    />
+                    <button className="btn md:w-24 py-[14px] px-4 rounded-lg hover:bg-gray-900 font-bold text-white bg-blue-500">
+                      Search
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-1  px-10 py-5 rounded-md gap-5  md:grid-cols-2 lg:grid-cols-3 ">
@@ -95,13 +137,13 @@ const AllProperties = () => {
               ))}
           </div>
           <div>
-            {count > 4 ? (
+            {count > 3 ? (
               <div className="flex justify-center items-center text-white my-5 bg-blue-500 rounded-xl p-3">
                 <div className="flex">
                   <a
                     onClick={() => {
                       setCurrentPage(currentPage - 1);
-                      setTimeout(refetch, 300);
+                      setTimeout(refetch, 500);
                       setLoader(true);
                       setTimeout(setLoader, 1000, false);
                     }}
@@ -135,7 +177,7 @@ const AllProperties = () => {
                     <button
                       onClick={() => {
                         setCurrentPage(page);
-                        setTimeout(refetch, 300);
+                        setTimeout(refetch, 500);
                         setLoader(true);
                         setTimeout(setLoader, 1000, false);
                       }}
@@ -158,7 +200,7 @@ const AllProperties = () => {
                     }
                     onClick={() => {
                       setCurrentPage(currentPage + 1);
-                      setTimeout(refetch, 300);
+                      setTimeout(refetch, 500);
                       setLoader(true);
                       setTimeout(setLoader, 1000, false);
                     }}
@@ -199,7 +241,9 @@ const AllProperties = () => {
                     <button
                       onClick={() => {
                         setSearch('');
-                        setTimeout(refetch, 300);
+                        setMinPrice(0);
+                        setMaxPrice(0);
+                        setTimeout(refetch, 500);
                         setLoader(true);
                         setTimeout(setLoader, 1000, false);
                       }}
@@ -211,6 +255,100 @@ const AllProperties = () => {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+
+        {/* Modal for Filter by Price */}
+        <div className=" mx-auto h-auto w-full md:w-48">
+          <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+          <div className="modal  mx-auto" role="dialog">
+            <div
+              style={{
+                scrollbarWidth: 'none',
+              }}
+              className="modal-box !p-2 !h-[380px] !w-80 right-0 absolute!"
+            >
+              {modalLoading ? (
+                <div>
+                  <div>
+                    {/* form */}
+                    <div className="w-full ">
+                      <div className="w-full  border rounded-md mt-5 p-5 shadow-md">
+                        <h3 className="text-xl font-bold ">Price Range:</h3>
+                        <div>
+                          <form onSubmit={handleSubmit(onSubmit)} className="">
+                            <div className="flex justify-between items-center">
+                              <div className="mb-5">
+                                <label
+                                  className="font-bold"
+                                  htmlFor="min_price"
+                                >
+                                  Minimum Price
+                                </label>
+                                <input
+                                  id="min_price"
+                                  name="min_price"
+                                  type="number"
+                                  {...register('min_price')}
+                                  placeholder="Min-Price"
+                                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+                                />
+                                {errors.min_price && (
+                                  <span className="text-red-500">
+                                    This field is required
+                                  </span>
+                                )}
+                              </div>
+                              <div className="mb-5">
+                                <label
+                                  className="font-bold"
+                                  htmlFor="max_price"
+                                >
+                                  Maximum Price
+                                </label>
+                                <input
+                                  id="max_price"
+                                  name="max_price"
+                                  type="number"
+                                  placeholder="Max-Price"
+                                  {...register('max_price')}
+                                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+                                />
+                                {errors.max_price && (
+                                  <span className="text-red-500">
+                                    This field is required
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="mt-6">
+                              <button className="modal-action w-full flex justify-center  p-3">
+                                <label
+                                  htmlFor="my_modal_7"
+                                  className="btn w-full flex justify-center  bg-blue-500 text-white hover:bg-gray-800"
+                                >
+                                  Apply
+                                </label>
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <div className="w-full flex justify-end mt-2">
+                        <label htmlFor="my_modal_7" className="btn">
+                          Cancel
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="w-full  flex justify-center items-center">
+                  <span className="loading loading-spinner loading-lg"></span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

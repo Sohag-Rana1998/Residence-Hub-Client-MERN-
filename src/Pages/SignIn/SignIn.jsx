@@ -74,7 +74,7 @@ const SignIn = () => {
   // }, []);
 
   return (
-    <div className="container mx-auto   ">
+    <div className="container mx-auto  pt-20 ">
       <Helmet>
         <title>Heaven Residence | Login</title>
       </Helmet>

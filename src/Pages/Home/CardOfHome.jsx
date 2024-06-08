@@ -3,10 +3,7 @@ import { GrLinkNext } from 'react-icons/gr';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 
-const Card = ({ estate, refetch }) => {
-  const location1 = useLocation();
-  const showDetailsbtn = location1.pathname.includes('/all-properties');
-
+const CardOfHome = ({ estate, refetch }) => {
   const {
     _id,
     title,
@@ -70,17 +67,13 @@ const Card = ({ estate, refetch }) => {
                   {agentName}
                 </p>
               </div>
-              {showDetailsbtn ? (
-                <div className="w-full flex justify-end">
-                  <Link to={`/view-details/${_id}`}>
-                    <button className="bg-blue-600 btn mb-2 mt-3 md:mt-0 btn-sm md:btn-md hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
-                      View Details <GrLinkNext className="text-xl" />
-                    </button>
-                  </Link>
-                </div>
-              ) : (
-                <></>
-              )}
+              <div className="w-full flex justify-end">
+                <Link to={`/view-details/${_id}`}>
+                  <button className="bg-blue-600 btn mb-2 mt-3 md:mt-0 btn-sm md:btn-md hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
+                    View Details <GrLinkNext className="text-xl" />
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -89,9 +82,8 @@ const Card = ({ estate, refetch }) => {
   );
 };
 
-Card.propTypes = {
+CardOfHome.propTypes = {
   estate: PropTypes.object,
   refetch: PropTypes.func,
 };
-
-export default Card;
+export default CardOfHome;

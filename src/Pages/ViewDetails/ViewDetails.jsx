@@ -12,17 +12,17 @@ import '@smastrom/react-rating/style.css';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import useReviewsById from '../../hooks/useReviewsById';
+import useRole from '../../hooks/userRole';
 
 const ViewDetails = () => {
   const { user } = useAuth();
+  const { loggedUser } = useRole();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   // const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState(0); // Initial value
   const [modalLoading, setModalLoading] = useState(true);
-
   const { property, isLoading, refetch } = usePropertyById(id);
-
   const { reviews, reload } = useReviewsById(id);
   console.log(reviews);
   const {
@@ -66,8 +66,8 @@ const ViewDetails = () => {
   });
 
   const handleAddToWishList = async () => {
-    if (agentEmail == user?.email) {
-      return toast.error('You are not eligible bus this property.');
+    if (agentEmail == user?.email || loggedUser?.role === 'Admin') {
+      return toast.error('You are not eligible buy this property.');
     }
 
     const email = user?.email;

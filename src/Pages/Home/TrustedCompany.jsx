@@ -20,7 +20,7 @@ export default function TrustedCompany() {
 
   return (
     <>
-      <div className=" w-screen px-20 pt-5  h-[150px] bg-[#F1F5F8]">
+      <div className="max-w-full px-2 md:px-20 pt-5 h-auto  md:h-[200px] bg-[#F1F5F8]">
         <div>
           <h3 className="text-2xl font-bold text-center mb-3">
             Trusted By 2000+ Companies
@@ -35,7 +35,7 @@ export default function TrustedCompany() {
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}
-          className="mySwiper h-[80px] "
+          className="mySwiper  h-auto md:h-[80px] "
           onAutoplayTimeLeft={onAutoplayTimeLeft}
         >
           <SwiperSlide>
@@ -83,7 +83,7 @@ export default function TrustedCompany() {
             <img src="https://i.postimg.cc/sfWY7Wt3/airbnb.png" alt="" />
           </SwiperSlide>
 
-          <div className="autoplay-progress" slot="container-end">
+          <div className="autoplay-progress hidden" slot="container-end">
             <svg viewBox="0 0 48 48" ref={progressCircle}>
               <circle cx="24" cy="24" r="20"></circle>
             </svg>

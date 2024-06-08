@@ -56,6 +56,7 @@ const AdvertiseProperty = () => {
     const searchText = e.target.search.value;
     setSearch(searchText);
     setTimeout(refetch, 500);
+    e.target.reset();
   };
 
   const { mutateAsync } = useMutation({
@@ -138,7 +139,7 @@ const AdvertiseProperty = () => {
                     className="input bg-gray-200 w-full md:w-60 border mb-5 mr-3"
                     id="search"
                     name="search"
-                    placeholder="Search By property Title"
+                    placeholder="Search By Property Location (USA)"
                     type="text"
                     required
                   />

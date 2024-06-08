@@ -4,23 +4,12 @@
 @tailwind utilities;
 
 
-
-
 .font-jost {
   font-family: "Jost", sans-serif;
 }
 
-nav ul li ul.dropDown {
-  display: none;
-  background-color: #e9edf1;
-  position: absolute;
-  width: 200px;
-  right: 0px;
-  border-radius: 15px;
-}
 
-.swiper-button-prev {
-  display: none;
-  position: absolute;
-  top: 0;
+* {
+  margin: 0px;
+  padding: 0px;
 }
