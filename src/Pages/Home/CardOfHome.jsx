@@ -3,6 +3,16 @@ import { GrLinkNext } from 'react-icons/gr';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Pagination, Navigation } from 'swiper/modules';
 const CardOfHome = ({ estate, refetch }) => {
   const {
     _id,
@@ -14,27 +24,63 @@ const CardOfHome = ({ estate, refetch }) => {
     area,
     location,
     image,
+    image_url2,
+    image_url3,
   } = estate;
 
   return (
     <div className="w-full">
       <div className="w-full  h-full  rounded-2xl shadow-2xl  ">
         <div className="m-0 p-0 ">
-          <div className="relative h-64 rounded-t-2xl overflow-hidden">
-            <img
-              src={image}
-              className="w-full   h-full hover:scale-[110%] duration-700"
-              alt="ui/ux review check"
-            />
+          <div className="relative h-80 rounded-t-xl ">
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={30}
+              loop={true}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className="mySwiper h-80 rounded-t-xl"
+            >
+              <SwiperSlide>
+                <div className=" h-full w-full rounded-t-xl">
+                  <img
+                    className="h-full w-full rounded-t-xl overflow-hidden hover:scale-105 duration-300"
+                    src={image}
+                    alt=""
+                  />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className=" h-full w-full rounded-xl  ">
+                  <img
+                    className="h-full w-full rounded-xl overflow-hidden hover:scale-105 duration-300"
+                    src={image_url2}
+                    alt=""
+                  />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className=" h-full w-full rounded-t-xl ">
+                  <img
+                    className="h-full w-full rounded-t-xl overflow-hidden hover:scale-105 duration-500"
+                    src={image_url3}
+                    alt=""
+                  />
+                </div>
+              </SwiperSlide>
+            </Swiper>
             <button
-              className={`px-3 py-2 rounded-bl-3xl ${
+              className={`px-3 py-2 rounded-tr-xl ${
                 status === 'Verified' ? 'bg-blue-500' : 'bg-red-400 '
               }  absolute z-10 right-0 top-0 text-white font-bold bg-opacity-80`}
             >
               {status}
             </button>
 
-            <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 p-2 rounded-t-lg ">
+            <div className="absolute bottom-0 z-50 left-0 bg-black/60  p-2 rounded-tr-lg ">
               <p className=" font-sm text-white text-sm flex items-center gap-2">
                 <FaLocationDot />
                 {location}

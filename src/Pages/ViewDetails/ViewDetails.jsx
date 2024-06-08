@@ -2,8 +2,16 @@ import { ScrollRestoration, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { FaLocationDot } from 'react-icons/fa6';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import usePropertyById from '../../hooks/usePropertyById';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+// import required modules
+import { Pagination, Autoplay } from 'swiper/modules';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
@@ -24,7 +32,7 @@ const ViewDetails = () => {
   const [modalLoading, setModalLoading] = useState(true);
   const { property, isLoading, refetch } = usePropertyById(id);
   const { reviews, reload } = useReviewsById(id);
-  console.log(reviews);
+
   const {
     title,
     agentName,
@@ -38,6 +46,8 @@ const ViewDetails = () => {
     image,
     agentImg,
     agentEmail,
+    image_url2,
+    image_url3,
   } = property;
 
   const present = new Date();
@@ -213,6 +223,14 @@ const ViewDetails = () => {
     }
   };
 
+  // Slider autoplay func
+  const progressCircle = useRef(null);
+  const progressContent = useRef(null);
+  const onAutoplayTimeLeft = (s, time, progress) => {
+    progressCircle.current.style.setProperty('--progress', 1 - progress);
+    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+  };
+
   return isLoading ? (
     <div className="w-[80%] mx-auto min-h-screen ">
       {/* <SkeletonTheme baseColor="#a2a2b2">
@@ -239,16 +257,74 @@ const ViewDetails = () => {
       <div className="h-auto px-4 md:px-10 lg:px-16">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
           <div className="flex flex-col w-full lg:w-[70%]   justify-between gap-5 items-start">
-            <div color="transparent" className="m-0 w-full p-0 rounded-none">
-              <div className="relative overflow-hidden rounded-2xl h-[300px] md:h-[500px]">
-                <img
-                  src={image}
-                  className="w-full rounded-2xl  h-full hover:scale-[105%] duration-700"
-                  alt="ui/ux review check"
-                />
-                <span className="bg-blue-500 bottom-0 right-0 absolute py-3 px-5 text-white rounded-br-2xl  rounded-tl-2xl text-sm font-bold">
+            <div className="m-0 w-full p-0 rounded-none">
+              <div className="relative h-[450px] rounded-t-xl ">
+                <Swiper
+                  slidesPerView={1}
+                  spaceBetween={30}
+                  autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                  }}
+                  onAutoplayTimeLeft={onAutoplayTimeLeft}
+                  loop={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination, Autoplay]}
+                  className="mySwiper h-[450px] rounded-t-xl"
+                >
+                  <SwiperSlide>
+                    <div className=" h-full w-full rounded-t-xl">
+                      <img
+                        className="h-full w-full rounded-t-xl overflow-hidden hover:scale-105 duration-300"
+                        src={image}
+                        alt=""
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className=" h-full w-full rounded-xl  ">
+                      <img
+                        className="h-full w-full rounded-xl overflow-hidden hover:scale-105 duration-300"
+                        src={image_url2}
+                        alt=""
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className=" h-full w-full rounded-t-xl ">
+                      <img
+                        className="h-full w-full rounded-t-xl overflow-hidden hover:scale-105 duration-500"
+                        src={image_url3}
+                        alt=""
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <div
+                    className="autoplay-progress hidden"
+                    slot="container-end"
+                  >
+                    <svg viewBox="0 0 48 48" ref={progressCircle}>
+                      <circle cx="24" cy="24" r="20"></circle>
+                    </svg>
+                    <span ref={progressContent}></span>
+                  </div>
+                </Swiper>
+                <button
+                  className={`px-3 py-2 rounded-tr-xl ${
+                    status === 'Verified' ? 'bg-blue-500' : 'bg-red-400 '
+                  }  absolute z-10 right-0 top-0 text-white font-bold bg-opacity-80`}
+                >
                   {status}
-                </span>
+                </button>
+
+                <div className="absolute bottom-0 z-50 left-0 bg-black/60  p-2 rounded-tr-lg ">
+                  <p className=" font-sm text-white text-sm flex items-center gap-2">
+                    <FaLocationDot />
+                    {location}
+                  </p>
+                </div>
               </div>
             </div>
 
