@@ -72,17 +72,14 @@ const ManageReviews = () => {
                   src="https://i.postimg.cc/xCfnh8DK/png-transparent-quotation-mark-apostrophe-computer-icons-quotation-text-number-sign-thumbnail.png"
                   alt=""
                 />
-
-                <p className="text-center">{review.review}</p>
-
                 <Rating style={{ maxWidth: 140 }} value={review.star} />
-                <div className="mt-2">
-                  <h3 className="font-bold mb-1">
-                    Property Title:{review?.propertyTitle}
-                  </h3>
-                </div>
+                <p className="text-center">{review.review}</p>
               </div>
-
+              <div className="mt-2">
+                <h3 className="font-bold mb-1">
+                  Property Title:{review?.propertyTitle}
+                </h3>
+              </div>
               <div>
                 <div className="flex items-center gap-2">
                   <img
@@ -90,18 +87,13 @@ const ManageReviews = () => {
                     className="h-12 w-12 rounded-full"
                     alt=""
                   />
-                  <div>
-                    <h3>Name:{review?.name}</h3>
-                    <h3>Email:{review?.email}</h3>
+                  <div className="mt-3">
+                    <h3>{review?.name}</h3>
+                    <h3>{review?.email}</h3>
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <div>
-                    <div>
-                      {' '}
-                      Posted on:{new Date(review.date).toLocaleDateString()}
-                    </div>
-                  </div>
+                  <div></div>
                   <div>
                     <button
                       onClick={() => handleDelete(review._id)}

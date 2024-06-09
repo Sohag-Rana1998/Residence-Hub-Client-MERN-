@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { MdOutlineLogin } from 'react-icons/md';
 import { FaUserAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { MdLogout } from 'react-icons/md';
 import useAuth from '../../hooks/useAuth';
 import useRole from '../../hooks/userRole';
 
@@ -499,9 +500,10 @@ const NavBar = () => {
               </nav>
               <button
                 onClick={handleLogout}
-                className="w-28 hidden md:block text-white font-bold border-none btn bg-blue-500 hover:bg-gray-900  rounded-lg "
+                className="w-28 hidden md:flex items-center gap-1 text-white font-bold border-none btn bg-blue-500 hover:bg-gray-900  rounded-lg "
               >
                 Log Out
+                <MdLogout />
               </button>
             </div>
           ) : (

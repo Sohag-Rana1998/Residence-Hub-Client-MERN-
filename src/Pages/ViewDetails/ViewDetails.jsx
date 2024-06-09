@@ -1,5 +1,6 @@
 import { ScrollRestoration, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { FaRegHeart, FaStar } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useRef, useState } from 'react';
@@ -312,19 +313,12 @@ const ViewDetails = () => {
                   </div>
                 </Swiper>
                 <button
-                  className={`px-3 py-2 rounded-tr-xl ${
+                  className={`px-3 py-2  ${
                     status === 'Verified' ? 'bg-blue-500' : 'bg-red-400 '
-                  }  absolute z-10 right-0 top-0 text-white font-bold bg-opacity-80`}
+                  }  absolute z-10 right-0 bottom-0 text-white rounded-tl-xl font-bold bg-opacity-80`}
                 >
                   {status}
                 </button>
-
-                <div className="absolute bottom-0 z-50 left-0 bg-black/60  p-2 rounded-tr-lg ">
-                  <p className=" font-sm text-white text-sm flex items-center gap-2">
-                    <FaLocationDot />
-                    {location}
-                  </p>
-                </div>
               </div>
             </div>
 
@@ -376,9 +370,9 @@ const ViewDetails = () => {
 
                       <button
                         onClick={() => handleAddToWishList(id)}
-                        className="btn rounded-3xl text-white w-full md:w-40  bg-blue-500"
+                        className="btn rounded-3xl text-white hover:bg-gray-500 w-full md:w-40  bg-blue-500"
                       >
-                        Add to Wishlist
+                        <FaRegHeart /> Add to Wishlist
                       </button>
                     </div>
                   </div>
@@ -485,7 +479,7 @@ const ViewDetails = () => {
                   htmlFor="my_modal_6"
                   className="btn bg-blue-500 w-full md:w-40 rounded-3xl hover:bg-gray-500 text-white"
                 >
-                  Add a review
+                  <FaStar /> Add a review
                 </label>
               </div>
             </div>

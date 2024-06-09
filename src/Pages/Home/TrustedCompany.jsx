@@ -20,9 +20,9 @@ export default function TrustedCompany() {
 
   return (
     <>
-      <div className="max-w-full px-2 md:px-20 pt-5 h-auto  md:h-[200px] bg-[#F1F5F8]">
+      <div className="max-w-full px-2 md:px-20 py-5 h-auto  md:h-[200px] bg-[#F1F5F8]">
         <div>
-          <h3 className="text-2xl font-bold text-center mb-3">
+          <h3 className="text-xl md:text-2xl font-bold text-center mb-3">
             Trusted By 2000+ Companies
           </h3>
         </div>

@@ -88,9 +88,9 @@ const AllProperties = () => {
                   Explore All Properties
                 </h2>
                 <p className="text-white">
-                  Unlock the door to exceptional living with <br /> our
-                  handpicked selection of homes. Discover the epitome of
-                  elegance and comfort.
+                  Browse through our extensive collection <br /> of properties.
+                  Use filters to find homes, apartments, and commercial spaces
+                  that match your criteria.
                 </p>
               </div>
             </div>
