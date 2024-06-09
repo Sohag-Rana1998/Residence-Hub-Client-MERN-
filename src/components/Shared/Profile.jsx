@@ -16,7 +16,7 @@ const Profile = ({ user, refetch }) => {
   return (
     <div className="container  mx-auto    rounded-lg ">
       <Helmet>
-        <title>Heaven Residence | Profile</title>
+        <title>RESIDENCE HUB | Profile</title>
       </Helmet>
       <div className=" w-full h-32 md:text-right text-center text-white p-5  bg-[#006770] overflow-hidden">
         <h3 className="text-3xl font-bold">Profile</h3>

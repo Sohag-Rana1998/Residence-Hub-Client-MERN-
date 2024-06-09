@@ -23,7 +23,8 @@ const SignUp = () => {
   const { updateUserProfile, createUser } = useAuth();
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
+  const date = new Date();
+  console.log(date);
   const {
     register,
     handleSubmit,
@@ -55,6 +56,7 @@ const SignUp = () => {
           name: data.name,
           email: data.email,
           photo: photo,
+          date: date,
         };
         const { data: data1 } = await axiosPublic.post('/users', userInfo);
         console.log(data1);
@@ -85,7 +87,7 @@ const SignUp = () => {
   ) : (
     <div className=" container mx-auto  pt-20 ">
       <Helmet>
-        <title>Heaven Residence | Register</title>
+        <title>RESIDENCE HUB| Register</title>
       </Helmet>
       <div className="flex flex-col md:flex-row-reverse  items-center border p-5">
         <div className=" w-full hidden md:block md:w-[50%]">

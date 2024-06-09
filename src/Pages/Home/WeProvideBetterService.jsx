@@ -10,9 +10,9 @@ import SectionHeading from './SectionHeading';
 
 const WeProvideBetterService = () => {
   return (
-    <div className="bg-blue-600 w-screen text-white py-20">
+    <div className="bg-blue-600 w-full text-white py-16 px-5">
       <div className="max-w-7xl container mx-auto">
-        <div>
+        <div className="mb-5">
           <SectionHeading
             heading={'We Provide Better Service For You'}
             subheading={

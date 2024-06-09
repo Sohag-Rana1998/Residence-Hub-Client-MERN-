@@ -17,7 +17,7 @@ const Dashboard = () => {
                 alt=""
               />
               <h3 className="text-3xl font-extrabold tracking-[5.4px]">
-                {"Heaven's"}
+                RESIDENCE HUB
               </h3>
             </div>
           </Link>

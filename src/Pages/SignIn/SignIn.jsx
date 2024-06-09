@@ -76,7 +76,7 @@ const SignIn = () => {
   return (
     <div className="container mx-auto  pt-20 ">
       <Helmet>
-        <title>Heaven Residence | Login</title>
+        <title>RESIDENCE HUB | Login</title>
       </Helmet>
       <div className="flex flex-col md:flex-row   min-h-screen  items-center border p-5">
         <div className=" w-full hidden md:block md:w-[50%]">

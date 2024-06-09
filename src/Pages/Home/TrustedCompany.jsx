@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -18,6 +18,29 @@ export default function TrustedCompany() {
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
 
+  const [slidesPerView, setSlidesPerView] = useState(
+    getSlidesPerView(window.innerWidth)
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSlidesPerView(getSlidesPerView(window.innerWidth));
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  function getSlidesPerView(width) {
+    if (width >= 720) {
+      return 7;
+    } else {
+      return 4;
+    }
+  }
+
   return (
     <>
       <div className="max-w-full px-2 md:px-20 py-5 h-auto  md:h-[200px] bg-[#F1F5F8]">
@@ -27,7 +50,7 @@ export default function TrustedCompany() {
           </h3>
         </div>
         <Swiper
-          slidesPerView={7}
+          slidesPerView={slidesPerView}
           loop={true}
           spaceBetween={20}
           autoplay={{

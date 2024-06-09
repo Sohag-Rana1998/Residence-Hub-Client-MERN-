@@ -119,7 +119,7 @@ const AdvertiseProperty = () => {
   ) : (
     <div className=" container mx-auto ">
       <Helmet>
-        <title>Heaven Residence | Advertise</title>
+        <title>RESIDENCE HUB | Advertise</title>
       </Helmet>
       <div>
         <div>

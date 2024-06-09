@@ -13,7 +13,7 @@ export default function Banner() {
   return (
     <>
       {' '}
-      <div className=" mx-auto max-w-full">
+      <div className="w-full">
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
@@ -23,7 +23,7 @@ export default function Banner() {
           }}
           navigation={true}
           modules={[Pagination, Navigation]}
-          className="mySwiper h-[650px] max-w-full"
+          className="mySwiper h-[650px] w-full"
         >
           <SwiperSlide>
             <div className="bg-[url(https://i.postimg.cc/Ssb0P9kL/banner-2.jpg)] h-full w-full bg-cover bg-center bg-no-repeat flex justify-center items-center flex-col text-white text-center px-5">

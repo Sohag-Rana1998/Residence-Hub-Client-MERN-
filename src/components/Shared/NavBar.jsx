@@ -405,7 +405,7 @@ const NavBar = () => {
 
   return (
     <div
-      className={`flex fixed top-0 border-b-2 w-screen px-4 py-2 transition duration-300 ease-in-out ${
+      className={`flex mx-auto fixed top-0 border-b-2 lg:w-screen w-11/12   py-2 transition duration-300 ease-in-out ${
         isScrolled ? 'bg-white text-black' : 'bg-transparent text-blue-500'
       } justify-between ease-in-out items-center    z-50 mx-auto `}
     >
@@ -467,7 +467,7 @@ const NavBar = () => {
               alt=""
             />
             <h3 className="text-2xl hidden md:block font-extrabold">
-              Heaven Residence
+              RESIDENCE HUB
             </h3>
           </div>
         </Link>
@@ -476,10 +476,10 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1"> {Links}</ul>
       </div>
 
-      <div className=" ">
-        <div className="flex  ">
+      <div className="pr-4 lg:pr-8">
+        <div className="flex ">
           {user ? (
-            <div className="flex gap-3 justify-between items-center mr-3">
+            <div className="flex gap-3 justify-between items-center ">
               <nav className="relative parent ">
                 <ul className="flex items-start gap-2">
                   <li>
@@ -492,7 +492,7 @@ const NavBar = () => {
                           (user && user?.photoURL) ||
                           'https://i.ibb.co/zmbRY07/images.png'
                         }
-                        className="mr-4  bg-no-repeat bg-cover bg-[url(https://i.ibb.co/zmbRY07/images.png)]"
+                        className="  bg-no-repeat bg-cover bg-[url(https://i.ibb.co/zmbRY07/images.png)]"
                       />
                     </div>
                   </li>
@@ -508,7 +508,7 @@ const NavBar = () => {
             </div>
           ) : (
             <div>
-              <div className="flex items-center gap-3 mr-3">
+              <div className="flex items-center gap-3 ">
                 <Link to={'/login'}>
                   <button
                     className={`w-28 font-bold border-none focus:outline-none btn  ${

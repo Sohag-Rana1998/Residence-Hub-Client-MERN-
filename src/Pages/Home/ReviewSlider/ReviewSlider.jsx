@@ -53,9 +53,26 @@ export default function ReviewSlider() {
         >
           {allReviews?.map(review => (
             <SwiperSlide key={review.id}>
-              <div className="mb-4 bg-gray-100 px-10 md:px-5 py-5 text-black rounded-sm">
+              <div className="mb-4 bg-gray-100 px-10 md:px-5 py-3 text-black rounded-sm">
                 <div className="">
-                  <div>
+                  <div></div>
+                  <div className="flex justify-center items-center flex-col ">
+                    <img
+                      className="w-12 h-10 my-2"
+                      src="https://i.postimg.cc/xCfnh8DK/png-transparent-quotation-mark-apostrophe-computer-icons-quotation-text-number-sign-thumbnail.png"
+                      alt=""
+                    />
+
+                    <Rating style={{ maxWidth: 150 }} value={review.star} />
+                    <div className="mt-2">
+                      <h3 className="font-bold">
+                        Property Title:{review?.propertyTitle}
+                      </h3>
+                    </div>
+
+                    <p className="text-center">{review.review}</p>
+                  </div>
+                  <div className="flex justify-between gap-5 mt-3 items-center">
                     <div className="flex items-center gap-2">
                       <img
                         src={review.photo}
@@ -63,26 +80,10 @@ export default function ReviewSlider() {
                         alt=""
                       />
                       <div className="mt-3">
-                        <h3>{review?.name}</h3>
-                        <Rating style={{ maxWidth: 100 }} value={review.star} />
+                        <h3 className="font-bold">{review?.name}</h3>
+                        <p>User</p>
                       </div>
-                    </div>
-                  </div>
-                  <div className="flex justify-center items-center flex-col ">
-                    <img
-                      className="w-12 h-10 my-2"
-                      src="https://i.postimg.cc/xCfnh8DK/png-transparent-quotation-mark-apostrophe-computer-icons-quotation-text-number-sign-thumbnail.png"
-                      alt=""
-                    />
-                    <div className="mt-2">
-                      <h3 className="font-bold mb-1">
-                        Property Title:{review?.propertyTitle}
-                      </h3>
-                    </div>
-                    <p className="text-center">{review.review}</p>
-                  </div>
-                  <div className="flex justify-end mt-3">
-                    {' '}
+                    </div>{' '}
                     Posted on:{new Date(review.date).toLocaleDateString()}
                   </div>
                 </div>

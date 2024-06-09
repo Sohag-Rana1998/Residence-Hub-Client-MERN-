@@ -8,8 +8,7 @@
   font-family: "Jost", sans-serif;
 }
 
+.swiper-button-next {
+  margin-right: 20px;
 
-* {
-  margin: 0px;
-  padding: 0px;
 }

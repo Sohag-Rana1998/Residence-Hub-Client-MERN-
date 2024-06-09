@@ -77,7 +77,7 @@ const AllProperties = () => {
   return (
     <div className="container mx-auto  pt-12 ">
       <Helmet>
-        <title>Heaven Residence | All Property </title>
+        <title>RESIDENCE HUB | All Property </title>
       </Helmet>
       <div className="mt-10">
         <div>
