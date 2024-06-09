@@ -6,8 +6,8 @@ const Dashboard = () => {
   const { loggedUser } = useRole();
   console.log(loggedUser);
   return (
-    <div className="flex h-screen pt-16   mx-auto">
-      <div className="w-64 hidden md:block pt-5 bg-[#1b71c7]  text-white ">
+    <div className="flex  pt-[70px]   mx-auto">
+      <div className="w-64 hidden  md:block pt-5 bg-[#1b71c7]  text-white ">
         <div className=" px-4">
           <Link to={'/'}>
             <div className="flex justify-center flex-col items-center">
@@ -285,7 +285,7 @@ const Dashboard = () => {
       </div>
       <div
         style={{ scrollbarWidth: 'none' }}
-        className="flex-1    overflow-y-scroll  "
+        className="flex-1   h-screen overflow-y-scroll  "
       >
         <Outlet />
       </div>

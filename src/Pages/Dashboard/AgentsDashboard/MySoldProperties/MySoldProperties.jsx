@@ -9,7 +9,7 @@ const MySoldProperties = () => {
   );
   console.log(totalPrice);
   return (
-    <div className="w-full px-5 mt-5">
+    <div className="px-10 pb-10">
       <div>
         <SectionTitle
           heading={'My Sold Properties'}
@@ -18,7 +18,7 @@ const MySoldProperties = () => {
       </div>
       <div className="w-full text-3xl mt-5 font-bold cinzel flex flex-col md:flex-row gap-2 justify-evenly items-center">
         <div>Total Sold Properties: {soldData?.length}</div>
-        <div>All Sold Amount:{totalPrice} </div>
+        <div>Total Sold Amount:{totalPrice} </div>
       </div>
       <div className="mt-5">
         <div className="overflow-x-auto">

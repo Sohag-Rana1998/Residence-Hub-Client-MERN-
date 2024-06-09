@@ -96,7 +96,7 @@ const MakeOffer = () => {
   };
 
   return (
-    <div>
+    <div className="pb-10 px-10">
       <div>
         <SectionTitle
           heading={'Make An Offer'}

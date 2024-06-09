@@ -54,7 +54,7 @@ const ReportedProperty = () => {
     });
   };
   return (
-    <div>
+    <div className="px-10 pb-10">
       <div>
         <SectionTitle
           heading={'Reported Properties'}

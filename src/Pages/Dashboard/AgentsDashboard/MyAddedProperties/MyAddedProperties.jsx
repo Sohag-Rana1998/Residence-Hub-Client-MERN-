@@ -7,11 +7,11 @@ const MyAddedProperties = () => {
   const { agentProperties, refetch } = usePropertyByAgent();
   console.log(agentProperties);
   return (
-    <div>
+    <div className="px-10 pb-10">
       <div>
         <SectionTitle
           heading={'My Added Properties'}
-          subheading={'Home/Dashboard/Add-Property'}
+          subheading={'Home/Dashboard/MyAdded-Property'}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

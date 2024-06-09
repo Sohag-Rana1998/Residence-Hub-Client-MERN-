@@ -105,7 +105,7 @@ const RequestedProperties = () => {
     });
   };
   return (
-    <div>
+    <div className="px-10 pb-10">
       <div>
         <SectionTitle
           heading={'Requested Properties'}

@@ -56,7 +56,7 @@ const ManageProperties = () => {
     });
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-10 pb-10">
       <div>
         <SectionTitle
           heading={'Manage Properties'}

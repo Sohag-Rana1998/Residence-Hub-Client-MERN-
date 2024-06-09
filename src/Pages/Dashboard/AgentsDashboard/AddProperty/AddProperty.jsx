@@ -7,6 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useRole from '../../../../hooks/userRole';
+import { useNavigate } from 'react-router-dom';
 const AddProperty = () => {
   const { user } = useAuth();
   const { loggedUser, refetch } = useRole();
@@ -14,7 +15,7 @@ const AddProperty = () => {
   const axiosPublic = useAxiosPublic();
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -35,6 +36,7 @@ const AddProperty = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      navigate('/dashboard/added-properties');
       reset();
     },
   });
@@ -81,7 +83,7 @@ const AddProperty = () => {
   };
 
   return (
-    <div>
+    <div className="px-10 pb-10">
       <div>
         <SectionTitle
           heading={'Add Property'}

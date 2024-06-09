@@ -117,7 +117,7 @@ const AdvertiseProperty = () => {
       </SkeletonTheme> */}
     </div>
   ) : (
-    <div className=" container mx-auto ">
+    <div className=" container mx-auto px-10 pb-10">
       <Helmet>
         <title>RESIDENCE HUB | Advertise</title>
       </Helmet>
@@ -136,7 +136,7 @@ const AdvertiseProperty = () => {
                 <form onSubmit={handleSearch}>
                   <label htmlFor="search"></label>
                   <input
-                    className="input bg-gray-200 w-full md:w-60 border mb-5 mr-3"
+                    className="input bg-gray-200 w-full md:w-72 border  mr-3"
                     id="search"
                     name="search"
                     placeholder="Search By Property Location (USA)"
@@ -155,7 +155,7 @@ const AdvertiseProperty = () => {
               <table className="table ">
                 {/* head */}
                 <thead>
-                  <tr>
+                  <tr className="bg-blue-500 text-white">
                     <th>No:</th>
                     <th>Property Image</th>
                     <th>Property Title</th>

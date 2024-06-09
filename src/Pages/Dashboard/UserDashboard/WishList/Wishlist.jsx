@@ -6,7 +6,7 @@ const Wishlist = () => {
   const { wishlistProperties, isLoading, refetch } = useWishlistDataByEmail();
   console.log(wishlistProperties);
   return (
-    <div>
+    <div className="pb-10 px-10">
       <div>
         <SectionTitle
           heading={'Wish List'}

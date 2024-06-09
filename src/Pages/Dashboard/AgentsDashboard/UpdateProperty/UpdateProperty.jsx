@@ -59,6 +59,7 @@ const UpdateProperty = () => {
       });
       reset();
       navigate('/dashboard/added-properties');
+
       refetch();
     },
   });
@@ -105,7 +106,7 @@ const UpdateProperty = () => {
       <p>Loading</p>
     </div>
   ) : (
-    <div>
+    <div className="px-10 pb-10">
       <div className="flex justify-center ">
         <div className="w-[280px]  p-3 text-center rounded-t-3xl">
           <h3 className="text-3xl font-bold border-b-2 pb-1">

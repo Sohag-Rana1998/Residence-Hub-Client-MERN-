@@ -52,7 +52,7 @@ const ManageReviews = () => {
   };
 
   return (
-    <div>
+    <div className="px-10 pb-10">
       <div>
         <SectionTitle
           heading={'Manage Reviews'}
@@ -63,7 +63,7 @@ const ManageReviews = () => {
         {allReviews?.map(review => (
           <div
             key={review._id}
-            className="mb-4 bg-gray-100 p-5 text-black rounded-sm hover:scale-105 duration-500"
+            className="mb-4 bg-gray-100 p-5 text-black rounded-sm hover:scale-105 duration-300"
           >
             <div className="">
               <div className="flex justify-center items-center flex-col ">
@@ -73,13 +73,14 @@ const ManageReviews = () => {
                   alt=""
                 />
                 <Rating style={{ maxWidth: 140 }} value={review.star} />
+                <div className="mt-2">
+                  <h3 className="font-bold mb-1">
+                    Property Title:{review?.propertyTitle}
+                  </h3>
+                </div>
                 <p className="text-center">{review.review}</p>
               </div>
-              <div className="mt-2">
-                <h3 className="font-bold mb-1">
-                  Property Title:{review?.propertyTitle}
-                </h3>
-              </div>
+
               <div>
                 <div className="flex items-center gap-2">
                   <img

@@ -52,7 +52,7 @@ const MyReviews = () => {
   };
 
   return (
-    <div>
+    <div className="pb-10 px-10">
       <div>
         <SectionTitle
           heading={'My Reviews'}

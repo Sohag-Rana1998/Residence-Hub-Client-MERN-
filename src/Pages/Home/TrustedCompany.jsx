@@ -43,76 +43,76 @@ export default function TrustedCompany() {
 
   return (
     <>
-      <div className="max-w-full px-2 md:px-20 py-5 h-auto  md:h-[200px] bg-[#F1F5F8]">
+      <div className="max-w-full  px-2 md:px-20 py-5 h-auto  md:h-[150px] bg-[#F1F5F8]">
         <div>
           <h3 className="text-xl md:text-2xl font-bold text-center mb-3">
             Trusted By 2000+ Companies
           </h3>
+          <Swiper
+            slidesPerView={slidesPerView}
+            loop={true}
+            spaceBetween={20}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+            className="mySwiper  h-auto md:h-[100px] "
+            onAutoplayTimeLeft={onAutoplayTimeLeft}
+          >
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/RCDZ1tSs/slack.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/R0SmxCCJ/pp.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/7hDd0mCG/spotify.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/nrcTn5jk/samsung.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/636CZZW6/googl.png" alt="" />
+            </SwiperSlide>
+
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/sD90Pqtf/amazon.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/sfWY7Wt3/airbnb.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/RCDZ1tSs/slack.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/R0SmxCCJ/pp.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/7hDd0mCG/spotify.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/nrcTn5jk/samsung.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/636CZZW6/googl.png" alt="" />
+            </SwiperSlide>
+
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/sD90Pqtf/amazon.png" alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.postimg.cc/sfWY7Wt3/airbnb.png" alt="" />
+            </SwiperSlide>
+
+            <div className="autoplay-progress hidden" slot="container-end">
+              <svg viewBox="0 0 48 48" ref={progressCircle}>
+                <circle cx="24" cy="24" r="20"></circle>
+              </svg>
+              <span ref={progressContent}></span>
+            </div>
+          </Swiper>
         </div>
-        <Swiper
-          slidesPerView={slidesPerView}
-          loop={true}
-          spaceBetween={20}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          modules={[Autoplay]}
-          className="mySwiper  h-auto md:h-[80px] "
-          onAutoplayTimeLeft={onAutoplayTimeLeft}
-        >
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/RCDZ1tSs/slack.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/R0SmxCCJ/pp.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/7hDd0mCG/spotify.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/nrcTn5jk/samsung.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/636CZZW6/googl.png" alt="" />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/sD90Pqtf/amazon.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/sfWY7Wt3/airbnb.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/RCDZ1tSs/slack.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/R0SmxCCJ/pp.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/7hDd0mCG/spotify.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/nrcTn5jk/samsung.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/636CZZW6/googl.png" alt="" />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/sD90Pqtf/amazon.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://i.postimg.cc/sfWY7Wt3/airbnb.png" alt="" />
-          </SwiperSlide>
-
-          <div className="autoplay-progress hidden" slot="container-end">
-            <svg viewBox="0 0 48 48" ref={progressCircle}>
-              <circle cx="24" cy="24" r="20"></circle>
-            </svg>
-            <span ref={progressContent}></span>
-          </div>
-        </Swiper>
       </div>
     </>
   );

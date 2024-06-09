@@ -5,7 +5,7 @@ import BoughtPropertyCard from './BoughtPropertyCard';
 const PropertyBought = () => {
   const { offeredProperties, refetch, isLoading } = useOfferedPropertyByEmail();
   return (
-    <div>
+    <div className="pb-10 px-10">
       <div>
         <SectionTitle
           heading={'Property Bought'}
