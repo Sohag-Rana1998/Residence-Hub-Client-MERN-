@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet-async';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 const AddProperty = () => {
   const { user } = useAuth();
-  const { loggedUser, isPending,refetch } = useRole();
+  const { loggedUser, isPending, refetch } = useRole();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
@@ -40,7 +40,7 @@ const AddProperty = () => {
       });
       navigate('/dashboard/added-properties');
       reset();
-      refetch()
+      refetch();
     },
   });
   const onSubmit = async data => {
@@ -120,7 +120,7 @@ const AddProperty = () => {
           </div>
           <div>
             <label htmlFor="location" className="block mb-2 font-bold text-sm">
-              Property Location
+              Location
             </label>
             <input
               type="text"

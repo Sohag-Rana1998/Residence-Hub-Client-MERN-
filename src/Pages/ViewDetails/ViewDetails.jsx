@@ -338,7 +338,7 @@ const ViewDetails = () => {
                           setTimeout(setModalLoading, 500, true);
                         }}
                         htmlFor="my_modal_5"
-                        className="btn btn-sm  bg-red-500 text-white md:w-48  rounded-3xl hover:bg-gray-500 "
+                        className="btn btn-sm mb-3 md:mb-0  bg-red-500 text-white md:w-48  rounded-3xl hover:bg-gray-500 "
                       >
                         Report this property
                       </label>
@@ -432,8 +432,8 @@ const ViewDetails = () => {
         </div>
         <div>
           <div className="mb-5 mt-10 w-full lg:w-[70%]">
-            <div className="flex items-center gap-2">
-              <div className="text-white text-center p-7 rounded-xl border bg-blue-500">
+            <div className="flex items-center flex-col md:flex-row gap-2">
+              <div className="text-white  text-center p-7 rounded-xl border bg-blue-500">
                 <div>
                   <h1 className="text-7xl font-bold">5.0</h1>
                   <p>Excellent</p>

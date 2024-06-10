@@ -28,6 +28,7 @@ import ReportedProperty from '../Pages/Dashboard/AdminDashboard/ReportedProperty
 import PrivateRoute from './PrivateRoute';
 import AgentRoute from './AgentRoute';
 import AdminRoute from './AdminRoute';
+import ContactUs from '../Pages/ContactUs/ContactUs';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
             <ViewDetails />
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/contact-us',
+        element: <ContactUs />,
       },
       {
         path: '/dashboard',

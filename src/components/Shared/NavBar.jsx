@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import { MdLogout } from 'react-icons/md';
 import useAuth from '../../hooks/useAuth';
 import useRole from '../../hooks/userRole';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 // import useCartsData from '../../hooks/useCartsData';
 // import useAdmin from '../../hooks/useAdmin';
@@ -57,15 +58,15 @@ const NavBar = () => {
   const Links = (
     <>
       <li>
-        <MenuItem className="menu-item hover:bg-transparent hover:text-current">
+        <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
           <NavLink
             to="/"
             className={({ isActive, isPending }) =>
               isActive
-                ? 'border-2 font-bold  px-3 py-2 rounded-lg '
+                ? 'border-2  w-full font-bold  px-3 py-2 rounded-lg'
                 : isPending
-                ? ' font-bold '
-                : ''
+                ? '  '
+                : 'w-full px-10 lg:px-3'
             }
           >
             HOME
@@ -106,6 +107,23 @@ const NavBar = () => {
             }
           >
             DASHBOARD
+          </NavLink>{' '}
+        </MenuItem>
+      </li>
+      <li>
+        <MenuItem className="menu-item hover:bg-transparent hover:text-current">
+          {' '}
+          <NavLink
+            to={'/contact-us'}
+            className={({ isActive, isPending }) =>
+              isActive
+                ? 'border-2 font-bold  px-3 py-2 rounded-lg'
+                : isPending
+                ? 'pending'
+                : ''
+            }
+          >
+            CONTACT US
           </NavLink>{' '}
         </MenuItem>
       </li>
@@ -365,15 +383,15 @@ const NavBar = () => {
 
       {loggedUser?.role || (
         <>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
+          <li className="mb-1  w-full">
+            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
               <NavLink
                 to={'/'}
                 className={({ isActive, isPending }) =>
                   isActive
                     ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
                     : isPending
-                    ? 'pending'
+                    ? 'pending  w-full'
                     : ''
                 }
               >
@@ -381,8 +399,8 @@ const NavBar = () => {
               </NavLink>
             </MenuItem>
           </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
+          <li className="mb-1 w-full">
+            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
               <NavLink
                 to={'/all-properties'}
                 className={({ isActive, isPending }) =>
@@ -397,8 +415,73 @@ const NavBar = () => {
               </NavLink>
             </MenuItem>
           </li>
-          <li className="mb-1">
+          <li>
             <MenuItem className="menu-item hover:bg-transparent hover:text-current">
+              {' '}
+              <NavLink
+                to={'/contact-us'}
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? 'border-2 font-bold  px-3 py-2 rounded-lg'
+                    : isPending
+                    ? 'pending'
+                    : ''
+                }
+              >
+                CONTACT US
+              </NavLink>{' '}
+            </MenuItem>
+          </li>
+          <li className="mb-1 w-full">
+            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
+              <NavLink
+                to={'/dashboard/user-profile'}
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
+                    : isPending
+                    ? 'pending'
+                    : ''
+                }
+              >
+                My Profile
+              </NavLink>
+            </MenuItem>
+          </li>
+          <li className="mb-1 w-full">
+            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
+              <NavLink
+                to={'/dashboard/wishlist'}
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
+                    : isPending
+                    ? 'pending'
+                    : ''
+                }
+              >
+                Wishlist
+              </NavLink>
+            </MenuItem>
+          </li>
+          <li className="mb-1 w-full">
+            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
+              <NavLink
+                to={'/dashboard/bought-properties'}
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
+                    : isPending
+                    ? 'pending'
+                    : ''
+                }
+              >
+                Property Bought
+              </NavLink>
+            </MenuItem>
+          </li>
+          <li className="mb-1 w-full">
+            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
               <NavLink
                 to={'/dashboard/my-reviews'}
                 className={({ isActive, isPending }) =>
@@ -417,8 +500,15 @@ const NavBar = () => {
       )}
     </>
   );
-
-  return (
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(setLoading, 500, false);
+  }, []);
+  return loading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div
       className={`flex mx-auto fixed top-0 border-b-2 lg:w-screen w-11/12   py-2 transition duration-300 ease-in-out ${
         isScrolled ? 'bg-white text-black' : 'bg-transparent text-blue-500'
@@ -431,25 +521,25 @@ const NavBar = () => {
               <TiThMenu className="text-2xl mr-2" />
             </MenuHandler>
             <MenuList>
-              <ul className="menu px-2 list-none">
+              <ul className="menu px-2  w-full list-none space-y-2">
                 {' '}
                 {showDashboardLink ? dashboardLink : Links}
                 {user ? (
-                  <li className="mb-1 list-none block md:hidden">
-                    <MenuItem className="menu-item hover:bg-transparent hover:text-current">
+                  <li className="mb-1 w-full list-none block md:hidden">
+                    <MenuItem className="menu-item w-full hover:bg-transparent hover:text-current">
                       <button
                         onClick={handleLogout}
-                        className=" w-32  text-white  btn bg-blue-500 hover:bg-gray-900  rounded-lg "
+                        className="  text-white w-full  btn bg-blue-500 hover:bg-gray-900  rounded-lg "
                       >
                         Log Out
                       </button>
                     </MenuItem>
                   </li>
                 ) : (
-                  <li className="mb-1 list-none block md:hidden">
-                    <MenuItem className="menu-item hover:bg-transparent hover:text-current">
+                  <li className="mb-1 list-none  w-full block md:hidden">
+                    <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
                       <Link to={'/login'}>
-                        <button className="btn w-32 border-none text-white bg-blue-500">
+                        <button className="btn  w-full border-none text-white bg-blue-500">
                           Sign In
                         </button>
                       </Link>
