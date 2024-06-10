@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
+import SearchBar from './SearchBar';
 
 export default function Banner() {
   return (
@@ -34,6 +35,9 @@ export default function Banner() {
                 Whether you&apos;re looking to sell or let your home or <br />{' '}
                 want to buy a home, we really are the people for you to come to.
               </p>
+              <div>
+                <SearchBar />
+              </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -47,6 +51,9 @@ export default function Banner() {
                   handpicked selection of homes. Discover the epitome of
                   elegance and comfort
                 </p>
+                <div>
+                  <SearchBar />
+                </div>
               </div>
             </div>
           </SwiperSlide>
@@ -61,6 +68,9 @@ export default function Banner() {
                   of properties. Explore endless possibilities for your next
                   chapter.
                 </p>
+                <div>
+                  <SearchBar />
+                </div>
               </div>
             </div>
           </SwiperSlide>
@@ -75,6 +85,9 @@ export default function Banner() {
                   collection of homes. <br /> Find the perfect fit for your
                   lifestyle today!
                 </p>
+                <div>
+                  <SearchBar />
+                </div>
               </div>
             </div>
           </SwiperSlide>

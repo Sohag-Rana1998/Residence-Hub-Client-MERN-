@@ -11,7 +11,9 @@ import toast from 'react-hot-toast';
 const Card = ({ estate, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const location1 = useLocation();
-  const showDetailsbtn = location1.pathname.includes('/all-properties');
+  const showUpdatebtn = location1.pathname.includes(
+    '/dashboard/added-properties'
+  );
 
   const {
     _id,
@@ -114,7 +116,9 @@ const Card = ({ estate, refetch }) => {
                   {agentName}
                 </p>
               </div>
-              {showDetailsbtn ? (
+              {showUpdatebtn ? (
+                <></>
+              ) : (
                 <div className="w-full flex justify-end">
                   <Link to={`/view-details/${_id}`}>
                     <button className="bg-blue-600 btn mb-2 mt-3 md:mt-0 btn-sm md:btn-md hover:scale-[106%] duration-500  text-white font-bold hover:bg-blue-gray-900">
@@ -122,12 +126,10 @@ const Card = ({ estate, refetch }) => {
                     </button>
                   </Link>
                 </div>
-              ) : (
-                <></>
               )}
             </div>
           </div>
-          {showDetailsbtn || (
+          {showUpdatebtn && (
             <div
               className={` w-full mt-3 flex ${
                 status === 'Rejected' ? 'justify-end' : 'justify-between'

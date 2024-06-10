@@ -49,6 +49,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/search-properties/:searchText',
+        element: (
+          <PrivateRoute>
+            <AllProperties />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: '/register',
         element: <SignUp />,
       },

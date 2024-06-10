@@ -48,10 +48,12 @@ export default function BrowseOurAgent() {
     };
   }, []);
   function getSlidesPerView(width) {
-    if (width >= 720) {
+    if (width > 920) {
       return 3;
-    } else {
+    } else if (width <= 920 && width > 620) {
       return 2;
+    } else {
+      return 1;
     }
   }
 
@@ -94,16 +96,20 @@ export default function BrowseOurAgent() {
                           Verified
                         </span>
                       </div>
-                      <div className="w-24 h-24 mx-auto rounded-full border-4 p-1 border-gray-400">
-                        <img
-                          className="w-full h-full rounded-full"
-                          src={agent.photo}
-                          alt=""
-                        />
-                      </div>
-                      <div className="text-center flex justify-center flex-col items-center">
-                        <h4 className="text-xl font-bold my-2">{agent.name}</h4>
-                        <Rating style={{ maxWidth: 100 }} value={5} />
+                      <div className=" mt-5">
+                        <div className="w-24 h-24 mx-auto rounded-full border-4 p-1 border-gray-400">
+                          <img
+                            className="w-full h-full rounded-full"
+                            src={agent.photo}
+                            alt=""
+                          />
+                        </div>
+                        <div className="text-center flex justify-center flex-col items-center">
+                          <h4 className="text-xl font-bold my-2">
+                            {agent.name}
+                          </h4>
+                          <Rating style={{ maxWidth: 100 }} value={5} />
+                        </div>
                       </div>
                       <div>
                         <button className="bg-[#70DAB9] my-2 border-2 border-[#41B06E] w-full bg-opacity-30 hover:bg-[#41B06E] text-[#41B06E] btn btn-outline">

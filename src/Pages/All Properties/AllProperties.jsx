@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ScrollRestoration } from 'react-router-dom';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { ScrollRestoration, useParams } from 'react-router-dom';
 import useVerifiedProperty from '../../hooks/useVerifiedProperty';
 import Card from '../../components/Shared/Card';
 import { useForm } from 'react-hook-form';
 import { FaFilter } from 'react-icons/fa';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import useCount from '../../hooks/useCount';
-import { set } from 'date-fns';
 
 const AllProperties = () => {
-  const axiosSecure = useAxiosSecure();
+  const { searchText } = useParams();
+  console.log(searchText);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(searchText || '');
   const [loader, setLoader] = useState(false);
   const [modalLoading, setModalLoading] = useState(true);
   const [minPrice, setMinPrice] = useState(0);
@@ -30,7 +29,7 @@ const AllProperties = () => {
   );
 
   useEffect(() => {
-    setTimeout(setLoader, 1000, false);
+    setTimeout(setLoader, 1300, false);
   }, []);
 
   console.log(count);

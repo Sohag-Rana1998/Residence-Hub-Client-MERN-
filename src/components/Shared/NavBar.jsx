@@ -518,7 +518,11 @@ const NavBar = () => {
         <div className="block lg:hidden">
           <Menu placement="top-start">
             <MenuHandler>
-              <TiThMenu className="text-2xl mr-2" />
+              <img
+                className="w-10 h-10 mr-3 cursor-pointer"
+                src="https://i.postimg.cc/Cx5JTg8j/menu-removebg-preview.png"
+                alt=""
+              />
             </MenuHandler>
             <MenuList>
               <ul className="menu px-2  w-full list-none space-y-2">
@@ -527,21 +531,21 @@ const NavBar = () => {
                 {user ? (
                   <li className="mb-1 w-full list-none block md:hidden">
                     <MenuItem className="menu-item w-full hover:bg-transparent hover:text-current">
-                      <button
+                      <span
                         onClick={handleLogout}
                         className="  text-white w-full  btn bg-blue-500 hover:bg-gray-900  rounded-lg "
                       >
                         Log Out
-                      </button>
+                      </span>
                     </MenuItem>
                   </li>
                 ) : (
                   <li className="mb-1 list-none  w-full block md:hidden">
                     <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
                       <Link to={'/login'}>
-                        <button className="btn  w-full border-none text-white bg-blue-500">
+                        <span className="btn  w-full border-none text-white bg-blue-500">
                           Sign In
-                        </button>
+                        </span>
                       </Link>
                     </MenuItem>
                   </li>
@@ -661,7 +665,7 @@ const NavBar = () => {
                   </button>
                 </Link>
                 <Link to={'/register'}>
-                  <button className="w-28 md:flex items-center gap-1 hidden  bg-blue-500 text-white font-bold focus:outline-none border-none btn    py-1 px-1 rounded-lg">
+                  <button className="w-28 md:flex items-center gap-1 hidden  bg-blue-500 text-white font-bold focus:outline-none border-none btn  hover:bg-[#01204E]  py-1 px-1 rounded-lg">
                     <FaUserAlt /> Sign Up
                   </button>
                 </Link>

@@ -10,7 +10,7 @@ import SectionHeading from './SectionHeading';
 
 const WeProvideBetterService = () => {
   return (
-    <div className="bg-blue-600 w-full text-white py-16 px-5">
+    <div className="bg-blue-700 w-full text-white py-16 px-5">
       <div className="max-w-7xl container mx-auto">
         <div className="mb-5">
           <SectionHeading

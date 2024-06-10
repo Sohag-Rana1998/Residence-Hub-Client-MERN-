@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 export default function ReviewSlider() {
   const { allReviews, refetch } = useAllReviews();
   useEffect(() => {
-    refetch()
+    refetch();
   }, []);
   const [slidesPerView, setSlidesPerView] = useState(
     getSlidesPerView(window.innerWidth)
@@ -33,7 +33,7 @@ export default function ReviewSlider() {
   }, []);
 
   function getSlidesPerView(width) {
-    if (width >= 720) {
+    if (width >= 920) {
       return 2;
     } else {
       return 1;
@@ -45,14 +45,14 @@ export default function ReviewSlider() {
       <div className="w-full h-[500px]">
         <Swiper
           slidesPerView={slidesPerView}
-          spaceBetween={30}
+          spaceBetween={50}
           navigation={true}
           modules={[Navigation]}
-          className="mySwiper h-[300px] px-5  md:!px-10"
+          className="mySwiper h-[350px] !px-5 md:!px-14 "
         >
           {allReviews?.map(review => (
             <SwiperSlide key={review.id}>
-              <div className="mb-4 bg-gray-100 px-10 md:px-5 py-3 text-black rounded-sm">
+              <div className="mb-4 bg-gray-100 px-10 rounded-xl min-h-[350px] md:px-5 py-3 text-black ">
                 <div className="">
                   <div></div>
                   <div className="flex justify-center items-center flex-col ">
@@ -69,9 +69,11 @@ export default function ReviewSlider() {
                       </h3>
                     </div>
 
-                    <p className="text-center">{review.review}</p>
+                    <p className="text-center mb-5">
+                      {review?.review?.slice(0, 200)}
+                    </p>
                   </div>
-                  <div className="flex justify-between gap-5 mt-3 items-center">
+                  <div className="flex justify-between gap-5 mt-3 mb-3 items-center">
                     <div className="flex items-center gap-2">
                       <img
                         src={review.photo}
