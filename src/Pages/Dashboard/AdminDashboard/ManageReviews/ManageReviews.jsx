@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAllReviews from '../../../../hooks/useAllReviews';
+import { Helmet } from 'react-helmet-async';
 
 const ManageReviews = () => {
   const axiosSecure = useAxiosSecure();
@@ -53,6 +54,9 @@ const ManageReviews = () => {
 
   return (
     <div className="px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Manage Reviews</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'Manage Reviews'}

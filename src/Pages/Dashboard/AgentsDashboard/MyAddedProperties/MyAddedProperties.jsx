@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Card from '../../../../components/Shared/Card';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 
@@ -8,6 +9,9 @@ const MyAddedProperties = () => {
   console.log(agentProperties);
   return (
     <div className="px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | My Added Properties</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'My Added Properties'}

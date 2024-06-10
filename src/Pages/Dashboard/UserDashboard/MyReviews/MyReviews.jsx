@@ -4,6 +4,7 @@ import SectionTitle from '../../../../components/Shared/SectionTitle';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet-async';
 
 const MyReviews = () => {
   const axiosSecure = useAxiosSecure();
@@ -53,6 +54,9 @@ const MyReviews = () => {
 
   return (
     <div className="pb-10 px-10">
+      <Helmet>
+        <title>RESIDENCE HUB | My Reviews</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'My Reviews'}

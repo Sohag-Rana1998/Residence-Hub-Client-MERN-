@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
 import { MdVerified } from 'react-icons/md';
+import { Helmet } from 'react-helmet-async';
 const ManageProperties = () => {
   const { properties, refetch } = useAllProperties();
   const axiosSecure = useAxiosSecure();
@@ -57,6 +58,9 @@ const ManageProperties = () => {
   };
   return (
     <div className="container mx-auto px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Manage Properties</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'Manage Properties'}

@@ -9,6 +9,7 @@ import usePropertyById from '../../../../hooks/usePropertyById';
 import useAuth from '../../../../hooks/useAuth';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 const UpdateProperty = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -107,6 +108,9 @@ const UpdateProperty = () => {
     </div>
   ) : (
     <div className="px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Update Properties</title>
+      </Helmet>
       <div className="flex justify-center ">
         <div className="w-[280px]  p-3 text-center rounded-t-3xl">
           <h3 className="text-3xl font-bold border-b-2 pb-1">

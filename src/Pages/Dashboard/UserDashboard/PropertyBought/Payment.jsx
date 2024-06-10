@@ -3,6 +3,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import { useParams } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
+import { Helmet } from 'react-helmet-async';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 console.log(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
@@ -11,6 +12,9 @@ const Payment = () => {
   console.log('params', id);
   return (
     <div>
+      <Helmet>
+        <title>RESIDENCE HUB | Payment</title>
+      </Helmet>
       <SectionTitle
         heading="Payment"
         subHeading="Please pay your offered price"

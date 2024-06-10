@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Profile from '../../../../../components/Shared/Profile';
 import useRole from '../../../../../hooks/userRole';
+import { Helmet } from 'react-helmet-async';
 
 const AgentProfile = () => {
   const { loggedUser, refetch } = useRole();
@@ -10,6 +11,9 @@ const AgentProfile = () => {
   }, [refetch]);
   return (
     <div>
+      <Helmet>
+        <title>RESIDENCE HUB | Agent Profile</title>
+      </Helmet>
       <Profile user={loggedUser} refetch={refetch} />
     </div>
   );

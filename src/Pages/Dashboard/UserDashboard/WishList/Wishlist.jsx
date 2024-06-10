@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useWishlistDataByEmail from '../../../../hooks/useWishlistDataByEmail';
 import WishlistCard from './WishlistCard';
@@ -7,6 +8,9 @@ const Wishlist = () => {
   console.log(wishlistProperties);
   return (
     <div className="pb-10 px-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Wishlist</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'Wish List'}

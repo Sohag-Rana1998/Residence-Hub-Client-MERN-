@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useOfferedProperties from '../../../../hooks/useOfferedProperties';
+import { Helmet } from 'react-helmet-async';
 
 const RequestedProperties = () => {
   const { offeredProperties, refetch, isLoading } = useOfferedProperties();
@@ -106,6 +107,9 @@ const RequestedProperties = () => {
   };
   return (
     <div className="px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Requested Properties</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'Requested Properties'}

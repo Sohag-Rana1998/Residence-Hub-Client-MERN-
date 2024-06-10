@@ -5,6 +5,7 @@ import { MdVerified } from 'react-icons/md';
 import useAllReports from '../../../../hooks/useAllReports';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
+import { Helmet } from 'react-helmet-async';
 const ReportedProperty = () => {
   const { allReports, refetch, isLoading } = useAllReports();
   const axiosSecure = useAxiosSecure();
@@ -55,6 +56,9 @@ const ReportedProperty = () => {
   };
   return (
     <div className="px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Reported Properties</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'Reported Properties'}

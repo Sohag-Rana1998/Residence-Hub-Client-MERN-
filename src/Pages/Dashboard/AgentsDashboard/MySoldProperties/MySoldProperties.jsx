@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useSoldPropertiesByEmail from '../../../../hooks/useSoldPropertiesByEmail';
 
@@ -10,6 +11,9 @@ const MySoldProperties = () => {
   console.log(totalPrice);
   return (
     <div className="px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Sold Properties</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'My Sold Properties'}

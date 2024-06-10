@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useRole from '../../../../hooks/userRole';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 const AddProperty = () => {
   const { user } = useAuth();
   const { loggedUser, refetch } = useRole();
@@ -84,6 +85,9 @@ const AddProperty = () => {
 
   return (
     <div className="px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Add Properties</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'Add Property'}

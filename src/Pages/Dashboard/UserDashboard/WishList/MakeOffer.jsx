@@ -10,6 +10,7 @@ import useWishListDataById from '../../../../hooks/useWishListData';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 const MakeOffer = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -97,6 +98,9 @@ const MakeOffer = () => {
 
   return (
     <div className="pb-10 px-10">
+      <Helmet>
+        <title>RESIDENCE HUB |Make an Offer</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'Make An Offer'}

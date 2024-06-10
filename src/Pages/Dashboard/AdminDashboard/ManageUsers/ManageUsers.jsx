@@ -5,6 +5,7 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
+import { Helmet } from 'react-helmet-async';
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -90,6 +91,9 @@ const ManageUsers = () => {
 
   return (
     <div className="w-full px-10 pb-10">
+      <Helmet>
+        <title>RESIDENCE HUB | Manage Users</title>
+      </Helmet>
       <div>
         <SectionTitle
           heading={'Manage Users'}

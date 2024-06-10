@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet-async';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 // import { useMutation } from '@tanstack/react-query';
@@ -62,6 +63,9 @@ const BoughtPropertyCard = ({ property, refetch }) => {
 
   return (
     <div className="w-full">
+      <Helmet>
+        <title>RESIDENCE HUB | Bought Properties</title>
+      </Helmet>
       <div className="w-full rounded-2xl  h-full   shadow-xl border ">
         <div className="relative h-48 w-full rounded-t-2xl  overflow-hidden">
           <img
