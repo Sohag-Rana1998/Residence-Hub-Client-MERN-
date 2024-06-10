@@ -7,17 +7,19 @@ import Card from '../../components/Shared/Card';
 import { useForm } from 'react-hook-form';
 import { FaFilter } from 'react-icons/fa';
 import ScaleLoader from 'react-spinners/ScaleLoader';
+import useCount from '../../hooks/useCount';
+import { set } from 'date-fns';
 
 const AllProperties = () => {
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const [search, setSearch] = useState('');
-  const [count, setCount] = useState(0);
   const [loader, setLoader] = useState(false);
   const [modalLoading, setModalLoading] = useState(true);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
+  const { count, reload, isPending } = useCount(search, minPrice, maxPrice);
   console.log(loader);
   const { verifiedProperties, refetch, isLoading } = useVerifiedProperty(
     currentPage,
@@ -27,22 +29,10 @@ const AllProperties = () => {
     maxPrice
   );
 
-  console.log(isLoading);
   useEffect(() => {
-    const getCount = async () => {
-      const { data } = await axiosSecure.get(
-        `/count-properties?status=Verified&search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`
-      );
-
-      if (data) {
-        setCount(data.count);
-      }
-    };
-    getCount();
-    setLoader(true);
-    setTimeout(refetch, 500);
     setTimeout(setLoader, 1000, false);
-  }, [search, axiosSecure, maxPrice, minPrice, refetch]);
+  }, []);
+
   console.log(count);
 
   const totalPage = Math.ceil(parseInt(count) / itemsPerPage);
@@ -51,11 +41,14 @@ const AllProperties = () => {
 
   const handleSearch = async e => {
     e.preventDefault();
+    setLoader(true);
     setMinPrice(0);
     setMaxPrice(0);
     const searchText = e.target.search.value;
     setSearch(searchText);
     setTimeout(refetch, 500);
+    setTimeout(reload, 500);
+    setTimeout(setLoader, 1000, false);
     e.target.reset();
   };
 
@@ -69,13 +62,16 @@ const AllProperties = () => {
 
   // handle Review
   const onSubmit = async data => {
+    setLoader(true);
     setSearch('');
     setMinPrice(data.min_price);
     setMaxPrice(data.max_price);
+    setTimeout(reload, 500);
     reset();
+    setTimeout(setLoader, 1000, false);
   };
 
-  return loader || isLoading ? (
+  return loader || isLoading || isPending ? (
     <div className="w-full min-h-screen flex justify-center items-center">
       <ScaleLoader color="#36d7b7" height={80} width={5} />
     </div>
@@ -249,6 +245,7 @@ const AllProperties = () => {
                         setMinPrice(0);
                         setMaxPrice(0);
                         setTimeout(refetch, 500);
+                        setTimeout(reload, 500);
                         setLoader(true);
                         setTimeout(setLoader, 1000, false);
                       }}
