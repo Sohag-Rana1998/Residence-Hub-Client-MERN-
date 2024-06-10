@@ -17,8 +17,8 @@ const SearchBar = () => {
 
   return (
     <div>
-      <div className=" my-5 ">
-        <div className="flex flex-col lg:flex-row gap-5 items-center ">
+      <div className=" my-5 w-full">
+        <div className="flex flex-col lg:flex-row gap-5 w-full items-center ">
           <div className="relative w-full">
             <label htmlFor="search"></label>
             <input
@@ -27,13 +27,13 @@ const SearchBar = () => {
               name="search"
               id="search"
               value={searchText}
-              className="py-3 pl-10 w-[95%] text-black border mx-auto md:w-[300px] lg:w-[400px] bg-[#EFEFEF] rounded-3xl"
-              placeholder="Search Properties By Location (USA) "
+              className="py-3 pl-3 md:pl-10 w-[200px] text-black border mx-auto md:w-[300px] lg:w-[400px] bg-[#EFEFEF] rounded-3xl"
+              placeholder="Search By Location (USA)"
             />
             <FaMagnifyingGlass
               className={
                 searchText.length === 0
-                  ? 'absolute left-5 md:left-3  top-4 text-gray-400'
+                  ? 'absolute hidden md:block left-5 md:left-3  top-4 text-gray-400'
                   : 'absolute hidden left-5 md:left-3 top-4 text-gray-500'
               }
             />

@@ -101,7 +101,7 @@ const AddProperty = () => {
         ></SectionTitle>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className=" ">
-        <div className="space-y-4 grid grid-cols-2 gap-5">
+        <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="mt-4">
             <label htmlFor="title" className="block mb-2 font-bold text-sm">
               Property Title
@@ -197,7 +197,7 @@ const AddProperty = () => {
                   name="price"
                   {...register('price', { required: true })}
                   id="price"
-                  placeholder="Minimum Price"
+                  placeholder="Min-Price"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                 />
                 {errors.price && (
@@ -210,7 +210,7 @@ const AddProperty = () => {
                   name="price1"
                   {...register('price1', { required: true })}
                   id="price1"
-                  placeholder="Maximum Price"
+                  placeholder="Max-Price"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                 />
                 {errors.price1 && (

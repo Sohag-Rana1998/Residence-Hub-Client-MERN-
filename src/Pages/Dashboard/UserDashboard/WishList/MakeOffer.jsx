@@ -21,7 +21,6 @@ const MakeOffer = () => {
   const { property, refetch, isLoading } = useWishListDataById(id);
   const navigate = useNavigate();
   const {
-    
     title,
     location,
     propertyId,
@@ -54,7 +53,7 @@ const MakeOffer = () => {
       }
       if (data.insertedId) {
         refetch();
-         reset()
+        reset();
         Swal.fire({
           icon: 'success',
           title: 'Your Offer Submitted Successfully',
@@ -104,7 +103,7 @@ const MakeOffer = () => {
       <ScaleLoader color="#36d7b7" height={80} width={5} />
     </div>
   ) : (
-    <div className="pb-10 px-10">
+    <div className="pb-10 px-5">
       <Helmet>
         <title>RESIDENCE HUB |Make an Offer</title>
       </Helmet>
@@ -115,7 +114,7 @@ const MakeOffer = () => {
         ></SectionTitle>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className=" ">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
             <label htmlFor="title" className="block mb-2 font-bold text-sm">
               Property Title
@@ -189,7 +188,7 @@ const MakeOffer = () => {
               />
             </div>
           </div>
-          <div className="flex justify-between items-end">
+          <div className="flex justify-between gap-1 items-end">
             <div>
               <div className="mb-2">
                 <label htmlFor="agent_name" className="text-sm font-bold">

@@ -120,7 +120,7 @@ const UpdateProperty = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className=" ">
-        <div className="space-y-4 grid grid-cols-2 gap-5">
+        <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="mt-4">
             <label htmlFor="title" className="block mb-2 font-bold text-sm">
               Property Title

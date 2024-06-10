@@ -48,11 +48,11 @@ export default function ReviewSlider() {
           spaceBetween={50}
           navigation={true}
           modules={[Navigation]}
-          className="mySwiper h-[350px] !px-5 md:!px-14 "
+          className="mySwiper h-[500px]  md:h-[350px] !px-5 md:!px-14 "
         >
           {allReviews?.map(review => (
             <SwiperSlide key={review.id}>
-              <div className="mb-4 bg-gray-100 px-10 rounded-xl min-h-[350px] md:px-5 py-3 text-black ">
+              <div className="mb-4 bg-gray-100 px-10 rounded-xl min-h-[500px]  md:min-h-[350px] md:px-5 py-3 text-black ">
                 <div className="">
                   <div></div>
                   <div className="flex justify-center items-center flex-col ">
