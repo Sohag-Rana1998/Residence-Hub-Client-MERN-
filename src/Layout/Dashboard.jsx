@@ -6,8 +6,8 @@ const Dashboard = () => {
   const { loggedUser } = useRole();
   console.log(loggedUser);
   return (
-    <div className="flex  pt-[70px]   mx-auto">
-      <div className="w-64 hidden  md:block pt-5 bg-[#1b71c7]  text-white ">
+    <div className="flex max-w-7xl pt-[70px]   mx-auto">
+      <div className="w-56 hidden  lg:block pt-5 bg-[#1b71c7]  text-white ">
         <div className=" px-4">
           <Link to={'/'}>
             <div className="flex justify-center flex-col items-center">
@@ -16,7 +16,7 @@ const Dashboard = () => {
                 src="https://i.postimg.cc/28Rn2bJ4/white-logo.png"
                 alt=""
               />
-              <h3 className="text-3xl font-extrabold tracking-[5.4px]">
+              <h3 className="   text-center text-xl font-extrabold tracking-[5.4px]">
                 RESIDENCE HUB
               </h3>
             </div>
@@ -285,7 +285,7 @@ const Dashboard = () => {
       </div>
       <div
         style={{ scrollbarWidth: 'none' }}
-        className="flex-1   h-screen overflow-y-scroll  "
+        className="flex-1 h-auto  lg:h-screen overflow-y-scroll  "
       >
         <Outlet />
       </div>

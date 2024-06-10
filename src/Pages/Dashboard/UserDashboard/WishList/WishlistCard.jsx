@@ -28,9 +28,11 @@ const WishlistCard = ({ property, refetch }) => {
       console.log(data);
       refetch();
       Swal.fire({
-        title: 'Deleted!',
+        title: 'Removed!',
         text: 'Your file has been removed.',
         icon: 'success',
+        timer: 1500,
+        showConfirmButton: false,
       });
     },
   });

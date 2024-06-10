@@ -16,7 +16,7 @@ const MySoldProperties = () => {
           subheading={'Home/Dashboard/Sold Properties'}
         />
       </div>
-      <div className="w-full text-3xl mt-5 font-bold cinzel flex flex-col md:flex-row gap-2 justify-evenly items-center">
+      <div className="w-full text-xl md:text-2xl mt-5 font-bold cinzel flex flex-col lg:flex-row gap-2 justify-evenly items-start lg:items-center">
         <div>Total Sold Properties: {soldData?.length}</div>
         <div>Total Sold Amount:{totalPrice} </div>
       </div>

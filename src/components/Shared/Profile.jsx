@@ -3,7 +3,6 @@ import {
   FaFacebook,
   FaInstagram,
   FaLinkedin,
-  FaLocationPin,
   FaPhone,
   FaPinterest,
   FaTwitter,
@@ -11,6 +10,7 @@ import {
   FaUserTie,
   FaVimeo,
 } from 'react-icons/fa6';
+import { IoLocationSharp } from 'react-icons/io5';
 import { TbEdit } from 'react-icons/tb';
 import { Helmet } from 'react-helmet-async';
 import { FaEnvelope } from 'react-icons/fa';
@@ -45,7 +45,6 @@ const Profile = ({ user, refetch }) => {
     register: register1,
     handleSubmit: handleSubmit1,
     reset: refresh,
-    formState: { errors: err },
   } = useForm();
 
   const { mutateAsync } = useMutation({
@@ -58,6 +57,7 @@ const Profile = ({ user, refetch }) => {
     },
     onSuccess: () => {
       refetch();
+      refresh();
       Swal.fire({
         icon: 'success',
         title: 'Profile updated Successfully!',
@@ -97,7 +97,7 @@ const Profile = ({ user, refetch }) => {
         console.log(userInfo);
 
         await mutateAsync(userInfo);
-        await updateUserProfile(user?.name, photo);
+        await updateUserProfile(user?.name, photo || user?.photo);
       } catch (err) {
         console.log(err);
         toast.error(err.message);
@@ -139,7 +139,7 @@ const Profile = ({ user, refetch }) => {
         <h3 className="text-sm">Home/Dashboard/Profile</h3>
       </div>
       <div className="flex w-full flex-col  md:flex-row justify-between items-start">
-        <div className="w-80 min-h-screen relative border-r-0 md:border-r">
+        <div className="w-80  relative border-r-0 md:border-r">
           <div className="mx-auto w-32 h-32 relative -mt-10 border-4 border-white rounded-full overflow-hidden">
             <img className=" w-32 h-32 rounded-full" src={user?.photo} />
           </div>
@@ -154,6 +154,10 @@ const Profile = ({ user, refetch }) => {
             <TbEdit className="text-3xl " />
           </label>
           <div className="divider"></div>
+          <div className="md:hidden block text-center">
+            <h2 className="font-bold text-2xl">{user?.name || 'Unknown'}</h2>
+            <h4 className="text-xl font-bold">{user?.role}</h4>
+          </div>
           <div className="text-lg flex justify-center items-center gap-3 mt-5">
             <FaFacebook className="cursor-pointer hover:scale-[120%] duration-500"></FaFacebook>
             <FaInstagram className="cursor-pointer hover:scale-[120%] duration-500"></FaInstagram>
@@ -177,7 +181,7 @@ const Profile = ({ user, refetch }) => {
         </div>
         <div className=" flex-1">
           <div className="px-5 mt-5">
-            <div>
+            <div className="hidden md:block">
               <h2 className="font-bold text-4xl">{user?.name || 'Unknown'}</h2>
               <h4 className="text-xl font-bold">{user?.role}</h4>
             </div>
@@ -189,7 +193,7 @@ const Profile = ({ user, refetch }) => {
                 <FaPhone /> +{user?.phone || 'Not Found'}
               </p>
               <p className=" font-semibold flex items-center gap-2">
-                <FaLocationPin /> {user?.address || 'Not Found'}
+                <IoLocationSharp /> {user?.address || 'Not Found'}
               </p>
               <p className=" font-semibold flex items-center gap-2">
                 <FaUserTie /> {user?.profession || 'Not Found'}
@@ -202,8 +206,8 @@ const Profile = ({ user, refetch }) => {
               </p>
             </div>
             <div>
-              <h3 className="text-2xl font-bold mt-10">About:</h3>
-              <div className="w-full border bg-gray-50 min-h-40 rounded-md p-2">
+              <h3 className="text-2xl font-bold mt-5">About:</h3>
+              <div className="w-full border bg-gray-50 min-h-40 rounded-md p-2 mb-10">
                 {user?.about}
               </div>
             </div>

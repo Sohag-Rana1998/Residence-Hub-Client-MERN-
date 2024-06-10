@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from './useAxiosPublic';
+import useAxiosSecure from './useAxiosSecure';
 
 const useAllProperties = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {
     data: properties = [],
     isLoading,
@@ -10,7 +10,7 @@ const useAllProperties = () => {
   } = useQuery({
     queryKey: ['all-properties'],
     queryFn: async () => {
-      const { data } = await axiosPublic.get('/properties');
+      const { data } = await axiosSecure.get('/properties');
       console.log(data);
       return data;
     },

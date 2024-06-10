@@ -3,7 +3,7 @@ import useAuth from '../../hooks/useAuth';
 import { FaRegHeart, FaStar } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import usePropertyById from '../../hooks/usePropertyById';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,7 +12,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 // import required modules
-import { Pagination, Autoplay } from 'swiper/modules';
+import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
@@ -224,14 +224,6 @@ const ViewDetails = () => {
     }
   };
 
-  // Slider autoplay func
-  const progressCircle = useRef(null);
-  const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-  };
-
   return isLoading ? (
     <div className="w-[80%] mx-auto min-h-screen ">
       {/* <SkeletonTheme baseColor="#a2a2b2">
@@ -249,7 +241,7 @@ const ViewDetails = () => {
       <Helmet>
         <title>Job Portal | Details </title>
       </Helmet>
-      <div className="h-32 mb-10 bg-[url(https://i.ibb.co/PtcPs7P/6.jpg)] bg-no-repeat bg-cover bg-center md:h-40  w-full rounded-xl flex justify-between items-center">
+      <div className="h-32 mt-16 mb-10 bg-[url(https://i.ibb.co/PtcPs7P/6.jpg)] bg-no-repeat bg-cover bg-center md:h-40  w-full  flex justify-between items-center">
         <h1 className="text-2xl h-full text-white flex items-center  w-full md:text-4xl font-bold   justify-center">
           Property Details
         </h1>
@@ -263,16 +255,12 @@ const ViewDetails = () => {
                 <Swiper
                   slidesPerView={1}
                   spaceBetween={30}
-                  autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                  }}
-                  onAutoplayTimeLeft={onAutoplayTimeLeft}
                   loop={true}
                   pagination={{
                     clickable: true,
                   }}
-                  modules={[Pagination, Autoplay]}
+                  navigation={true}
+                  modules={[Pagination, Navigation]}
                   className="mySwiper h-[450px] rounded-t-xl"
                 >
                   <SwiperSlide>
@@ -302,15 +290,6 @@ const ViewDetails = () => {
                       />
                     </div>
                   </SwiperSlide>
-                  <div
-                    className="autoplay-progress hidden"
-                    slot="container-end"
-                  >
-                    <svg viewBox="0 0 48 48" ref={progressCircle}>
-                      <circle cx="24" cy="24" r="20"></circle>
-                    </svg>
-                    <span ref={progressContent}></span>
-                  </div>
                 </Swiper>
                 <button
                   className={`px-3 py-2  ${

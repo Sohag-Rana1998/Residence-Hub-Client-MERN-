@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 // import required modules
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import useAllReviews from '../../../hooks/useAllReviews';
 import { Rating } from '@smastrom/react-rating';
 import { useEffect, useState } from 'react';
@@ -44,12 +44,9 @@ export default function ReviewSlider() {
         <Swiper
           slidesPerView={slidesPerView}
           spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
           navigation={true}
-          modules={[Pagination, Navigation]}
-          className="mySwiper h-[400px] px-5  md:!px-10"
+          modules={[Navigation]}
+          className="mySwiper h-[300px] px-5  md:!px-10"
         >
           {allReviews?.map(review => (
             <SwiperSlide key={review.id}>

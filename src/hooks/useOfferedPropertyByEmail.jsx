@@ -14,7 +14,7 @@ const useOfferedPropertyByEmail = () => {
     queryFn: async () => {
       if (user?.email) {
         const { data } = await axiosSecure.get(
-          `/offered-property?email=${user?.email}`
+          `/bought-property?email=${user?.email}`
         );
         console.log(data);
         return data;

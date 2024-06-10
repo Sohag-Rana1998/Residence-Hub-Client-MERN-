@@ -83,7 +83,7 @@ const AllProperties = () => {
         <div>
           <div className=" mb-5 rounded-t-xl h-60 bg-no-repeat bg-center bg-cover w-full  flex flex-col items-center justify-center bg-[url(https://i.postimg.cc/rstCStvL/banner-job-ads-1.jpg)] bg-opacity-50 relative">
             <div className=" inset-0 absolute rounded-t-xl bg-gradient-to-r from-gray-900 ">
-              <div className="pl-0 p-5  md:pl-20 mt-1 md:mt-10 text-center md:text-left">
+              <div className="pl-0 p-5 md:pl-10  lg:pl-20 mt-1 md:mt-10 text-center md:text-left">
                 <h2 className=" text-2xl md:text-4xl font-bold text-white mb-2 md:mb-5">
                   Explore All Properties
                 </h2>
@@ -111,7 +111,7 @@ const AllProperties = () => {
                 </label>
               </div>
               <div className="flex justify-end w-[90%] md:w-full ">
-                <form onSubmit={handleSearch} className="w-full md:w-[60%] ">
+                <form onSubmit={handleSearch} className="w-full lg:w-[60%] ">
                   <label htmlFor="search"></label>
                   <div className="flex items-center gap-2">
                     <input
@@ -130,7 +130,7 @@ const AllProperties = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1  px-10 py-5 rounded-md gap-5  md:grid-cols-2 lg:grid-cols-3 ">
+          <div className="grid grid-cols-1  px-5 py-5 rounded-md gap-5  md:grid-cols-2 lg:grid-cols-3 ">
             {verifiedProperties &&
               verifiedProperties.map(property => (
                 <Card key={property._id} estate={property} refetch={refetch} />
