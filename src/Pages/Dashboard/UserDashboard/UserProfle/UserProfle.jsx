@@ -3,14 +3,19 @@ import Profile from '../../../../components/Shared/Profile';
 
 import useRole from '../../../../hooks/userRole';
 import { Helmet } from 'react-helmet-async';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const UserProfle = () => {
-  const { loggedUser, refetch } = useRole();
+  const { loggedUser, refetch, isPending } = useRole();
   console.log(loggedUser);
   useEffect(() => {
     refetch();
   }, [refetch]);
-  return (
+  return isPending ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div>
       <Helmet>
         <title>RESIDENCE HUB | User Profile</title>

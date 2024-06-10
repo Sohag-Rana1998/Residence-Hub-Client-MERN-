@@ -11,13 +11,14 @@ import {
 // } from 'react-simple-captcha';
 
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 // import { toast } from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import { useForm } from 'react-hook-form';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const SignIn = () => {
   // const captChaRef = useRef();
@@ -73,7 +74,16 @@ const SignIn = () => {
   //   loadCaptchaEnginge(6);
   // }, []);
 
-  return (
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(setLoading, 500, false);
+  }, []);
+
+  return loading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div className="container mx-auto  pt-20 ">
       <Helmet>
         <title>RESIDENCE HUB | Login</title>

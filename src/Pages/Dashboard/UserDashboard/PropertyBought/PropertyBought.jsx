@@ -1,10 +1,15 @@
+import ScaleLoader from 'react-spinners/ScaleLoader';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useOfferedPropertyByEmail from '../../../../hooks/useOfferedPropertyByEmail';
 import BoughtPropertyCard from './BoughtPropertyCard';
 
 const PropertyBought = () => {
   const { offeredProperties, refetch, isLoading } = useOfferedPropertyByEmail();
-  return (
+  return isLoading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) :  (
     <div className="pb-10 px-10">
       <div>
         <SectionTitle

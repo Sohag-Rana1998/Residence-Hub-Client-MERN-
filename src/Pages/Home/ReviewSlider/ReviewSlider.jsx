@@ -13,7 +13,9 @@ import { useEffect, useState } from 'react';
 
 export default function ReviewSlider() {
   const { allReviews, refetch } = useAllReviews();
-  console.log(allReviews);
+  useEffect(() => {
+    refetch()
+  }, []);
   const [slidesPerView, setSlidesPerView] = useState(
     getSlidesPerView(window.innerWidth)
   );

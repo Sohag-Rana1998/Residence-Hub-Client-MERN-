@@ -9,17 +9,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useWishListDataById from '../../../../hooks/useWishListData';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
+
 import { Helmet } from 'react-helmet-async';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 const MakeOffer = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { id } = useParams();
-  const [startDate, setStartDate] = useState(new Date());
+  const startDate = new Date();
+
   const { property, refetch, isLoading } = useWishListDataById(id);
   const navigate = useNavigate();
   const {
-    _id,
+    
     title,
     location,
     propertyId,
@@ -52,6 +54,7 @@ const MakeOffer = () => {
       }
       if (data.insertedId) {
         refetch();
+         reset()
         Swal.fire({
           icon: 'success',
           title: 'Your Offer Submitted Successfully',
@@ -96,7 +99,11 @@ const MakeOffer = () => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div className="pb-10 px-10">
       <Helmet>
         <title>RESIDENCE HUB |Make an Offer</title>

@@ -7,6 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useOfferedProperties from '../../../../hooks/useOfferedProperties';
 import { Helmet } from 'react-helmet-async';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const RequestedProperties = () => {
   const { offeredProperties, refetch, isLoading } = useOfferedProperties();
@@ -105,7 +106,11 @@ const RequestedProperties = () => {
       }
     });
   };
-  return (
+  return isLoading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div className="px-10 pb-10">
       <Helmet>
         <title>RESIDENCE HUB | Requested Properties</title>

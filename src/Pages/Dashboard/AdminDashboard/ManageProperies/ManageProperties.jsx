@@ -6,8 +6,9 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
 import { MdVerified } from 'react-icons/md';
 import { Helmet } from 'react-helmet-async';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 const ManageProperties = () => {
-  const { properties, refetch } = useAllProperties();
+  const { properties, refetch, isLoading } = useAllProperties();
   const axiosSecure = useAxiosSecure();
 
   const { mutateAsync } = useMutation({
@@ -56,7 +57,11 @@ const ManageProperties = () => {
       }
     });
   };
-  return (
+  return isLoading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div className="container mx-auto px-10 pb-10">
       <Helmet>
         <title>RESIDENCE HUB | Manage Properties</title>

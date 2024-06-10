@@ -9,9 +9,10 @@ import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useRole from '../../../../hooks/userRole';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 const AddProperty = () => {
   const { user } = useAuth();
-  const { loggedUser, refetch } = useRole();
+  const { loggedUser, isPending,refetch } = useRole();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
@@ -39,6 +40,7 @@ const AddProperty = () => {
       });
       navigate('/dashboard/added-properties');
       reset();
+      refetch()
     },
   });
   const onSubmit = async data => {
@@ -83,7 +85,11 @@ const AddProperty = () => {
     console.log('with image url', data);
   };
 
-  return (
+  return isPending ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div className="px-10 pb-10">
       <Helmet>
         <title>RESIDENCE HUB | Add Properties</title>

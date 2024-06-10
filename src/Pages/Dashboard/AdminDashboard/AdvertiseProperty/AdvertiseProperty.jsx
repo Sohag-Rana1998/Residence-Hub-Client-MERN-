@@ -15,6 +15,7 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { MdVerified } from 'react-icons/md';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const AdvertiseProperty = () => {
   const { loggedUser, isPending } = useRole();
@@ -104,17 +105,9 @@ const AdvertiseProperty = () => {
     });
   };
 
-  return isLoading || loader ? (
-    <div className="w-[80%] mx-auto min-h-screen ">
-      {/* <SkeletonTheme baseColor="#a2a2b2">
-        <div>
-          <div className="mt-10 mb-5">
-            <Skeleton height={150} />
-          </div>
-
-          <Skeleton height={30} count={10} />
-        </div>
-      </SkeletonTheme> */}
+  return loader || isLoading || isPending ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
     </div>
   ) : (
     <div className=" container mx-auto px-10 pb-10">

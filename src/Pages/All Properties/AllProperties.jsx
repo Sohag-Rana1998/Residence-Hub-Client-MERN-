@@ -6,6 +6,7 @@ import useVerifiedProperty from '../../hooks/useVerifiedProperty';
 import Card from '../../components/Shared/Card';
 import { useForm } from 'react-hook-form';
 import { FaFilter } from 'react-icons/fa';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const AllProperties = () => {
   const axiosSecure = useAxiosSecure();
@@ -74,7 +75,11 @@ const AllProperties = () => {
     reset();
   };
 
-  return (
+  return loader || isLoading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div className="container mx-auto  pt-12 ">
       <Helmet>
         <title>RESIDENCE HUB | All Property </title>

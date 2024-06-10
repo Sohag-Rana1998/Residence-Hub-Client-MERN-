@@ -3,7 +3,8 @@ import useAuth from '../../hooks/useAuth';
 import { FaRegHeart, FaStar } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useState } from 'react';
+import ScaleLoader from 'react-spinners/ScaleLoader';
+import { useEffect, useState } from 'react';
 import usePropertyById from '../../hooks/usePropertyById';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,7 +13,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 // import required modules
-import { Pagination, Autoplay, Navigation } from 'swiper/modules';
+import { Pagination, Navigation } from 'swiper/modules';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
@@ -28,11 +29,14 @@ const ViewDetails = () => {
   const { loggedUser } = useRole();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState(0); // Initial value
   const [modalLoading, setModalLoading] = useState(true);
   const { property, isLoading, refetch } = usePropertyById(id);
   const { reviews, reload } = useReviewsById(id);
+  useEffect(() => {
+    setTimeout(setLoading, 500, false);
+  }, []);
 
   const {
     title,
@@ -224,17 +228,9 @@ const ViewDetails = () => {
     }
   };
 
-  return isLoading ? (
-    <div className="w-[80%] mx-auto min-h-screen ">
-      {/* <SkeletonTheme baseColor="#a2a2b2">
-        <div>
-          <div className="mt-10 mb-5">
-            <Skeleton height={150} />
-          </div>
-
-          <Skeleton height={30} count={10} />
-        </div>
-      </SkeletonTheme> */}
+  return isLoading || loading ? (
+    <div className="w-[80%] flex justify-center items-center min-h-screen ">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
     </div>
   ) : (
     <div className="">

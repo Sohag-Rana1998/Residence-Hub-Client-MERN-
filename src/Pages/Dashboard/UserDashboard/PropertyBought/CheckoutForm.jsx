@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 import useOfferedPropertyById from '../../../../hooks/useOfferedPropertyById';
-
+import PropTypes from 'prop-types'
 const CheckoutForm = ({ id }) => {
   const [error, setError] = useState('');
   const [clientSecret, setClientSecret] = useState('');
@@ -15,6 +15,7 @@ const CheckoutForm = ({ id }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { acceptedProperty, reload, isLoading } = useOfferedPropertyById(id);
+  console.log(isLoading);
   console.log(acceptedProperty);
   const navigate = useNavigate();
   const paymentPrice = acceptedProperty?.OfferedAmount;
@@ -148,4 +149,8 @@ const CheckoutForm = ({ id }) => {
   );
 };
 
+CheckoutForm.propTypes = {
+  id: PropTypes.string,
+ 
+};
 export default CheckoutForm;

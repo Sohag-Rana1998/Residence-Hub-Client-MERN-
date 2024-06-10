@@ -5,10 +5,11 @@ import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAllReviews from '../../../../hooks/useAllReviews';
 import { Helmet } from 'react-helmet-async';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const ManageReviews = () => {
   const axiosSecure = useAxiosSecure();
-  const { allReviews, refetch } = useAllReviews();
+  const { allReviews, refetch, isLoading } = useAllReviews();
   console.log(allReviews);
 
   //   delete
@@ -52,7 +53,11 @@ const ManageReviews = () => {
     });
   };
 
-  return (
+  return isLoading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div className="px-10 pb-10">
       <Helmet>
         <title>RESIDENCE HUB | Manage Reviews</title>

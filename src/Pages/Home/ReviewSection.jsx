@@ -1,5 +1,3 @@
-import { Rating } from '@smastrom/react-rating';
-
 import SectionHeading from './SectionHeading';
 import ReviewSlider from './ReviewSlider/ReviewSlider';
 

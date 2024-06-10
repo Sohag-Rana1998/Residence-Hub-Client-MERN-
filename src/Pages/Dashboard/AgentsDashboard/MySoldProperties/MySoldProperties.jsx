@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useSoldPropertiesByEmail from '../../../../hooks/useSoldPropertiesByEmail';
+import ScaleLoader from 'react-spinners/ScaleLoader';
+import { useEffect } from 'react';
 
 const MySoldProperties = () => {
   const { soldData, refetch, isLoading } = useSoldPropertiesByEmail();
@@ -8,8 +10,14 @@ const MySoldProperties = () => {
     (total, property) => total + parseInt(property.price),
     0
   );
-  console.log(totalPrice);
-  return (
+  useEffect(() => {
+    refetch();
+  }, []);
+  return isLoading ? (
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    </div>
+  ) : (
     <div className="px-10 pb-10">
       <Helmet>
         <title>RESIDENCE HUB | Sold Properties</title>

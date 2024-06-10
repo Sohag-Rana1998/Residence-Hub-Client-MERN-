@@ -14,6 +14,7 @@ import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ const SignUp = () => {
   }, []);
   return loading ? (
     <div className="w-full min-h-screen flex justify-center items-center">
-      <span className="loading loading-spinner loading-lg"></span>
+      <ScaleLoader color="#36d7b7" height={80} width={5} />
     </div>
   ) : (
     <div className=" container mx-auto  pt-20 ">

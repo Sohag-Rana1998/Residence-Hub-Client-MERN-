@@ -2,12 +2,10 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet-async';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-// import { useMutation } from '@tanstack/react-query';
-// import Swal from 'sweetalert2';
-// import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+
 
 const BoughtPropertyCard = ({ property, refetch }) => {
-  // const axiosSecure = useAxiosSecure();
+  
   console.log(refetch);
   const {
     _id,
@@ -22,46 +20,9 @@ const BoughtPropertyCard = ({ property, refetch }) => {
   } = property;
   console.log(property);
   console.log(buyingDate);
-  //   delete
-  // const { mutateAsync } = useMutation({
-  //   mutationFn: async id => {
-  //     const { data } = await axiosSecure.delete(`/wishlist/${id}`);
-  //     return data;
-  //   },
-  //   onSuccess: data => {
-  //     console.log(data);
-  //     refetch();
-  //     Swal.fire({
-  //       title: 'Deleted!',
-  //       text: 'Your file has been removed.',
-  //       icon: 'success',
-  //     });
-  //   },
-  // });
+ 
 
-  // //  Handle Delete
-  // const handleDelete = async id => {
-  //   console.log(id);
-  //   Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: 'You want to remove from wishlist!',
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Yes, remove it!',
-  //   }).then(async result => {
-  //     if (result.isConfirmed) {
-  //       try {
-  //         await mutateAsync(id);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //   });
-  // };
-
-  return (
+ return (
     <div className="w-full">
       <Helmet>
         <title>RESIDENCE HUB | Bought Properties</title>
