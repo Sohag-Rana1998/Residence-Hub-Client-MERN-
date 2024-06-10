@@ -237,7 +237,7 @@ const ViewDetails = () => {
       <Helmet>
         <title>RESIDENCE HUB | Property Details</title>
       </Helmet>
-      <div className="h-32 mt-16 mb-10 bg-[url(https://i.ibb.co/PtcPs7P/6.jpg)] bg-no-repeat bg-cover bg-center md:h-40  w-full  flex justify-between items-center">
+      <div className="h-32 mt-[68px] mb-10 bg-[url(https://i.ibb.co/PtcPs7P/6.jpg)] bg-no-repeat bg-cover bg-center md:h-40  w-full  flex justify-between items-center">
         <h1 className="text-2xl h-full text-white flex items-center  w-full md:text-4xl font-bold   justify-center">
           Property Details
         </h1>

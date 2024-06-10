@@ -25,7 +25,6 @@ import useAuth from '../../hooks/useAuth';
 
 const Profile = ({ user, refetch }) => {
   const { updateUserProfile } = useAuth();
-
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const [modalLoading, setModalLoading] = useState(true);
@@ -56,14 +55,14 @@ const Profile = ({ user, refetch }) => {
       return data;
     },
     onSuccess: () => {
-      refetch();
-      refresh();
+      setTimeout(refetch, 1000);
       Swal.fire({
         icon: 'success',
         title: 'Profile updated Successfully!',
         showConfirmButton: false,
         timer: 1500,
       });
+      refresh();
       reset();
     },
   });

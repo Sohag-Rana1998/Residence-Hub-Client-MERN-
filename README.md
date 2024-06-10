@@ -1,14 +1,22 @@
 # Residence Hub
 
+## Assignment Category: assignment12_category_0011
+
 ## Website Live Link1: https://real-state-project-63c9c.web.app
 
-## Website Live Link2: https://real-state-project-63c9c.firebaseapp.com
+## Server site Repo Link: https://github.com/programming-hero-web-course1/b9a12-server-side-Sohag-Rana1998
 
 ## For Admin Login:
 
 ### Admin Email: admin@gmail.com
 
 ### Admin Pass: Admin#
+
+## For Agent Login:
+
+### Agent Email: agent11@gmail.com
+
+### Agent Pass: Agent#
 
 # Features and Characteristics Of My Website:
 
