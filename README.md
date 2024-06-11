@@ -1,22 +1,20 @@
 # Residence Hub
 
-## Assignment Category: assignment12_category_0011
+### Website Live Link: https://residence-hub-by-sohag.netlify.app
 
-## Website Live Link1: https://real-state-project-63c9c.web.app
+### Server site Repo Link: https://github.com/programming-hero-web-course1/b9a12-server-side-Sohag-Rana1998
 
-## Server site Repo Link: https://github.com/programming-hero-web-course1/b9a12-server-side-Sohag-Rana1998
+#### For Admin Login:
 
-## For Admin Login:
+##### Admin Email: admin@gmail.com
 
-### Admin Email: admin@gmail.com
+##### Admin Pass: Admin#
 
-### Admin Pass: Admin#
+#### For Agent Login:
 
-## For Agent Login:
+##### Agent Email: agent11@gmail.com
 
-### Agent Email: agent11@gmail.com
-
-### Agent Pass: Agent#
+##### Agent Pass: Agent#
 
 # Features and Characteristics Of My Website:
 

@@ -5,9 +5,7 @@ import {
   MenuItem,
   MenuList,
 } from '@material-tailwind/react';
-
 import { useEffect, useState } from 'react';
-import { TiThMenu } from 'react-icons/ti';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { MdOutlineLogin } from 'react-icons/md';
 import { FaUserAlt } from 'react-icons/fa';
@@ -16,9 +14,6 @@ import { MdLogout } from 'react-icons/md';
 import useAuth from '../../hooks/useAuth';
 import useRole from '../../hooks/userRole';
 import ScaleLoader from 'react-spinners/ScaleLoader';
-
-// import useCartsData from '../../hooks/useCartsData';
-// import useAdmin from '../../hooks/useAdmin';
 
 const NavBar = () => {
   const { loggedUser } = useRole();
@@ -128,6 +123,74 @@ const NavBar = () => {
         </MenuItem>
       </li>
     </>
+  );
+  const LinkForLargeDevice = (
+    <ul className="flex items-center justify-center">
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? 'border-2  w-full font-bold  px-3 py-2 rounded-lg'
+              : isPending
+              ? '  '
+              : 'w-full px-10 lg:px-3'
+          }
+        >
+          HOME
+        </NavLink>
+      </li>
+      <li>
+        <MenuItem className="menu-item hover:bg-transparent hover:text-current">
+          <NavLink
+            to="/all-properties"
+            className={({ isActive, isPending }) =>
+              isActive
+                ? 'border-2 font-bold px-3 py-2 rounded-lg'
+                : isPending
+                ? 'pending'
+                : ''
+            }
+          >
+            ALL PROPERTIES
+          </NavLink>
+        </MenuItem>
+      </li>
+      <li>
+        {' '}
+        <NavLink
+          to={
+            (loggedUser?.role === 'Admin' && '/dashboard/admin-profile') ||
+            (loggedUser?.role === 'Agent' && '/dashboard/agent-profile') ||
+            '/dashboard/user-profile'
+          }
+          className={({ isActive, isPending }) =>
+            isActive
+              ? 'border-2 font-bold  px-3 py-2 rounded-lg'
+              : isPending
+              ? 'pending'
+              : ''
+          }
+        >
+          DASHBOARD
+        </NavLink>{' '}
+      </li>
+      <li>
+        {' '}
+        <NavLink
+          to={'/contact-us'}
+          className={({ isActive, isPending }) =>
+            isActive
+              ? 'border-2 font-bold  px-3 py-2 rounded-lg'
+              : isPending
+              ? 'pending'
+              : ''
+          }
+        >
+          CONTACT US
+        </NavLink>{' '}
+      </li>
+    </ul>
   );
 
   const dashboardLink = (
@@ -617,7 +680,7 @@ const NavBar = () => {
         </Link>
       </div>
       <div className=" hidden  lg:flex">
-        <ul className="menu menu-horizontal px-1"> {Links}</ul>
+        <ul className="menu menu-horizontal px-1"> {LinkForLargeDevice}</ul>
       </div>
 
       <div className="pr-4 lg:pr-8">
