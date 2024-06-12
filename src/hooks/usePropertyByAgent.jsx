@@ -16,7 +16,7 @@ const usePropertyByAgent = () => {
         const { data } = await axiosSecure.get(
           `/agent-properties?email=${user?.email}`
         );
-        console.log(data);
+        // console.log(data);
         return data;
       }
     },

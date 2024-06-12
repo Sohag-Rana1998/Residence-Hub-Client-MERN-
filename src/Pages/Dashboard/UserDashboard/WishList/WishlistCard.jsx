@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
@@ -25,7 +26,7 @@ const WishlistCard = ({ property, refetch }) => {
       return data;
     },
     onSuccess: data => {
-      console.log(data);
+      // console.log(data);
       refetch();
       Swal.fire({
         title: 'Removed!',
@@ -39,7 +40,7 @@ const WishlistCard = ({ property, refetch }) => {
 
   //  Handle Delete
   const handleDelete = async id => {
-    console.log(id);
+    // console.log(id);
     Swal.fire({
       title: 'Are you sure?',
       text: 'You want to remove from wishlist!',
@@ -53,7 +54,7 @@ const WishlistCard = ({ property, refetch }) => {
         try {
           await mutateAsync(id);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       }
     });

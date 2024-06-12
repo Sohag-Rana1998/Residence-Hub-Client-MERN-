@@ -19,7 +19,7 @@ const useVerifiedProperty = (
       const { data } = await axiosSecure.get(
         `/verified-properties?status=Verified&page=${currentPage}&size=${itemsPerPage}&search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`
       );
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

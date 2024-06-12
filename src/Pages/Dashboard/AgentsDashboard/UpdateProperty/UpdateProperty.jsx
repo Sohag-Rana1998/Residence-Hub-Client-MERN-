@@ -21,7 +21,7 @@ const UpdateProperty = () => {
   const axiosPublic = useAxiosPublic();
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-  console.log(property);
+  // console.log(property);
 
   useEffect(() => {
     setTimeout(setLoading, 500, false);
@@ -52,7 +52,7 @@ const UpdateProperty = () => {
       return data;
     },
     onSuccess: () => {
-      console.log('Property Saved Successfully');
+      // console.log('Property Saved Successfully');
       Swal.fire({
         icon: 'success',
         title: 'Property Updated Successfully',
@@ -66,7 +66,7 @@ const UpdateProperty = () => {
     },
   });
   const onSubmit = async data => {
-    console.log(data);
+    // console.log(data);
     // image upload to imgbb and then get an url
     const imageFile = { image: data.image[0] };
 
@@ -75,7 +75,7 @@ const UpdateProperty = () => {
         'content-type': 'multipart/form-data',
       },
     });
-    console.log(res.data.data);
+    // console.log(res.data.data);
     if (res.data.success) {
       try {
         const propertyData = {
@@ -92,12 +92,12 @@ const UpdateProperty = () => {
           agentEmail: user?.email,
           agentImg: user?.photoURL,
         };
-        console.log(propertyData);
+        // console.log(propertyData);
 
         //   Post request to server
         await mutateAsync(propertyData);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         toast.error(err.message);
       }
     }

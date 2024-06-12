@@ -14,7 +14,7 @@ const useCount = (search, minPrice, maxPrice) => {
         `/count-properties?status=Verified&search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`
       );
       const count = data.count;
-      console.log(count);
+      // console.log(count);
       return count;
     },
   });

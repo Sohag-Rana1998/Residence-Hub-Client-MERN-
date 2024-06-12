@@ -15,11 +15,11 @@ const Main = () => {
       <ScaleLoader color="#36d7b7" height={80} width={5} />
     </div>
   ) : (
-    <div className="lg:w-screen w-11/12 mx-auto font-jost">
-      <div className="w-full  ">
+    <div className="w-screen  mx-auto font-jost">
+      <div className="w-full mx-auto ">
         <NavBar />
       </div>
-      <div className="mt-auto   min-h-[calc(100vh-84px)]">
+      <div className="mt-auto  min-h-[calc(100vh-84px)]">
         <Outlet />
       </div>
       <div>

@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import { GrLinkNext } from 'react-icons/gr';
 import { FaLocationDot } from 'react-icons/fa6';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -28,7 +29,7 @@ const CardOfHome = ({ estate, refetch }) => {
     image_url2,
     image_url3,
   } = estate;
-  console.log(toggle);
+  // console.log(toggle);
   return (
     <div className="w-full">
       <div className="w-full  h-full  rounded-2xl shadow-xl  ">
@@ -85,7 +86,7 @@ const CardOfHome = ({ estate, refetch }) => {
               {status}
             </button>
 
-            <div className="absolute bottom-0 z-50 left-0 bg-black/60  p-2 rounded-tr-lg ">
+            <div className="absolute bottom-0 z-10 left-0 bg-black/60  p-2 rounded-tr-lg ">
               <p className=" font-sm text-white text-sm flex items-center gap-2">
                 <FaLocationDot />
                 {location}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Swal from 'sweetalert2';
 import { useMutation } from '@tanstack/react-query';
 import { MdVerified } from 'react-icons/md';
@@ -9,18 +10,18 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 const ReportedProperty = () => {
   const { allReports, refetch, isLoading } = useAllReports();
   const axiosSecure = useAxiosSecure();
-  console.log('Reports', allReports);
+  // console.log('Reports', allReports);
 
   //   delete
   const { mutateAsync } = useMutation({
     mutationFn: async ids => {
       const { data } = await axiosSecure.patch(`/reported-property`, ids);
-      console.log(data);
+      // console.log(data);
       return data;
     },
 
     onSuccess: data => {
-      console.log(data);
+      // console.log(data);
       refetch();
       Swal.fire({
         title: 'Deleted!',
@@ -35,7 +36,7 @@ const ReportedProperty = () => {
   //  Handle Delete
   const handleRemoveProperty = async report => {
     const ids = { id: report._id, propertyId: report.propertyId };
-    console.log(report);
+    // console.log(report);
     Swal.fire({
       title: 'Are you sure?',
       text: 'You want to remove this property!',
@@ -49,7 +50,7 @@ const ReportedProperty = () => {
         try {
           await mutateAsync(ids);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       }
     });

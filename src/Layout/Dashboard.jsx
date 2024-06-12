@@ -4,7 +4,7 @@ import useRole from '../hooks/userRole';
 
 const Dashboard = () => {
   const { loggedUser } = useRole();
-  console.log(loggedUser);
+  // console.log(loggedUser);
   return (
     <div className="flex max-w-7xl pt-[70px]   mx-auto">
       <div className="w-56 hidden  lg:block pt-5 bg-[#1b71c7]  text-white ">

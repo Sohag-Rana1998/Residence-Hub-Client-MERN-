@@ -14,7 +14,7 @@ const useReviewByEmail = () => {
     queryFn: async () => {
       if (user?.email) {
         const { data } = await axiosSecure.get(`/reviews?email=${user?.email}`);
-        console.log(data);
+        // console.log(data);
         return data;
       }
     },

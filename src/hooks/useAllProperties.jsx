@@ -11,7 +11,7 @@ const useAllProperties = () => {
     queryKey: ['all-properties'],
     queryFn: async () => {
       const { data } = await axiosSecure.get('/properties');
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

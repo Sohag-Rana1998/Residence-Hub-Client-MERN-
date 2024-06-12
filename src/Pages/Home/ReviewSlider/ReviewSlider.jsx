@@ -48,7 +48,7 @@ export default function ReviewSlider() {
           spaceBetween={50}
           navigation={true}
           modules={[Navigation]}
-          className="mySwiper h-[500px]  md:h-[350px] !px-5 md:!px-14 "
+          className="mySwiper h-[500px]  md:h-[350px] !px-4 md:!px-14 "
         >
           {allReviews?.map(review => (
             <SwiperSlide key={review.id}>

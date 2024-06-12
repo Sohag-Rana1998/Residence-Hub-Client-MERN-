@@ -1,12 +1,11 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet-async';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
-
 const BoughtPropertyCard = ({ property, refetch }) => {
-  
-  console.log(refetch);
+  // console.log(refetch);
   const {
     _id,
     title,
@@ -18,11 +17,10 @@ const BoughtPropertyCard = ({ property, refetch }) => {
     image,
     transactionId,
   } = property;
-  console.log(property);
-  console.log(buyingDate);
- 
+  // console.log(property);
+  // console.log(buyingDate);
 
- return (
+  return (
     <div className="w-full">
       <Helmet>
         <title>RESIDENCE HUB | Bought Properties</title>

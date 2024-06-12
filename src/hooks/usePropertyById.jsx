@@ -10,7 +10,7 @@ const usePropertyById = id => {
     queryKey: ['single-property'],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/property/${id}`);
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

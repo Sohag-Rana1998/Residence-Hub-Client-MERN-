@@ -40,7 +40,7 @@ const MakeOffer = () => {
     formState: { errors },
     reset,
   } = useForm();
-  console.log(startDate);
+  // console.log(startDate);
   const { mutateAsync } = useMutation({
     mutationFn: async offeredProperty => {
       const { data } = await axiosSecure.post(
@@ -88,12 +88,12 @@ const MakeOffer = () => {
       buyerName: user?.displayName,
       buyerEmail: user?.email,
     };
-    console.log(offeredProperty);
+    // console.log(offeredProperty);
 
     try {
       await mutateAsync(offeredProperty);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err.message);
     }
   };

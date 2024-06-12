@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Rating } from '@smastrom/react-rating';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import Swal from 'sweetalert2';
@@ -10,7 +11,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 const ManageReviews = () => {
   const axiosSecure = useAxiosSecure();
   const { allReviews, refetch, isLoading } = useAllReviews();
-  console.log(allReviews);
+  // console.log(allReviews);
 
   //   delete
   const { mutateAsync } = useMutation({
@@ -19,7 +20,7 @@ const ManageReviews = () => {
       return data;
     },
     onSuccess: data => {
-      console.log(data);
+      // console.log(data);
       refetch();
       Swal.fire({
         title: 'Deleted!',

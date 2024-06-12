@@ -31,7 +31,7 @@ const AddProperty = () => {
       return data;
     },
     onSuccess: () => {
-      console.log('Data Saved Successfully');
+      // console.log('Data Saved Successfully');
       Swal.fire({
         icon: 'success',
         title: 'Property Added Successfully!',
@@ -47,7 +47,7 @@ const AddProperty = () => {
     if (loggedUser?.role === 'Fraud')
       return toast.error('You are not allowed to add any properties');
 
-    console.log(data);
+    // console.log(data);
     // image upload to imgbb and then get an url
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -55,7 +55,7 @@ const AddProperty = () => {
         'content-type': 'multipart/form-data',
       },
     });
-    console.log(res.data.data);
+    // console.log(res.data.data);
     if (res.data.success) {
       try {
         const propertyData = {
@@ -72,17 +72,17 @@ const AddProperty = () => {
           agentEmail: data.agent_email,
           agentImg: user?.photoURL,
         };
-        console.log(propertyData);
+        // console.log(propertyData);
 
         //   Post request to server
         await mutateAsync(propertyData);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         toast.error(err.message);
       }
     }
 
-    console.log('with image url', data);
+    // console.log('with image url', data);
   };
 
   return isPending ? (

@@ -57,7 +57,7 @@ export default function TrustedCompany() {
               disableOnInteraction: false,
             }}
             modules={[Autoplay]}
-            className="mySwiper  h-auto md:h-[100px] "
+            className="mySwiper !px-4 md:!px-0  h-auto md:h-[100px] "
             onAutoplayTimeLeft={onAutoplayTimeLeft}
           >
             <SwiperSlide>

@@ -16,7 +16,7 @@ const useOfferedPropertyByEmail = () => {
         const { data } = await axiosSecure.get(
           `/bought-property?email=${user?.email}`
         );
-        console.log(data);
+        // console.log(data);
         return data;
       }
     },

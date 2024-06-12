@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 
 import { Helmet } from 'react-helmet-async';
@@ -19,7 +20,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const AdvertiseProperty = () => {
   const { loggedUser, isPending } = useRole();
-  console.log(loggedUser);
+  // console.log(loggedUser);
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
@@ -46,7 +47,7 @@ const AdvertiseProperty = () => {
     setLoader(true);
     setTimeout(setLoader, 1000, false);
   }, [search, axiosSecure]);
-  console.log(count);
+  // console.log(count);
 
   const totalPage = Math.ceil(parseInt(count) / itemsPerPage);
 
@@ -68,9 +69,10 @@ const AdvertiseProperty = () => {
       );
       return data;
     },
+    // eslint-disable-next-line no-unused-vars
     onSuccess: data => {
       refetch();
-      console.log(data);
+      // console.log(data);
       Swal.fire({
         title: 'Updated!',
         text: 'Property Status updated successfully!',
@@ -84,7 +86,7 @@ const AdvertiseProperty = () => {
 
   const handleAdvertise = id => {
     const propertyData = { id, advertise: 'Advertised' };
-    console.log(propertyData);
+    // console.log(propertyData);
     Swal.fire({
       title: 'Are you sure?',
       text: `You want to Advertise this property!`,
@@ -98,7 +100,7 @@ const AdvertiseProperty = () => {
         try {
           await mutateAsync(propertyData);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
           toast.error(err.message);
         }
       }

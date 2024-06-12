@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Link,
   ScrollRestoration,
@@ -25,7 +26,7 @@ const SignUp = () => {
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
   const date = new Date();
-  console.log(date);
+  // console.log(date);
   const {
     register,
     handleSubmit,
@@ -42,14 +43,14 @@ const SignUp = () => {
         'content-type': 'multipart/form-data',
       },
     });
-    console.log(res.data.data);
+    // console.log(res.data.data);
     if (res.data.success) {
       const photo = res?.data?.data?.display_url;
 
       try {
         //2. User Registration
         const result = await createUser(data.email, data.password);
-        console.log(result);
+        // console.log(result);
 
         // 3. Save username and photo in firebase
         await updateUserProfile(data.name, photo);
@@ -60,7 +61,7 @@ const SignUp = () => {
           date: date,
         };
         const { data: data1 } = await axiosPublic.post('/users', userInfo);
-        console.log(data1);
+        // console.log(data1);
         reset();
         Swal.fire({
           icon: 'success',
@@ -71,7 +72,7 @@ const SignUp = () => {
         });
         navigate(location.state || '/');
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         toast.error(err.message);
       }
     }

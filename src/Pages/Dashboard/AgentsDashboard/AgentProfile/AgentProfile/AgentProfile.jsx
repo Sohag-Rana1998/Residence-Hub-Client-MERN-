@@ -6,7 +6,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const AgentProfile = () => {
   const { loggedUser, refetch,isPending } = useRole();
-  console.log(loggedUser);
+  // console.log(loggedUser);
   useEffect(() => {
     refetch();
   }, [refetch]);

@@ -11,7 +11,7 @@ const useAgents = () => {
     queryKey: ['all-agents'],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/agents?role=Agent`);
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

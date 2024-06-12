@@ -10,7 +10,7 @@ const useReviewsById = id => {
     queryKey: ['reviewsById'],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/reviews/${id}`);
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

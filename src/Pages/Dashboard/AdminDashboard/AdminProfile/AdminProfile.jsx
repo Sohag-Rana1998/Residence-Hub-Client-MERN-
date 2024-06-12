@@ -4,7 +4,7 @@ import useRole from '../../../../hooks/userRole';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 const AdminProfile = () => {
   const { loggedUser, refetch, isPending } = useRole();
-  console.log(loggedUser);
+  // console.log(loggedUser);
 
   return isPending ? (
     <div className="w-full min-h-screen flex justify-center items-center">

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -23,7 +24,7 @@ import { Rating } from '@smastrom/react-rating';
 
 export default function BrowseOurAgent() {
   const { allAgents, refetch, isLoading } = useAgents();
-  console.log(allAgents);
+  // console.log(allAgents);
   const [toggle, setToggle] = useState(true);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);

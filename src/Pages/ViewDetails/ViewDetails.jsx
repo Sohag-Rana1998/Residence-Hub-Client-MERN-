@@ -63,7 +63,7 @@ const ViewDetails = () => {
         `/wishlist-property`,
         propertyData
       );
-      console.log(data);
+      // console.log(data);
       if (data.message) {
         toast.error(data.message);
       }
@@ -88,7 +88,7 @@ const ViewDetails = () => {
     const email = user?.email;
     const name = user?.displayName;
     const propertyId = id;
-    console.log(email);
+    // console.log(email);
     const propertyData = {
       propertyId,
       title,
@@ -111,7 +111,7 @@ const ViewDetails = () => {
     try {
       mutateAsync1(propertyData);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -124,11 +124,11 @@ const ViewDetails = () => {
   const { mutateAsync } = useMutation({
     mutationFn: async reviewData => {
       const { data } = await axiosSecure.post(`/add-review`, reviewData);
-      console.log(data);
+      // console.log(data);
       return data;
     },
     onSuccess: () => {
-      console.log('Your Review Added Successfully');
+      // console.log('Your Review Added Successfully');
       Swal.fire({
         icon: 'success',
         title: 'Your Review Added Successfully',
@@ -145,11 +145,11 @@ const ViewDetails = () => {
   const { mutateAsync: mutateAsync2 } = useMutation({
     mutationFn: async reportData => {
       const { data } = await axiosSecure.post(`/add-report`, reportData);
-      console.log(data);
+      // console.log(data);
       return data;
     },
     onSuccess: () => {
-      console.log('Your Report Submitted Successfully');
+      // console.log('Your Report Submitted Successfully');
       Swal.fire({
         icon: 'success',
         title: 'Your Report Submitted  Successfully',
@@ -180,7 +180,7 @@ const ViewDetails = () => {
 
   // handle Review
   const onSubmit = async data => {
-    console.log(data);
+    // console.log(data);
 
     const reviewData = {
       propertyId: id,
@@ -193,19 +193,19 @@ const ViewDetails = () => {
       star: rating,
       date: present,
     };
-    console.log(reviewData);
+    // console.log(reviewData);
 
     try {
       await mutateAsync(reviewData);
       reset();
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
 
   // handleReport
   const onSubmit1 = async data => {
-    console.log('kaj hochse');
+    // console.log('kaj hochse');
 
     const reportData = {
       propertyId: id,
@@ -218,13 +218,13 @@ const ViewDetails = () => {
       report: data.report,
       date: present,
     };
-    console.log(reportData);
+    // console.log(reportData);
 
     try {
       await mutateAsync2(reportData);
       refresh();
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
 

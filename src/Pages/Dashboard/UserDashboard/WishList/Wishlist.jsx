@@ -6,7 +6,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const Wishlist = () => {
   const { wishlistProperties, isLoading, refetch } = useWishlistDataByEmail();
-  console.log(wishlistProperties);
+  // console.log(wishlistProperties);
   return isLoading ? (
     <div className="w-full min-h-screen flex justify-center items-center">
       <ScaleLoader color="#36d7b7" height={80} width={5} />

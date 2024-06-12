@@ -11,7 +11,7 @@ const useAllReports = () => {
     queryKey: ['allReports'],
     queryFn: async () => {
       const { data } = await axiosSecure.get('/all-reports');
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

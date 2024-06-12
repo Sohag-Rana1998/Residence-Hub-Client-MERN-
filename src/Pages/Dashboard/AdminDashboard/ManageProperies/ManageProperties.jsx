@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import toast from 'react-hot-toast';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useAllProperties from '../../../../hooks/useAllProperties';
@@ -23,7 +24,7 @@ const ManageProperties = () => {
     },
     onSuccess: data => {
       refetch();
-      console.log(data);
+      // console.log(data);
       Swal.fire({
         title: 'Updated!',
         text: 'Property Status updated successfully!',
@@ -37,7 +38,7 @@ const ManageProperties = () => {
 
   const handleStatus = async (id, status) => {
     const propertyStatus = { id: id, status: status };
-    console.log(propertyStatus);
+    // console.log(propertyStatus);
     Swal.fire({
       title: 'Are you sure?',
       text: `You want  to set status ${status}!`,
@@ -51,7 +52,7 @@ const ManageProperties = () => {
         try {
           await mutateAsync(propertyStatus);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
           toast.error(err.message);
         }
       }

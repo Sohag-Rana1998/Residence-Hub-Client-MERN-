@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import toast from 'react-hot-toast';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 
@@ -25,7 +26,7 @@ const RequestedProperties = () => {
     },
     onSuccess: data => {
       refetch();
-      console.log(data);
+      // console.log(data);
       Swal.fire({
         title: 'Updated!',
         text: 'Property Status updated successfully!',
@@ -44,7 +45,7 @@ const RequestedProperties = () => {
     },
     onSuccess: data => {
       refetch();
-      console.log(data);
+      // console.log(data);
       Swal.fire({
         title: 'Updated!',
         text: 'Property Status Rejected successfully!',
@@ -63,7 +64,7 @@ const RequestedProperties = () => {
       buyerEmail: buyerEmail,
       status: 'Accepted',
     };
-    console.log(propertyStatus);
+    // console.log(propertyStatus);
     Swal.fire({
       title: 'Are you sure?',
       text: `You want accept this offer!`,
@@ -77,7 +78,7 @@ const RequestedProperties = () => {
         try {
           await mutateAsync(propertyStatus);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
           toast.error(err.message);
         }
       }
@@ -100,7 +101,7 @@ const RequestedProperties = () => {
         try {
           await mutateAsync1(status1);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
           toast.error(err.message);
         }
       }

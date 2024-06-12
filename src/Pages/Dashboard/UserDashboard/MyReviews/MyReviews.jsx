@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Rating } from '@smastrom/react-rating';
 import useReviewByEmail from '../../../../hooks/useReviewByEmail';
 import SectionTitle from '../../../../components/Shared/SectionTitle';
@@ -10,7 +11,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 const MyReviews = () => {
   const axiosSecure = useAxiosSecure();
   const { reviewData, refetch, isLoading } = useReviewByEmail();
-  console.log(reviewData);
+  // console.log(reviewData);
 
   //   delete
   const { mutateAsync } = useMutation({
@@ -19,7 +20,7 @@ const MyReviews = () => {
       return data;
     },
     onSuccess: data => {
-      console.log(data);
+      // console.log(data);
       refetch();
       Swal.fire({
         title: 'Deleted!',
@@ -33,7 +34,7 @@ const MyReviews = () => {
 
   //  Handle Delete
   const handleDelete = async id => {
-    console.log(id);
+    // console.log(id);
     Swal.fire({
       title: 'Are you sure?',
       text: 'You want to delete this review!',
@@ -47,7 +48,7 @@ const MyReviews = () => {
         try {
           await mutateAsync(id);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       }
     });

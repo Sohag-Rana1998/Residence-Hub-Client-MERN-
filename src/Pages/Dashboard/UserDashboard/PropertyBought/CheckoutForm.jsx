@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
@@ -5,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 import useOfferedPropertyById from '../../../../hooks/useOfferedPropertyById';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 const CheckoutForm = ({ id }) => {
   const [error, setError] = useState('');
   const [clientSecret, setClientSecret] = useState('');
@@ -15,18 +16,18 @@ const CheckoutForm = ({ id }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { acceptedProperty, reload, isLoading } = useOfferedPropertyById(id);
-  console.log(isLoading);
-  console.log(acceptedProperty);
+  // console.log(isLoading);
+  // console.log(acceptedProperty);
   const navigate = useNavigate();
   const paymentPrice = acceptedProperty?.OfferedAmount;
   const propertyId = acceptedProperty?.propertyId;
-  console.log(paymentPrice, propertyId);
+  // console.log(paymentPrice, propertyId);
   useEffect(() => {
     if (paymentPrice > 0) {
       axiosSecure
         .post('/create-payment-intent', { price: paymentPrice })
         .then(res => {
-          console.log(res.data.clientSecret);
+          // console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
@@ -51,10 +52,10 @@ const CheckoutForm = ({ id }) => {
     });
 
     if (error) {
-      console.log('payment error', error);
+      // console.log('payment error', error);
       setError(error.message);
     } else {
-      console.log('payment method', paymentMethod);
+      // console.log('payment method', paymentMethod);
       setError('');
     }
 
@@ -71,11 +72,11 @@ const CheckoutForm = ({ id }) => {
       });
 
     if (confirmError) {
-      console.log('confirm error');
+      // console.log('confirm error');
     } else {
-      console.log('payment intent', paymentIntent);
+      // console.log('payment intent', paymentIntent);
       if (paymentIntent.status === 'succeeded') {
-        console.log('transaction id', paymentIntent.id);
+        // console.log('transaction id', paymentIntent.id);
         setTransactionId(paymentIntent.id);
 
         // now save the payment in the database
@@ -93,7 +94,7 @@ const CheckoutForm = ({ id }) => {
         };
 
         const res = await axiosSecure.post('/payments', payment);
-        console.log('payment saved', res.data);
+        // console.log('payment saved', res.data);
         reload();
         if (res.data?.paymentResult?.insertedId) {
           Swal.fire({
@@ -151,6 +152,5 @@ const CheckoutForm = ({ id }) => {
 
 CheckoutForm.propTypes = {
   id: PropTypes.string,
- 
 };
 export default CheckoutForm;

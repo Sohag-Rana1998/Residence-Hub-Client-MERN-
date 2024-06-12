@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import { GrLinkNext } from 'react-icons/gr';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -33,7 +34,7 @@ const Card = ({ estate, refetch }) => {
     },
     onSuccess: data => {
       refetch();
-      console.log(data);
+      // console.log(data);
 
       Swal.fire({
         title: 'Deleted!',

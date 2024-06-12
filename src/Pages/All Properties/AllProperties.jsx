@@ -10,7 +10,7 @@ import useCount from '../../hooks/useCount';
 
 const AllProperties = () => {
   const { searchText } = useParams();
-  console.log(searchText);
+  // console.log(searchText);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const [search, setSearch] = useState(searchText || '');
@@ -19,7 +19,7 @@ const AllProperties = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
   const { count, reload, isPending } = useCount(search, minPrice, maxPrice);
-  console.log(loader);
+  // console.log(loader);
   const { verifiedProperties, refetch, isLoading } = useVerifiedProperty(
     currentPage,
     itemsPerPage,
@@ -32,7 +32,7 @@ const AllProperties = () => {
     setTimeout(setLoader, 1300, false);
   }, []);
 
-  console.log(count);
+  // console.log(count);
 
   const totalPage = Math.ceil(parseInt(count) / itemsPerPage);
 

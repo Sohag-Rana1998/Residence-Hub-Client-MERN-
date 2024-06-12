@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import useAllUsers from '../../../../hooks/useAllUsers';
@@ -11,7 +12,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const { users, refetch, isLoading } = useAllUsers();
-  console.log(users);
+  // console.log(users);
   const { mutateAsync } = useMutation({
     mutationFn: async userRole => {
       const { data } = await axiosSecure.patch(`/users/role`, userRole);
@@ -19,7 +20,7 @@ const ManageUsers = () => {
     },
     onSuccess: data => {
       refetch();
-      console.log(data);
+      // console.log(data);
       Swal.fire({
         title: 'Updated!',
         text: 'User role updated successfully!',
@@ -38,7 +39,7 @@ const ManageUsers = () => {
     },
     onSuccess: data => {
       refetch();
-      console.log(data);
+      // console.log(data);
 
       Swal.fire({
         title: 'Deleted!',
@@ -53,7 +54,7 @@ const ManageUsers = () => {
 
   const handleChangeRole = async (id, role, email) => {
     const userRole = { id: id, role: role, email: email };
-    console.log(userRole);
+    // console.log(userRole);
     Swal.fire({
       title: 'Are you sure?',
       text: `You want  to make him ${role}!`,
@@ -67,7 +68,7 @@ const ManageUsers = () => {
         try {
           await mutateAsync(userRole);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
           toast.error(err.message);
         }
       }

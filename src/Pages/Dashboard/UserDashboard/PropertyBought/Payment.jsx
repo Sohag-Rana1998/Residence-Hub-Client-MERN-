@@ -8,14 +8,14 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 import { useEffect, useState } from 'react';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
-console.log(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
+// console.log(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const Payment = () => {
   const { id } = useParams();
-  console.log('params', id);
+  // console.log('params', id);
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setTimeout(setLoading,500,false)
+    setTimeout(setLoading, 500, false);
   }, []);
   return loading ? (
     <div className="w-full min-h-screen flex justify-center items-center">

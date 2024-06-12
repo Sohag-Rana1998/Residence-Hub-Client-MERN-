@@ -11,7 +11,7 @@ const useAllReviews = () => {
     queryKey: ['reviews-for-slider'],
     queryFn: async () => {
       const { data } = await axiosPublic.get('/all-reviews');
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

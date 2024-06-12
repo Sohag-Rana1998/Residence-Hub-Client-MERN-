@@ -70,13 +70,13 @@ const Profile = ({ user, refetch }) => {
   // handle Update profile picture
   const onSubmit1 = async data => {
     const imageFile = { image: data?.image[0] };
-    console.log(imageFile);
+    // console.log(imageFile);
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
         'content-type': 'multipart/form-data',
       },
     });
-    console.log(res.data.data);
+    // console.log(res.data.data);
 
     if (res.data.success) {
       const photo = res?.data?.data?.display_url;
@@ -93,12 +93,12 @@ const Profile = ({ user, refetch }) => {
           about: user?.about,
           gender: user?.gender,
         };
-        console.log(userInfo);
+        // console.log(userInfo);
 
         await mutateAsync(userInfo);
         await updateUserProfile(user?.name, photo || user?.photo);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         toast.error(err.message);
       }
     }
@@ -118,12 +118,12 @@ const Profile = ({ user, refetch }) => {
       about: data.about || user?.about,
       gender: data.gender || user?.gender,
     };
-    console.log(userInfo);
+    // console.log(userInfo);
     try {
       await mutateAsync(userInfo);
       await updateUserProfile(data.name || user?.name, user?.photo);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };

@@ -1,4 +1,4 @@
-import { FaGoogle } from 'react-icons/fa';
+/* eslint-disable no-unused-vars */
 import useAuth from '../../hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
@@ -11,14 +11,14 @@ const SocialLogin = () => {
   const location = useLocation();
   const handleGoogleSignIn = () => {
     googleSignIn().then(result => {
-      console.log(result.user);
+      // console.log(result.user);
       const userInfo = {
         email: result.user?.email,
         name: result.user?.displayName,
         photo: result.user?.photoURL,
       };
       axiosPublic.post('/users', userInfo).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         Swal.fire({
           icon: 'success',
           title: 'Login successfully',

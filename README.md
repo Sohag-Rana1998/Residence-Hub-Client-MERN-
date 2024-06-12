@@ -2,7 +2,7 @@
 
 ### Website Live Link: https://residence-hub-by-sohag.netlify.app
 
-### Server site Repo Link: https://github.com/programming-hero-web-course1/b9a12-server-side-Sohag-Rana1998
+### Server site Repo Link:https://github.com/Sohag-Rana1998/Residence-Hub-Server
 
 #### For Admin Login:
 

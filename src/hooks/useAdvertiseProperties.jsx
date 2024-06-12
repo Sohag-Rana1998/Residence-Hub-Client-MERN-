@@ -13,7 +13,7 @@ const useAdvertiseProperties = () => {
       const { data } = await axiosPublic.get(
         `/advertised-properties?status=Advertised`
       );
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

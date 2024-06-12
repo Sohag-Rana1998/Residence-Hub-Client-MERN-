@@ -6,7 +6,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const MyAddedProperties = () => {
   const { agentProperties, refetch, isLoading } = usePropertyByAgent();
-  console.log(agentProperties);
+  // console.log(agentProperties);
   return isLoading ? (
     <div className="w-full min-h-screen flex justify-center items-center">
       <ScaleLoader color="#36d7b7" height={80} width={5} />

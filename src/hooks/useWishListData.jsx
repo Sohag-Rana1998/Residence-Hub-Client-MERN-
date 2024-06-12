@@ -11,7 +11,7 @@ const useWishListDataById = id => {
     queryKey: ['wishlistDataById'],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/wishlist/${id}`);
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });

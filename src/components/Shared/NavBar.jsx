@@ -21,7 +21,7 @@ const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const showDashboardLink = location.pathname.includes('/dashboard');
-  console.log(showDashboardLink);
+  // console.log(showDashboardLink);
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.pageYOffset;
@@ -141,20 +141,18 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-          <NavLink
-            to="/all-properties"
-            className={({ isActive, isPending }) =>
-              isActive
-                ? 'border-2 font-bold px-3 py-2 rounded-lg'
-                : isPending
-                ? 'pending'
-                : ''
-            }
-          >
-            ALL PROPERTIES
-          </NavLink>
-        </MenuItem>
+        <NavLink
+          to="/all-properties"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? 'border-2 font-bold px-3 py-2 rounded-lg'
+              : isPending
+              ? 'pending'
+              : ''
+          }
+        >
+          ALL PROPERTIES
+        </NavLink>
       </li>
       <li>
         {' '}
@@ -573,7 +571,7 @@ const NavBar = () => {
     </div>
   ) : (
     <div
-      className={`flex mx-auto fixed top-0 border-b-2 lg:w-screen w-11/12   py-2 transition duration-300 ease-in-out ${
+      className={`flex mx-auto fixed top-0 border-b-2 w-full   py-2 transition duration-300 ease-in-out ${
         isScrolled ? 'bg-white text-black' : 'bg-transparent text-blue-500'
       } justify-between ease-in-out items-center    z-50 mx-auto `}
     >
