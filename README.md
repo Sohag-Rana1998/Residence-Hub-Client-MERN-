@@ -55,3 +55,23 @@
 - In this project i have use npm react icons package for show icons on the ui.
   react icons package is so much easy to find any types of icons.
 - I have use react leaflet npm package on the contact us page for showing map.
+
+# Running the Client Side using bash
+
+1. Clone the Repository:
+
+- git clone https://github.com/Sohag-Rana1998/Residence-Hub-Client-MERN-.git
+- cd Residence-Hub-Client-MERN
+
+2. Install Dependencies:
+
+- npm install
+
+3. Set Up Environment Variables:
+
+- Create a .env.local file in the project root directory and add the necessary
+  environment variables.
+
+  4. Run the Application:
+
+  - npm run dev
