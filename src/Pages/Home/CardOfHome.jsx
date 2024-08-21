@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
-import PropTypes from 'prop-types';
-import { GrLinkNext } from 'react-icons/gr';
-import { FaLocationDot } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { GrLinkNext } from "react-icons/gr";
+import { FaLocationDot } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation } from 'swiper/modules';
-import { useState } from 'react';
+import { Pagination, Navigation } from "swiper/modules";
+import { useState } from "react";
 const CardOfHome = ({ estate, refetch }) => {
   const [toggle, setToggle] = useState(false);
   const {
@@ -80,7 +80,7 @@ const CardOfHome = ({ estate, refetch }) => {
             </Swiper>
             <button
               className={`px-3 py-2 rounded-tr-xl rounded-bl-xl  ${
-                status === 'Verified' ? 'bg-blue-500' : 'bg-red-400 '
+                status === "Verified" ? "bg-blue-500" : "bg-red-400 "
               }  absolute z-10 right-0 top-0 text-white font-bold bg-opacity-80`}
             >
               {status}
@@ -96,10 +96,10 @@ const CardOfHome = ({ estate, refetch }) => {
         </div>
         <div className="px-3 pb-3 h-auto  ">
           <div>
-            <div className=" text-blue-500 font-bold text-xl ">
+            <div className=" text-blue-500 font-bold text-xl mt-2">
               ${minimumPrice}-{maximumPrice}
             </div>
-            <p className="text-xl font-semibold">{title}</p>
+            <p className="text-xl font-semibold ">{title}</p>
             <p className="font-semibold text-lg">
               <span className="font-bold">Area:</span>
               {area}

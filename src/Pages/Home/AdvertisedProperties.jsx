@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import useAdvertiseProperties from '../../hooks/useAdvertiseProperties';
-import CardOfHome from './CardOfHome';
-import SectionHeading from './SectionHeading';
+import useAdvertiseProperties from "../../hooks/useAdvertiseProperties";
+import CardOfHome from "./CardOfHome";
+import SectionHeading from "./SectionHeading";
 
 const AdvertisedProperties = () => {
   const { advertisedProperties, isLoading, refetch } = useAdvertiseProperties();
@@ -17,7 +17,7 @@ const AdvertisedProperties = () => {
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:grid-cols-3">
-        {advertisedProperties.map(property => (
+        {advertisedProperties?.slice(0, 6)?.map((property) => (
           <CardOfHome key={property._id} estate={property} />
         ))}
       </div>

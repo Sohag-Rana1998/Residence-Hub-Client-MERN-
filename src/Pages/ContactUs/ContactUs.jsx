@@ -1,16 +1,16 @@
-import { FaHome, FaPhoneAlt } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
-import { Button } from '@material-tailwind/react';
-import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import { Icon } from 'leaflet';
-import { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import Swal from 'sweetalert2';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import { FaHome, FaPhoneAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { Button } from "@material-tailwind/react";
+import { MapContainer, Marker, Popup, TileLayer, Tooltip } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { Icon } from "leaflet";
+import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
+import ScaleLoader from "react-spinners/ScaleLoader";
 const ContactUs = () => {
   const markerIcon = new Icon({
-    iconUrl: '/location-2955 (1).png',
+    iconUrl: "/location-2955 (1).png",
     iconSize: [45, 45],
   });
 
@@ -24,8 +24,8 @@ const ContactUs = () => {
     setTimeout(() => {
       setTimeout(setLoading, 500, false);
       Swal.fire({
-        icon: 'success',
-        title: 'Message Sent Successfully',
+        icon: "success",
+        title: "Message Sent Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -125,7 +125,7 @@ const ContactUs = () => {
                 <Button
                   onClick={handleSent}
                   size="lg"
-                  className="text-white font-bold w-full hover:scale-[110%] hover:bg-gray-900 md:w-60 bg-orange-600"
+                  className="text-white font-bold w-full hover:scale-[110%] hover:bg-gray-900 md:w-60 bg-blue-500"
                 >
                   Send Email
                 </Button>
