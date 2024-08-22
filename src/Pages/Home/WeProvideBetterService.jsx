@@ -5,18 +5,18 @@ import {
   FaHouseFloodWater,
   FaHouseUser,
   FaRocketchat,
-} from 'react-icons/fa6';
-import SectionHeading from './SectionHeading';
+} from "react-icons/fa6";
+import SectionHeading from "./SectionHeading";
 
 const WeProvideBetterService = () => {
   return (
-    <div className="bg-blue-700 w-full text-white py-16 px-5">
+    <div className="bg-blue-600 w-full text-white py-10 mt-10 px-5">
       <div className="max-w-7xl container mx-auto">
         <div className="mb-5">
           <SectionHeading
-            heading={'We Provide Better Service For You'}
+            heading={"We Provide Better Service For You"}
             subheading={
-              'Experience top-notch real estate services tailored to your needs. From personalized property searches to expert advice and seamless transactions, our dedicated team goes above and beyond to ensure you receive the best service possible. Let us make your real estate journey smooth and successful'
+              "Experience top-notch real estate services tailored to your needs. From personalized property searches to expert advice and seamless transactions, our dedicated team goes above and beyond to ensure you receive the best service possible. Let us make your real estate journey smooth and successful"
             }
           />
         </div>

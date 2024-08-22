@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 import {
   FaFacebook,
   FaInstagram,
@@ -9,18 +9,18 @@ import {
   FaPinterest,
   FaTwitter,
   FaVimeo,
-} from 'react-icons/fa6';
+} from "react-icons/fa6";
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // import required modules
-import { Autoplay } from 'swiper/modules';
-import SectionHeading from './SectionHeading';
-import useAgents from '../../hooks/useAgents';
-import { FaHeartCircleCheck } from 'react-icons/fa6';
-import { Rating } from '@smastrom/react-rating';
+import { Autoplay } from "swiper/modules";
+import SectionHeading from "./SectionHeading";
+import useAgents from "../../hooks/useAgents";
+import { FaHeartCircleCheck } from "react-icons/fa6";
+import { Rating } from "@smastrom/react-rating";
 
 export default function BrowseOurAgent() {
   const { allAgents, refetch, isLoading } = useAgents();
@@ -29,7 +29,7 @@ export default function BrowseOurAgent() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress);
+    progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
 
@@ -42,10 +42,10 @@ export default function BrowseOurAgent() {
       setSlidesPerView(getSlidesPerView(window.innerWidth));
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
   function getSlidesPerView(width) {
@@ -60,13 +60,13 @@ export default function BrowseOurAgent() {
 
   return (
     <>
-      <div className="w-full flex justify-between items-center my-5  md:my-20 py-5  h-[700px] lg:h-[450px] bg-[#F1F5F8]">
+      <div className="w-full flex justify-between items-center  pt-5   h-[700px] lg:h-[450px]">
         <div className="max-w-7xl container flex-col lg:flex-row gap-5 mx-auto flex justify-between items-center">
           <div className="w-full lg:w-[30%]">
             <SectionHeading
-              heading={'Browse Our Agents'}
+              heading={"Browse Our Agents"}
               subheading={
-                'Explore our Agents section to discover the experienced professionals ready to assist you. From seasoned veterans to specialized agents, find the perfect match to guide you through your real estate journey. '
+                "Explore our Agents section to discover the experienced professionals ready to assist you. From seasoned veterans to specialized agents, find the perfect match to guide you through your real estate journey. "
               }
             />
           </div>
@@ -87,7 +87,7 @@ export default function BrowseOurAgent() {
               className="mySwiper    h-[450px]] "
               onAutoplayTimeLeft={onAutoplayTimeLeft}
             >
-              {allAgents?.map(agent => (
+              {allAgents?.map((agent) => (
                 <SwiperSlide key={agent._id}>
                   <SwiperSlide className="bg-white w-full ">
                     <div className="p-5">

@@ -58,7 +58,7 @@ export default function ReviewSlider() {
       <div
         onMouseEnter={() => setToggle(false)}
         onMouseLeave={() => setToggle(true)}
-        className="w-full mx-auto bg-[#F1F5F8] py-20 flex justify-center items-center review-slider"
+        className="w-full mx-auto mt-10 flex justify-center items-center review-slider"
       >
         <Swiper
           slidesPerView={slidesPerView}
@@ -74,7 +74,7 @@ export default function ReviewSlider() {
         >
           {allReviews?.map((review) => (
             <SwiperSlide className="h-full " key={review.id}>
-              <div className="h-[250px] w-full mx-auto border p-4 flex flex-col justify-center items-center bg-white relative">
+              <div className="h-[280px] w-full mx-auto border p-4 flex flex-col justify-center items-center bg-white relative">
                 <img
                   className="w-10 h-8 my-2"
                   src="https://i.postimg.cc/xCfnh8DK/png-transparent-quotation-mark-apostrophe-computer-icons-quotation-text-number-sign-thumbnail.png"
