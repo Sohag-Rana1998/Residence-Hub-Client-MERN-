@@ -1,14 +1,7 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
-
 import { Helmet } from 'react-helmet-async';
 import { ScrollRestoration } from 'react-router-dom';
-// import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-// import 'react-loading-skeleton/dist/skeleton.css';
-
-// import { GrLinkNext } from 'react-icons/gr';
 import useVerifiedProperty from '../../../../hooks/useVerifiedProperty';
-
 import SectionTitle from '../../../../components/Shared/SectionTitle';
 import useRole from '../../../../hooks/userRole';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
@@ -16,7 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { MdVerified } from 'react-icons/md';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import Loader from '../../../../components/Shared/Loader';
 
 const AdvertiseProperty = () => {
   const { loggedUser, isPending } = useRole();
@@ -108,8 +101,8 @@ const AdvertiseProperty = () => {
   };
 
   return loader || isLoading || isPending ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader/>
     </div>
   ) : (
     <div className=" container mx-auto px-10 pb-10">

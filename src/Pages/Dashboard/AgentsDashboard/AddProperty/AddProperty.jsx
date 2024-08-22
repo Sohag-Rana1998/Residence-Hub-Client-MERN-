@@ -1,15 +1,15 @@
-import { useForm } from 'react-hook-form';
-import useAxiosPublic from '../../../../hooks/useAxiosPublic';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import useAuth from '../../../../hooks/useAuth';
-import { toast } from 'react-hot-toast';
-import { useMutation } from '@tanstack/react-query';
-import Swal from 'sweetalert2';
-import SectionTitle from '../../../../components/Shared/SectionTitle';
-import useRole from '../../../../hooks/userRole';
-import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useAuth from "../../../../hooks/useAuth";
+import { toast } from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import SectionTitle from "../../../../components/Shared/SectionTitle";
+import useRole from "../../../../hooks/userRole";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import Loader from "../../../../components/Shared/Loader";
 const AddProperty = () => {
   const { user } = useAuth();
   const { loggedUser, isPending, refetch } = useRole();
@@ -26,33 +26,33 @@ const AddProperty = () => {
   } = useForm();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async propertyData => {
+    mutationFn: async (propertyData) => {
       const { data } = await axiosSecure.post(`/add-property`, propertyData);
       return data;
     },
     onSuccess: () => {
       // console.log('Data Saved Successfully');
       Swal.fire({
-        icon: 'success',
-        title: 'Property Added Successfully!',
+        icon: "success",
+        title: "Property Added Successfully!",
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate('/dashboard/added-properties');
+      navigate("/dashboard/added-properties");
       reset();
       refetch();
     },
   });
-  const onSubmit = async data => {
-    if (loggedUser?.role === 'Fraud')
-      return toast.error('You are not allowed to add any properties');
+  const onSubmit = async (data) => {
+    if (loggedUser?.role === "Fraud")
+      return toast.error("You are not allowed to add any properties");
 
     // console.log(data);
     // image upload to imgbb and then get an url
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data",
       },
     });
     // console.log(res.data.data);
@@ -67,7 +67,7 @@ const AddProperty = () => {
           description: data.description,
           facilities: data.facilities,
           area: data.area,
-          status: 'Pending',
+          status: "Pending",
           agentName: data.agent_name,
           agentEmail: data.agent_email,
           agentImg: user?.photoURL,
@@ -86,8 +86,8 @@ const AddProperty = () => {
   };
 
   return isPending ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className="px-10 pb-10">
@@ -96,8 +96,8 @@ const AddProperty = () => {
       </Helmet>
       <div>
         <SectionTitle
-          heading={'Add Property'}
-          subheading={'Home/Dashboard/Add-Property'}
+          heading={"Add Property"}
+          subheading={"Home/Dashboard/Add-Property"}
         ></SectionTitle>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className=" ">
@@ -110,7 +110,7 @@ const AddProperty = () => {
               type="text"
               name="title"
               id="title"
-              {...register('title', { required: true })}
+              {...register("title", { required: true })}
               placeholder="Property Title"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -126,7 +126,7 @@ const AddProperty = () => {
               type="text"
               name="location"
               id="location"
-              {...register('location', { required: true })}
+              {...register("location", { required: true })}
               placeholder="Property Location"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -142,7 +142,7 @@ const AddProperty = () => {
               type="text"
               name="area"
               id="area"
-              {...register('area', { required: true })}
+              {...register("area", { required: true })}
               placeholder="Area by sq feet"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -162,7 +162,7 @@ const AddProperty = () => {
               type="text"
               name="facilities"
               id="facilities"
-              {...register('facilities', { required: true })}
+              {...register("facilities", { required: true })}
               placeholder="Facilities"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -178,7 +178,7 @@ const AddProperty = () => {
               type="file"
               name="image"
               id="image"
-              {...register('image', { required: true })}
+              {...register("image", { required: true })}
               placeholder="Property image"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -195,7 +195,7 @@ const AddProperty = () => {
                 <input
                   type="number"
                   name="price"
-                  {...register('price', { required: true })}
+                  {...register("price", { required: true })}
                   id="price"
                   placeholder="Min-Price"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
@@ -208,7 +208,7 @@ const AddProperty = () => {
                 <input
                   type="number"
                   name="price1"
-                  {...register('price1', { required: true })}
+                  {...register("price1", { required: true })}
                   id="price1"
                   placeholder="Max-Price"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
@@ -231,7 +231,7 @@ const AddProperty = () => {
                 type="text"
                 name="agent_name"
                 id="agent_name"
-                {...register('agent_name', {
+                {...register("agent_name", {
                   required: true,
                 })}
                 value={user?.displayName}
@@ -250,7 +250,7 @@ const AddProperty = () => {
                 type="email"
                 name="agent_email"
                 id="agent_email"
-                {...register('agent_email', {
+                {...register("agent_email", {
                   required: true,
                 })}
                 value={user?.email}
@@ -271,7 +271,7 @@ const AddProperty = () => {
             type="text"
             name="description"
             id="description"
-            {...register('description', { required: true })}
+            {...register("description", { required: true })}
             placeholder="Description about property"
             className="w-full textarea px-3 py-2 border rounded-md border-gray-300 bg-gray-50"
           ></textarea>

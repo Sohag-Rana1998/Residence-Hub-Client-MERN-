@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { ScrollRestoration, useParams } from 'react-router-dom';
-import useVerifiedProperty from '../../hooks/useVerifiedProperty';
-import Card from '../../components/Shared/Card';
-import { useForm } from 'react-hook-form';
-import { FaFilter } from 'react-icons/fa';
-import ScaleLoader from 'react-spinners/ScaleLoader';
-import useCount from '../../hooks/useCount';
+import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { ScrollRestoration, useParams } from "react-router-dom";
+import useVerifiedProperty from "../../hooks/useVerifiedProperty";
+import Card from "../../components/Shared/Card";
+import { useForm } from "react-hook-form";
+import { FaFilter } from "react-icons/fa";
+import useCount from "../../hooks/useCount";
+import Loader from "../../components/Shared/Loader";
 
 const AllProperties = () => {
   const { searchText } = useParams();
   // console.log(searchText);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
-  const [search, setSearch] = useState(searchText || '');
+  const [search, setSearch] = useState(searchText || "");
   const [loader, setLoader] = useState(false);
   const [modalLoading, setModalLoading] = useState(true);
   const [minPrice, setMinPrice] = useState(0);
@@ -36,9 +36,9 @@ const AllProperties = () => {
 
   const totalPage = Math.ceil(parseInt(count) / itemsPerPage);
 
-  const pageArray = [...Array(totalPage).keys()].map(element => element + 1);
+  const pageArray = [...Array(totalPage).keys()].map((element) => element + 1);
 
-  const handleSearch = async e => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     setLoader(true);
     setMinPrice(0);
@@ -60,9 +60,9 @@ const AllProperties = () => {
   } = useForm();
 
   // handle Review
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     setLoader(true);
-    setSearch('');
+    setSearch("");
     setMinPrice(data.min_price);
     setMaxPrice(data.max_price);
     setTimeout(reload, 500);
@@ -71,8 +71,8 @@ const AllProperties = () => {
   };
 
   return loader || isLoading || isPending ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className=" w-full pt-[67px] ">
@@ -133,7 +133,7 @@ const AllProperties = () => {
             </div>
             <div className="grid grid-cols-1  px-5 py-5 rounded-md gap-5  md:grid-cols-2 lg:grid-cols-3 ">
               {verifiedProperties &&
-                verifiedProperties.map(property => (
+                verifiedProperties.map((property) => (
                   <Card
                     key={property._id}
                     estate={property}
@@ -154,8 +154,8 @@ const AllProperties = () => {
                       }}
                       className={
                         currentPage == 1
-                          ? ' hidden'
-                          : 'px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  dark:bg-gray-80 cursor-pointer hover:bg-blue-500 hover:text-white'
+                          ? " hidden"
+                          : "px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  dark:bg-gray-80 cursor-pointer hover:bg-blue-500 hover:text-white"
                       }
                     >
                       <div className="flex items-center -mx-1">
@@ -178,7 +178,7 @@ const AllProperties = () => {
                       </div>
                     </a>
 
-                    {pageArray?.map(page => (
+                    {pageArray?.map((page) => (
                       <button
                         onClick={() => {
                           setCurrentPage(page);
@@ -189,8 +189,8 @@ const AllProperties = () => {
                         key={page}
                         className={
                           currentPage == page
-                            ? 'px-4 py-2 hidden md:block mx-1 transition-colors duration-300 transform bg-gray-500 rounded-md sm:inline    hover:bg-blue-500   hover:text-white  '
-                            : 'px-4 py-2 hidden md:block mx-1 text-gray-700 transition-colors  duration-300 transform bg-white rounded-md sm:inline hover:bg-blue-500  hover:text-white  '
+                            ? "px-4 py-2 hidden md:block mx-1 transition-colors duration-300 transform bg-gray-500 rounded-md sm:inline    hover:bg-blue-500   hover:text-white  "
+                            : "px-4 py-2 hidden md:block mx-1 text-gray-700 transition-colors  duration-300 transform bg-white rounded-md sm:inline hover:bg-blue-500  hover:text-white  "
                         }
                       >
                         {page}
@@ -200,8 +200,8 @@ const AllProperties = () => {
                     <a
                       className={
                         currentPage == pageArray.length
-                          ? 'hidden'
-                          : 'px-4 py-2 mx-1  text-gray-700 transition-colors duration-300 transform bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200'
+                          ? "hidden"
+                          : "px-4 py-2 mx-1  text-gray-700 transition-colors duration-300 transform bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
                       }
                       onClick={() => {
                         setCurrentPage(currentPage + 1);
@@ -236,7 +236,7 @@ const AllProperties = () => {
                   <div className="w-full flex flex-col justify-center mt-5">
                     {verifiedProperties && verifiedProperties.length === 0 ? (
                       <h3 className="text-center text-3xl font-bold my-10">
-                        {' '}
+                        {" "}
                         No Job Found
                       </h3>
                     ) : (
@@ -245,7 +245,7 @@ const AllProperties = () => {
                     <div className="w-full flex  justify-center">
                       <button
                         onClick={() => {
-                          setSearch('');
+                          setSearch("");
                           setMinPrice(0);
                           setMaxPrice(0);
                           setTimeout(refetch, 500);
@@ -270,7 +270,7 @@ const AllProperties = () => {
             <div className="modal  mx-auto" role="dialog">
               <div
                 style={{
-                  scrollbarWidth: 'none',
+                  scrollbarWidth: "none",
                 }}
                 className="modal-box !p-2 !h-[380px] !w-80 right-0 absolute!"
               >
@@ -298,7 +298,7 @@ const AllProperties = () => {
                                     id="min_price"
                                     name="min_price"
                                     type="number"
-                                    {...register('min_price')}
+                                    {...register("min_price")}
                                     placeholder="Min-Price"
                                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                   />
@@ -320,7 +320,7 @@ const AllProperties = () => {
                                     name="max_price"
                                     type="number"
                                     placeholder="Max-Price"
-                                    {...register('max_price')}
+                                    {...register("max_price")}
                                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                   />
                                   {errors.max_price && (

@@ -1,30 +1,30 @@
 /* eslint-disable no-unused-vars */
-import { RiDeleteBin5Line } from 'react-icons/ri';
-import Swal from 'sweetalert2';
-import useAllUsers from '../../../../hooks/useAllUsers';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import { useMutation } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
-import SectionTitle from '../../../../components/Shared/SectionTitle';
-import { Helmet } from 'react-helmet-async';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import { RiDeleteBin5Line } from "react-icons/ri";
+import Swal from "sweetalert2";
+import useAllUsers from "../../../../hooks/useAllUsers";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import SectionTitle from "../../../../components/Shared/SectionTitle";
+import { Helmet } from "react-helmet-async";
+import Loader from "../../../../components/Shared/Loader";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const { users, refetch, isLoading } = useAllUsers();
   // console.log(users);
   const { mutateAsync } = useMutation({
-    mutationFn: async userRole => {
+    mutationFn: async (userRole) => {
       const { data } = await axiosSecure.patch(`/users/role`, userRole);
       return data;
     },
-    onSuccess: data => {
+    onSuccess: (data) => {
       refetch();
       // console.log(data);
       Swal.fire({
-        title: 'Updated!',
-        text: 'User role updated successfully!',
-        icon: 'success',
+        title: "Updated!",
+        text: "User role updated successfully!",
+        icon: "success",
         confirmButton: false,
         showConfirmButton: false,
         timer: 1500,
@@ -33,18 +33,18 @@ const ManageUsers = () => {
   });
 
   const { mutateAsync: mutateAsync1 } = useMutation({
-    mutationFn: async id => {
+    mutationFn: async (id) => {
       const { data } = await axiosSecure.delete(`/user/${id}`);
       return data;
     },
-    onSuccess: data => {
+    onSuccess: (data) => {
       refetch();
       // console.log(data);
 
       Swal.fire({
-        title: 'Deleted!',
-        text: 'User Deleted successfully!',
-        icon: 'success',
+        title: "Deleted!",
+        text: "User Deleted successfully!",
+        icon: "success",
         confirmButton: false,
         showConfirmButton: false,
         timer: 1500,
@@ -56,14 +56,14 @@ const ManageUsers = () => {
     const userRole = { id: id, role: role, email: email };
     // console.log(userRole);
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: `You want  to make him ${role}!`,
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes!',
-    }).then(async result => {
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           await mutateAsync(userRole);
@@ -75,16 +75,16 @@ const ManageUsers = () => {
     });
   };
 
-  const handleDelete = id => {
+  const handleDelete = (id) => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then(result => {
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
       if (result.isConfirmed) {
         mutateAsync1(id);
       }
@@ -92,8 +92,8 @@ const ManageUsers = () => {
   };
 
   return isLoading ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className="w-full px-10 pb-10">
@@ -102,8 +102,8 @@ const ManageUsers = () => {
       </Helmet>
       <div>
         <SectionTitle
-          heading={'Manage Users'}
-          subheading={'Home/Dashboard/Manage Users'}
+          heading={"Manage Users"}
+          subheading={"Home/Dashboard/Manage Users"}
         />
       </div>
       <div className="w-full text-3xl mt-5 font-bold ">
@@ -137,25 +137,25 @@ const ManageUsers = () => {
 
                   <td>{user?.name}</td>
                   <td>{user?.email}</td>
-                  <td>{user?.role || 'User'}</td>
+                  <td>{user?.role || "User"}</td>
 
-                  {user?.role === 'Fraud' || (
+                  {user?.role === "Fraud" || (
                     <>
                       <td className="">
                         <button
                           onClick={() =>
-                            handleChangeRole(user._id, 'Admin', user?.email)
+                            handleChangeRole(user._id, "Admin", user?.email)
                           }
                           className="btn"
                         >
-                          {' '}
+                          {" "}
                           Make Admin
                         </button>
                       </td>
                       <td className="">
                         <button
                           onClick={() =>
-                            handleChangeRole(user._id, 'Agent', user?.email)
+                            handleChangeRole(user._id, "Agent", user?.email)
                           }
                           className="btn"
                         >
@@ -163,10 +163,10 @@ const ManageUsers = () => {
                         </button>
                       </td>
                       <td className="">
-                        {user?.role === 'Agent' && (
+                        {user?.role === "Agent" && (
                           <button
                             onClick={() =>
-                              handleChangeRole(user._id, 'Fraud', user?.email)
+                              handleChangeRole(user._id, "Fraud", user?.email)
                             }
                             className="btn"
                           >
@@ -176,7 +176,7 @@ const ManageUsers = () => {
                       </td>
                     </>
                   )}
-                  {user?.role === 'Fraud' && (
+                  {user?.role === "Fraud" && (
                     <>
                       <td></td>
 

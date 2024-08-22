@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -8,11 +8,11 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-} from 'firebase/auth';
+} from "firebase/auth";
 
-import PropTypes from 'prop-types';
-import app from '../firebase/firebase.config';
-import useAxiosPublic from '../hooks/useAxiosPublic';
+import PropTypes from "prop-types";
+import app from "../firebase/firebase.config";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
@@ -24,20 +24,19 @@ const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
         // get token and store client
         const userInfo = { email: currentUser.email };
-        axiosPublic.post('/jwt', userInfo).then(res => {
+        axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
-            localStorage.setItem('access-token', res.data.token);
+            localStorage.setItem("access-token", res.data.token);
             setLoading(false);
           }
         });
       } else {
-        // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
-        localStorage.removeItem('access-token');
+        localStorage.removeItem("access-token");
         setLoading(false);
       }
     });

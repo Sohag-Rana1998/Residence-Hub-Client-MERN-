@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
-import ScaleLoader from 'react-spinners/ScaleLoader';
-import { Navigate, useLocation } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import Loader from "../components/Shared/Loader";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
@@ -15,8 +15,8 @@ const PrivateRoute = ({ children }) => {
 
   if (loading || loading1) {
     return (
-      <div className="w-[80%] mx-auto flex justify-center items-center min-h-screen ">
-        <ScaleLoader color="#36d7b7" height={80} width={5} />
+      <div>
+        <Loader />
       </div>
     );
   } else if (user) {

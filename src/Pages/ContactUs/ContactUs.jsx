@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import Loader from "../../components/Shared/Loader";
 const ContactUs = () => {
   const markerIcon = new Icon({
     iconUrl: "/location-2955 (1).png",
@@ -33,8 +34,8 @@ const ContactUs = () => {
   };
 
   return loading ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className="pt-[68px] ">

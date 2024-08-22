@@ -11,7 +11,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { Helmet } from 'react-helmet-async';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import Loader from '../../../../components/Shared/Loader';
 const MakeOffer = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -99,8 +99,8 @@ const MakeOffer = () => {
   };
 
   return isLoading ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className="pb-10 px-5">

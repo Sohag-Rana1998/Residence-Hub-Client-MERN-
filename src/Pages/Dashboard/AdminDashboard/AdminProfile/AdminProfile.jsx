@@ -1,14 +1,15 @@
-import { Helmet } from 'react-helmet-async';
-import Profile from '../../../../components/Shared/Profile';
-import useRole from '../../../../hooks/userRole';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import { Helmet } from "react-helmet-async";
+import Profile from "../../../../components/Shared/Profile";
+import useRole from "../../../../hooks/userRole";
+import Loader from "../../../../components/Shared/Loader";
+
 const AdminProfile = () => {
   const { loggedUser, refetch, isPending } = useRole();
   // console.log(loggedUser);
 
   return isPending ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div>

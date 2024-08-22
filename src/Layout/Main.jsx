@@ -1,9 +1,9 @@
-import { Toaster } from 'react-hot-toast';
-import { Outlet } from 'react-router-dom';
-import NavBar from '../components/Shared/NavBar';
-import Footer from '../components/Shared/Footer';
-import ScaleLoader from 'react-spinners/ScaleLoader';
-import { useEffect, useState } from 'react';
+import { Toaster } from "react-hot-toast";
+import { Outlet } from "react-router-dom";
+import NavBar from "../components/Shared/NavBar";
+import Footer from "../components/Shared/Footer";
+import { useEffect, useState } from "react";
+import Loader from "../components/Shared/Loader";
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
@@ -11,8 +11,8 @@ const Main = () => {
     setTimeout(setLoading, 500, false);
   }, []);
   return loading ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className="w-screen  mx-auto font-jost">

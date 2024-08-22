@@ -16,7 +16,7 @@ const Home = () => {
       <TrustedCompany />
       <AdvertisedProperties />
       <WeProvideBetterService />
-      <div className=" bg-[#e9eaeb]">
+      <div className="bg-[#e9eaeb]">
         <ReviewSection />
         <BrowseOurAgent />
       </div>

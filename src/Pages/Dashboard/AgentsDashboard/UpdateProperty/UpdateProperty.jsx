@@ -1,16 +1,16 @@
-import { useForm } from 'react-hook-form';
-import useAxiosPublic from '../../../../hooks/useAxiosPublic';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
-import { toast } from 'react-hot-toast';
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import usePropertyById from '../../../../hooks/usePropertyById';
-import useAuth from '../../../../hooks/useAuth';
-import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-import { Helmet } from 'react-helmet-async';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import { toast } from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import usePropertyById from "../../../../hooks/usePropertyById";
+import useAuth from "../../../../hooks/useAuth";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
+import Loader from "../../../../components/Shared/Loader";
 const UpdateProperty = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -47,32 +47,32 @@ const UpdateProperty = () => {
   } = useForm();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async propertyData => {
+    mutationFn: async (propertyData) => {
       const { data } = await axiosSecure.put(`/property/${_id}`, propertyData);
       return data;
     },
     onSuccess: () => {
       // console.log('Property Saved Successfully');
       Swal.fire({
-        icon: 'success',
-        title: 'Property Updated Successfully',
+        icon: "success",
+        title: "Property Updated Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
       reset();
-      navigate('/dashboard/added-properties');
+      navigate("/dashboard/added-properties");
 
       refetch();
     },
   });
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     // console.log(data);
     // image upload to imgbb and then get an url
     const imageFile = { image: data.image[0] };
 
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data",
       },
     });
     // console.log(res.data.data);
@@ -103,8 +103,8 @@ const UpdateProperty = () => {
     }
   };
   return loading || isLoading ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className="px-10 pb-10">
@@ -130,7 +130,7 @@ const UpdateProperty = () => {
               name="title"
               defaultValue={title}
               id="title"
-              {...register('title')}
+              {...register("title")}
               placeholder="Property Title"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -147,7 +147,7 @@ const UpdateProperty = () => {
               name="location"
               defaultValue={location}
               id="location"
-              {...register('location')}
+              {...register("location")}
               placeholder="Property Location"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -164,7 +164,7 @@ const UpdateProperty = () => {
               name="area"
               defaultValue={area}
               id="area"
-              {...register('area')}
+              {...register("area")}
               placeholder="Area by sq feet"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -185,7 +185,7 @@ const UpdateProperty = () => {
               name="facilities"
               defaultValue={facilities}
               id="facilities"
-              {...register('facilities')}
+              {...register("facilities")}
               placeholder="Facilities"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -201,7 +201,7 @@ const UpdateProperty = () => {
               type="file"
               name="image"
               id="image"
-              {...register('image', { required: true })}
+              {...register("image", { required: true })}
               placeholder="Property image"
               className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 "
             />
@@ -219,7 +219,7 @@ const UpdateProperty = () => {
                   type="number"
                   name="price"
                   defaultValue={minimumPrice}
-                  {...register('price')}
+                  {...register("price")}
                   id="price"
                   placeholder="Minimum Price"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
@@ -233,7 +233,7 @@ const UpdateProperty = () => {
                   type="number"
                   name="price1"
                   defaultValue={maximumPrice}
-                  {...register('price1')}
+                  {...register("price1")}
                   id="price1"
                   placeholder="Maximum Price"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
@@ -293,7 +293,7 @@ const UpdateProperty = () => {
             defaultValue={description}
             name="description"
             id="description"
-            {...register('description')}
+            {...register("description")}
             placeholder="Description about property"
             className="w-full textarea px-3 py-2 border rounded-md border-gray-300 bg-gray-50"
           ></textarea>

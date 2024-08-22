@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { Rating } from '@smastrom/react-rating';
-import SectionTitle from '../../../../components/Shared/SectionTitle';
-import Swal from 'sweetalert2';
-import { useMutation } from '@tanstack/react-query';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import useAllReviews from '../../../../hooks/useAllReviews';
-import { Helmet } from 'react-helmet-async';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import { Rating } from "@smastrom/react-rating";
+import SectionTitle from "../../../../components/Shared/SectionTitle";
+import Swal from "sweetalert2";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useAllReviews from "../../../../hooks/useAllReviews";
+import { Helmet } from "react-helmet-async";
+import Loader from "../../../../components/Shared/Loader";
 
 const ManageReviews = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,17 +15,17 @@ const ManageReviews = () => {
 
   //   delete
   const { mutateAsync } = useMutation({
-    mutationFn: async id => {
+    mutationFn: async (id) => {
       const { data } = await axiosSecure.delete(`/review/${id}`);
       return data;
     },
-    onSuccess: data => {
+    onSuccess: (data) => {
       // console.log(data);
       refetch();
       Swal.fire({
-        title: 'Deleted!',
-        text: 'Your review has been deleted.',
-        icon: 'success',
+        title: "Deleted!",
+        text: "Your review has been deleted.",
+        icon: "success",
         timer: 1500,
         showConfirmButton: false,
       });
@@ -33,17 +33,17 @@ const ManageReviews = () => {
   });
 
   //  Handle Delete
-  const handleDelete = async id => {
+  const handleDelete = async (id) => {
     console.log(id);
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You want to delete this review!',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "You want to delete this review!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, remove it!',
-    }).then(async result => {
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           await mutateAsync(id);
@@ -55,8 +55,8 @@ const ManageReviews = () => {
   };
 
   return isLoading ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className="px-10 pb-10">
@@ -65,12 +65,12 @@ const ManageReviews = () => {
       </Helmet>
       <div>
         <SectionTitle
-          heading={'Manage Reviews'}
-          subheading={'Home/Dashboard/ManageReviews'}
+          heading={"Manage Reviews"}
+          subheading={"Home/Dashboard/ManageReviews"}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {allReviews?.map(review => (
+        {allReviews?.map((review) => (
           <div
             key={review._id}
             className="mb-4 bg-gray-100 p-5 text-black rounded-sm hover:scale-105 duration-300"

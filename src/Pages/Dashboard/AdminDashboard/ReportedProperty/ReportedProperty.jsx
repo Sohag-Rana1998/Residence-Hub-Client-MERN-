@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import Swal from 'sweetalert2';
-import { useMutation } from '@tanstack/react-query';
-import { MdVerified } from 'react-icons/md';
-import useAllReports from '../../../../hooks/useAllReports';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import SectionTitle from '../../../../components/Shared/SectionTitle';
-import { Helmet } from 'react-helmet-async';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import Swal from "sweetalert2";
+import { useMutation } from "@tanstack/react-query";
+import { MdVerified } from "react-icons/md";
+import useAllReports from "../../../../hooks/useAllReports";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import SectionTitle from "../../../../components/Shared/SectionTitle";
+import { Helmet } from "react-helmet-async";
+import Loader from "../../../../components/Shared/Loader";
 const ReportedProperty = () => {
   const { allReports, refetch, isLoading } = useAllReports();
   const axiosSecure = useAxiosSecure();
@@ -14,19 +14,19 @@ const ReportedProperty = () => {
 
   //   delete
   const { mutateAsync } = useMutation({
-    mutationFn: async ids => {
+    mutationFn: async (ids) => {
       const { data } = await axiosSecure.patch(`/reported-property`, ids);
       // console.log(data);
       return data;
     },
 
-    onSuccess: data => {
+    onSuccess: (data) => {
       // console.log(data);
       refetch();
       Swal.fire({
-        title: 'Deleted!',
-        text: 'Property has been deleted.',
-        icon: 'success',
+        title: "Deleted!",
+        text: "Property has been deleted.",
+        icon: "success",
         timer: 1500,
         showConfirmButton: false,
       });
@@ -34,18 +34,18 @@ const ReportedProperty = () => {
   });
 
   //  Handle Delete
-  const handleRemoveProperty = async report => {
+  const handleRemoveProperty = async (report) => {
     const ids = { id: report._id, propertyId: report.propertyId };
     // console.log(report);
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You want to remove this property!',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "You want to remove this property!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, remove it!',
-    }).then(async result => {
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           await mutateAsync(ids);
@@ -56,8 +56,8 @@ const ReportedProperty = () => {
     });
   };
   return isLoading ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div className="px-10 pb-10">
@@ -66,8 +66,8 @@ const ReportedProperty = () => {
       </Helmet>
       <div>
         <SectionTitle
-          heading={'Reported Properties'}
-          subheading={'Home/dashboard/ReportedProperties'}
+          heading={"Reported Properties"}
+          subheading={"Home/dashboard/ReportedProperties"}
         />
       </div>
       <div className="w-full text-3xl mt-5 font-bold  ">
@@ -76,7 +76,7 @@ const ReportedProperty = () => {
       <div>
         <div className="mt-5">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {allReports?.map(report => (
+            {allReports?.map((report) => (
               <div
                 key={report._id}
                 className="mb-4 bg-gray-100 p-5 rounded-sm hover:scale-105 duration-500"
