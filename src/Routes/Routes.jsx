@@ -1,38 +1,39 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Main from '../Layout/Main';
-import ErrorPage from '../Pages/ErrorPage/ErrorPage';
-import Home from '../Pages/Home/Home';
-import SignUp from '../Pages/SignUp/SignUp';
-import AllProperties from '../Pages/All Properties/AllProperties';
-import Dashboard from '../Layout/Dashboard';
-import SignIn from '../Pages/SignIn/SignIn';
-import AdminProfile from '../Pages/Dashboard/AdminDashboard/AdminProfile/AdminProfile';
-import ManageProperties from '../Pages/Dashboard/AdminDashboard/ManageProperies/ManageProperties';
-import ManageUsers from '../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers';
-import ManageReviews from '../Pages/Dashboard/AdminDashboard/ManageReviews/ManageReviews';
-import AgentProfile from '../Pages/Dashboard/AgentsDashboard/AgentProfile/AgentProfile/AgentProfile';
-import AddProperty from '../Pages/Dashboard/AgentsDashboard/AddProperty/AddProperty';
-import MyAddedProperties from '../Pages/Dashboard/AgentsDashboard/MyAddedProperties/MyAddedProperties';
-import RequestedProperties from '../Pages/Dashboard/AgentsDashboard/RequestedProperties/RequestedProperties';
-import MySoldProperties from '../Pages/Dashboard/AgentsDashboard/MySoldProperties/MySoldProperties';
-import UserProfle from '../Pages/Dashboard/UserDashboard/UserProfle/UserProfle';
-import Wishlist from '../Pages/Dashboard/UserDashboard/WishList/Wishlist';
-import PropertyBought from '../Pages/Dashboard/UserDashboard/PropertyBought/PropertyBought';
-import MyReviews from '../Pages/Dashboard/UserDashboard/MyReviews/MyReviews';
-import UpdateProperty from '../Pages/Dashboard/AgentsDashboard/UpdateProperty/UpdateProperty';
-import AdvertiseProperty from '../Pages/Dashboard/AdminDashboard/AdvertiseProperty/AdvertiseProperty';
-import ViewDetails from '../Pages/ViewDetails/ViewDetails';
-import MakeOffer from '../Pages/Dashboard/UserDashboard/WishList/MakeOffer';
-import Payment from '../Pages/Dashboard/UserDashboard/PropertyBought/Payment';
-import ReportedProperty from '../Pages/Dashboard/AdminDashboard/ReportedProperty/ReportedProperty';
-import PrivateRoute from './PrivateRoute';
-import AgentRoute from './AgentRoute';
-import AdminRoute from './AdminRoute';
-import ContactUs from '../Pages/ContactUs/ContactUs';
+import { createBrowserRouter } from "react-router-dom";
+import Main from "../Layout/Main";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Home from "../Pages/Home/Home";
+import SignUp from "../Pages/SignUp/SignUp";
+import AllProperties from "../Pages/All Properties/AllProperties";
+import Dashboard from "../Layout/Dashboard";
+import SignIn from "../Pages/SignIn/SignIn";
+import AdminProfile from "../Pages/Dashboard/AdminDashboard/AdminProfile/AdminProfile";
+import ManageProperties from "../Pages/Dashboard/AdminDashboard/ManageProperies/ManageProperties";
+import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
+import ManageReviews from "../Pages/Dashboard/AdminDashboard/ManageReviews/ManageReviews";
+import AgentProfile from "../Pages/Dashboard/AgentsDashboard/AgentProfile/AgentProfile/AgentProfile";
+import AddProperty from "../Pages/Dashboard/AgentsDashboard/AddProperty/AddProperty";
+import MyAddedProperties from "../Pages/Dashboard/AgentsDashboard/MyAddedProperties/MyAddedProperties";
+import RequestedProperties from "../Pages/Dashboard/AgentsDashboard/RequestedProperties/RequestedProperties";
+import MySoldProperties from "../Pages/Dashboard/AgentsDashboard/MySoldProperties/MySoldProperties";
+import UserProfle from "../Pages/Dashboard/UserDashboard/UserProfle/UserProfle";
+import Wishlist from "../Pages/Dashboard/UserDashboard/WishList/Wishlist";
+import PropertyBought from "../Pages/Dashboard/UserDashboard/PropertyBought/PropertyBought";
+import MyReviews from "../Pages/Dashboard/UserDashboard/MyReviews/MyReviews";
+import UpdateProperty from "../Pages/Dashboard/AgentsDashboard/UpdateProperty/UpdateProperty";
+import AdvertiseProperty from "../Pages/Dashboard/AdminDashboard/AdvertiseProperty/AdvertiseProperty";
+import ViewDetails from "../Pages/ViewDetails/ViewDetails";
+import MakeOffer from "../Pages/Dashboard/UserDashboard/WishList/MakeOffer";
+import Payment from "../Pages/Dashboard/UserDashboard/PropertyBought/Payment";
+import ReportedProperty from "../Pages/Dashboard/AdminDashboard/ReportedProperty/ReportedProperty";
+import PrivateRoute from "./PrivateRoute";
+import AgentRoute from "./AgentRoute";
+import AdminRoute from "./AdminRoute";
+import ContactUs from "../Pages/ContactUs/ContactUs";
+import AgentDetails from "../Pages/AgentDetails/AgentDetails";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Main />,
     errorElement: <ErrorPage />,
     children: [
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/all-properties',
+        path: "/all-properties",
         element: (
           <PrivateRoute>
             <AllProperties />
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/search-properties/:searchText',
+        path: "/search-properties/:searchText",
         element: (
           <PrivateRoute>
             <AllProperties />
@@ -57,15 +58,19 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/register',
+        path: "/register",
         element: <SignUp />,
       },
       {
-        path: '/login',
+        path: "/login",
         element: <SignIn />,
       },
       {
-        path: '/view-details/:id',
+        path: "/agent-details/:id",
+        element: <AgentDetails />,
+      },
+      {
+        path: "/view-details/:id",
         element: (
           <PrivateRoute>
             <ViewDetails />
@@ -73,11 +78,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/contact-us',
+        path: "/contact-us",
         element: <ContactUs />,
       },
       {
-        path: '/dashboard',
+        path: "/dashboard",
         element: (
           <PrivateRoute>
             <Dashboard />
@@ -87,34 +92,34 @@ const router = createBrowserRouter([
           // User Routes
 
           {
-            path: 'user-profile',
+            path: "user-profile",
             element: <UserProfle />,
           },
           {
-            path: 'wishlist',
+            path: "wishlist",
             element: <Wishlist />,
           },
           {
-            path: 'bought-properties',
+            path: "bought-properties",
             element: <PropertyBought />,
           },
           {
-            path: 'my-reviews',
+            path: "my-reviews",
             element: <MyReviews />,
           },
           {
-            path: 'wishlist/:id',
+            path: "wishlist/:id",
             element: <MakeOffer />,
           },
           {
-            path: 'bought-properties/:id',
+            path: "bought-properties/:id",
             element: <Payment />,
           },
 
           // Agents routes
 
           {
-            path: 'agent-profile',
+            path: "agent-profile",
             element: (
               <AgentRoute>
                 <AgentProfile />
@@ -122,7 +127,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'add-property',
+            path: "add-property",
             element: (
               <AgentRoute>
                 <AddProperty />
@@ -130,7 +135,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'added-properties',
+            path: "added-properties",
             element: (
               <AgentRoute>
                 <MyAddedProperties />
@@ -138,7 +143,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'requested-properties',
+            path: "requested-properties",
             element: (
               <AgentRoute>
                 <RequestedProperties />
@@ -146,7 +151,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'sold-properties',
+            path: "sold-properties",
             element: (
               <AgentRoute>
                 <MySoldProperties />
@@ -154,7 +159,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'added-properties/:id',
+            path: "added-properties/:id",
             element: (
               <AgentRoute>
                 <UpdateProperty />
@@ -164,7 +169,7 @@ const router = createBrowserRouter([
 
           // Admin Routes
           {
-            path: 'admin-profile',
+            path: "admin-profile",
             element: (
               <AdminRoute>
                 <AdminProfile />
@@ -172,7 +177,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'manage-properties',
+            path: "manage-properties",
             element: (
               <AdminRoute>
                 <ManageProperties />
@@ -180,7 +185,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'manage-users',
+            path: "manage-users",
             element: (
               <AdminRoute>
                 <ManageUsers />
@@ -188,7 +193,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'manage-reviews',
+            path: "manage-reviews",
             element: (
               <AdminRoute>
                 <ManageReviews />
@@ -196,7 +201,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'advertise-property',
+            path: "advertise-property",
             element: (
               <AdminRoute>
                 <AdvertiseProperty />
@@ -204,7 +209,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: 'reported-properties',
+            path: "reported-properties",
             element: (
               <AdminRoute>
                 <ReportedProperty />

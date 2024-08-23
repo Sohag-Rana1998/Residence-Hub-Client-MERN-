@@ -21,6 +21,7 @@ import SectionHeading from "./SectionHeading";
 import useAgents from "../../hooks/useAgents";
 import { FaHeartCircleCheck } from "react-icons/fa6";
 import { Rating } from "@smastrom/react-rating";
+import { Link } from "react-router-dom";
 
 export default function BrowseOurAgent() {
   const { allAgents, refetch, isLoading } = useAgents();
@@ -28,10 +29,6 @@ export default function BrowseOurAgent() {
   const [toggle, setToggle] = useState(true);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty("--progress", 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-  };
 
   const [slidesPerView, setSlidesPerView] = useState(
     getSlidesPerView(window.innerWidth)
@@ -85,51 +82,56 @@ export default function BrowseOurAgent() {
               }}
               modules={[Autoplay]}
               className="mySwiper    h-[450px]] "
-              onAutoplayTimeLeft={onAutoplayTimeLeft}
             >
-              {allAgents?.map((agent) => (
-                <SwiperSlide key={agent._id}>
-                  <SwiperSlide className="bg-white w-full ">
-                    <div className="p-5">
-                      <div className="flex justify-between items-center">
-                        <FaHeartCircleCheck className="text-3xl text-orange-500" />
-                        <span className="text-blue-700 font-bold  bg-blue-100 px-3 py-2 text-sm rounded-2xl">
-                          Verified
-                        </span>
-                      </div>
-                      <div className=" mt-5">
-                        <div className="w-24 h-24 mx-auto rounded-full border-4 p-1 border-gray-400">
-                          <img
-                            className="w-full h-full rounded-full"
-                            src={agent.photo}
-                            alt=""
-                          />
+              {allAgents &&
+                allAgents?.map((agent) => (
+                  <SwiperSlide key={agent._id}>
+                    <SwiperSlide className="bg-white w-full ">
+                      <div className="p-5">
+                        <div className="flex justify-between items-center">
+                          <FaHeartCircleCheck className="text-3xl text-orange-500" />
+                          <span className="text-blue-700 font-bold  bg-blue-100 px-3 py-2 text-sm rounded-2xl">
+                            Verified
+                          </span>
                         </div>
-                        <div className="text-center flex justify-center flex-col items-center">
-                          <h4 className="text-xl font-bold my-2">
-                            {agent.name}
-                          </h4>
-                          <Rating style={{ maxWidth: 100 }} value={5} />
+                        <div className=" mt-5">
+                          <div className="w-24 h-24 mx-auto rounded-full border-4 p-1 border-gray-400">
+                            <img
+                              className="w-full h-full rounded-full"
+                              src={agent.photo}
+                              alt=""
+                            />
+                          </div>
+                          <div className="text-center flex justify-center flex-col items-center">
+                            <h4 className="text-xl font-bold my-2">
+                              {agent.name}
+                            </h4>
+                            <Rating style={{ maxWidth: 100 }} value={5} />
+                          </div>
+                        </div>
+                        <div>
+                          <Link
+                            to={`/agent-details/${agent._id}`}
+                            className="w-full"
+                          >
+                            <button className="bg-[#70DAB9] my-2 border-2 border-[#41B06E] w-full bg-opacity-30 hover:bg-[#41B06E] text-[#41B06E] btn btn-outline">
+                              Contact Agent
+                            </button>
+                          </Link>
+                        </div>
+                        <div className="divider my-2"></div>
+                        <div className="text-lg flex justify-center items-center gap-3 mb-2">
+                          <FaFacebook className="cursor-pointer hover:scale-[120%] duration-500"></FaFacebook>
+                          <FaInstagram className="cursor-pointer hover:scale-[120%] duration-500"></FaInstagram>
+                          <FaTwitter className="cursor-pointer hover:scale-[120%] duration-500"></FaTwitter>
+                          <FaLinkedin className="cursor-pointer hover:scale-[120%] duration-500"></FaLinkedin>
+                          <FaPinterest className="cursor-pointer hover:scale-[120%] duration-500"></FaPinterest>
+                          <FaVimeo className="cursor-pointer hover:scale-[120%] duration-500"></FaVimeo>
                         </div>
                       </div>
-                      <div>
-                        <button className="bg-[#70DAB9] my-2 border-2 border-[#41B06E] w-full bg-opacity-30 hover:bg-[#41B06E] text-[#41B06E] btn btn-outline">
-                          Contact Agent
-                        </button>
-                      </div>
-                      <div className="divider my-2"></div>
-                      <div className="text-lg flex justify-center items-center gap-3 mb-2">
-                        <FaFacebook className="cursor-pointer hover:scale-[120%] duration-500"></FaFacebook>
-                        <FaInstagram className="cursor-pointer hover:scale-[120%] duration-500"></FaInstagram>
-                        <FaTwitter className="cursor-pointer hover:scale-[120%] duration-500"></FaTwitter>
-                        <FaLinkedin className="cursor-pointer hover:scale-[120%] duration-500"></FaLinkedin>
-                        <FaPinterest className="cursor-pointer hover:scale-[120%] duration-500"></FaPinterest>
-                        <FaVimeo className="cursor-pointer hover:scale-[120%] duration-500"></FaVimeo>
-                      </div>
-                    </div>
+                    </SwiperSlide>
                   </SwiperSlide>
-                </SwiperSlide>
-              ))}
+                ))}
               {toggle ? (
                 <div className="autoplay-progress hidden" slot="container-end">
                   <svg viewBox="0 0 48 48" ref={progressCircle}>

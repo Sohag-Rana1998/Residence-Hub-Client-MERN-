@@ -1,670 +1,220 @@
-import {
-  Avatar,
-  Menu,
-  MenuHandler,
-  MenuItem,
-  MenuList,
-} from '@material-tailwind/react';
-import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { MdOutlineLogin } from 'react-icons/md';
-import { FaUserAlt } from 'react-icons/fa';
-import Swal from 'sweetalert2';
-import { MdLogout } from 'react-icons/md';
-import useAuth from '../../hooks/useAuth';
-import useRole from '../../hooks/userRole';
-import ScaleLoader from 'react-spinners/ScaleLoader';
-
+import { Avatar } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { MdOutlineLogin } from "react-icons/md";
+import { FaUserAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { MdLogout } from "react-icons/md";
+import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/userRole";
+import Loader from "./Loader";
+import { RxCross2 } from "react-icons/rx";
+import { GiHamburgerMenu } from "react-icons/gi";
 const NavBar = () => {
   const { loggedUser } = useRole();
   const { user, logOut } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const showDashboardLink = location.pathname.includes('/dashboard');
-  // console.log(showDashboardLink);
+  const showDashboardLink = location.pathname.includes("/dashboard");
+  const [loading, setLoading] = useState(true);
+  const [menuToggle, setMenuToggle] = useState(false);
+
+  useEffect(() => {
+    setTimeout(setLoading, 500, false);
+  }, []);
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.pageYOffset;
       setIsScrolled(scrollPosition > 50); // Adjust scroll threshold (default 50px)
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener('scroll', handleScroll); // Cleanup
+    return () => window.removeEventListener("scroll", handleScroll); // Cleanup
   }, []);
 
   const handleLogout = () => {
     logOut()
-      .then(result => {
+      .then((result) => {
         console.log(result);
         Swal.fire({
-          icon: 'success',
-          title: 'Log Out successful',
+          icon: "success",
+          title: "Log Out successful",
           showConfirmButton: false,
           timer: 1500,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error.message);
       });
     // console.log(user);
   };
 
-  const Links = (
-    <>
-      <li>
-        <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
-          <NavLink
-            to="/"
-            className={({ isActive, isPending }) =>
-              isActive
-                ? 'border-2  w-full font-bold  px-3 py-2 rounded-lg'
-                : isPending
-                ? '  '
-                : 'w-full px-10 lg:px-3'
-            }
-          >
-            HOME
-          </NavLink>
-        </MenuItem>
-      </li>
-      <li>
-        <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-          <NavLink
-            to="/all-properties"
-            className={({ isActive, isPending }) =>
-              isActive
-                ? 'border-2 font-bold px-3 py-2 rounded-lg'
-                : isPending
-                ? 'pending'
-                : ''
-            }
-          >
-            ALL PROPERTIES
-          </NavLink>
-        </MenuItem>
-      </li>
-      <li>
-        <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-          {' '}
-          <NavLink
-            to={
-              (loggedUser?.role === 'Admin' && '/dashboard/admin-profile') ||
-              (loggedUser?.role === 'Agent' && '/dashboard/agent-profile') ||
-              '/dashboard/user-profile'
-            }
-            className={({ isActive, isPending }) =>
-              isActive
-                ? 'border-2 font-bold  px-3 py-2 rounded-lg'
-                : isPending
-                ? 'pending'
-                : ''
-            }
-          >
-            DASHBOARD
-          </NavLink>{' '}
-        </MenuItem>
-      </li>
-      <li>
-        <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-          {' '}
-          <NavLink
-            to={'/contact-us'}
-            className={({ isActive, isPending }) =>
-              isActive
-                ? 'border-2 font-bold  px-3 py-2 rounded-lg'
-                : isPending
-                ? 'pending'
-                : ''
-            }
-          >
-            CONTACT US
-          </NavLink>{' '}
-        </MenuItem>
-      </li>
-    </>
-  );
-  const LinkForLargeDevice = (
-    <ul className="flex items-center justify-center">
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive, isPending }) =>
-            isActive
-              ? 'border-2  w-full font-bold  px-3 py-2 rounded-lg'
-              : isPending
-              ? '  '
-              : 'w-full px-10 lg:px-3'
-          }
-        >
-          HOME
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/all-properties"
-          className={({ isActive, isPending }) =>
-            isActive
-              ? 'border-2 font-bold px-3 py-2 rounded-lg'
-              : isPending
-              ? 'pending'
-              : ''
-          }
-        >
-          ALL PROPERTIES
-        </NavLink>
-      </li>
-      <li>
-        {' '}
-        <NavLink
-          to={
-            (loggedUser?.role === 'Admin' && '/dashboard/admin-profile') ||
-            (loggedUser?.role === 'Agent' && '/dashboard/agent-profile') ||
-            '/dashboard/user-profile'
-          }
-          className={({ isActive, isPending }) =>
-            isActive
-              ? 'border-2 font-bold  px-3 py-2 rounded-lg'
-              : isPending
-              ? 'pending'
-              : ''
-          }
-        >
-          DASHBOARD
-        </NavLink>{' '}
-      </li>
-      <li>
-        {' '}
-        <NavLink
-          to={'/contact-us'}
-          className={({ isActive, isPending }) =>
-            isActive
-              ? 'border-2 font-bold  px-3 py-2 rounded-lg'
-              : isPending
-              ? 'pending'
-              : ''
-          }
-        >
-          CONTACT US
-        </NavLink>{' '}
-      </li>
-    </ul>
-  );
+  // Common Links
+  const links = [
+    { path: "/", title: "Home" },
+    { path: "/all-properties", title: "All Properties" },
+    {
+      path: `${
+        (loggedUser?.role === "Admin" && "/dashboard/admin-profile") ||
+        (loggedUser?.role === "Agent" && "/dashboard/agent-profile") ||
+        "/dashboard/user-profile"
+      }`,
+      title: "Dashboard",
+    },
+    {
+      path: "/contact-us",
+      title: "Contact Us",
+    },
+  ];
 
-  const dashboardLink = (
-    <>
-      {loggedUser?.role === 'Admin' && (
-        <>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full  bg-black/30 px-3 py-2 rounded-lg font-bold text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                HOME
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/all-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                All Properties
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/admin-profile'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Admin Profile
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/manage-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Manage Properties
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/advertise-property'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Advertise Properties
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/manage-users'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Manage Users
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/manage-reviews'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Manage Reviews
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/reported-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Reported Property
-              </NavLink>
-            </MenuItem>
-          </li>
-        </>
-      )}
-      {loggedUser?.role === 'Agent' && (
-        <>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Home
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/all-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                All Properties
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/agent-profile'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Agent Profile
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/add-property'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Add Property
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/added-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                My Added Properties
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/requested-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Requested Properties
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1">
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/sold-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                My Sold Properties
-              </NavLink>
-            </MenuItem>
-          </li>
-        </>
-      )}
+  //  Links for specific role;
+  const adminLinks = [
+    {
+      path: "/dashboard/admin-profile",
+      title: "Admin Profile",
+    },
 
-      {loggedUser?.role || (
-        <>
-          <li className="mb-1  w-full">
-            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending  w-full'
-                    : ''
-                }
-              >
-                Home
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1 w-full">
-            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/all-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                All Properties
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li>
-            <MenuItem className="menu-item hover:bg-transparent hover:text-current">
-              {' '}
-              <NavLink
-                to={'/contact-us'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 font-bold  px-3 py-2 rounded-lg'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                CONTACT US
-              </NavLink>{' '}
-            </MenuItem>
-          </li>
-          <li className="mb-1 w-full">
-            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/user-profile'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                My Profile
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1 w-full">
-            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/wishlist'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Wishlist
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1 w-full">
-            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/bought-properties'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                Property Bought
-              </NavLink>
-            </MenuItem>
-          </li>
-          <li className="mb-1 w-full">
-            <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
-              <NavLink
-                to={'/dashboard/my-reviews'}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? 'border-2 w-full bg-black/30 font-bold px-3 py-2 rounded-lg text-white'
-                    : isPending
-                    ? 'pending'
-                    : ''
-                }
-              >
-                My-Reviews
-              </NavLink>
-            </MenuItem>
-          </li>
-        </>
-      )}
-    </>
-  );
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(setLoading, 500, false);
-  }, []);
+    {
+      path: "/dashboard/manage-properties",
+      title: "Manage Properties",
+    },
+    {
+      path: "/dashboard/advertise-property",
+      title: "Advertise Properties",
+    },
+    {
+      path: "/dashboard/manage-users",
+      title: "Manage Users",
+    },
+    {
+      path: "/dashboard/manage-reviews",
+      title: "Manage Reviews",
+    },
+    {
+      path: "/dashboard/reported-properties",
+      title: "Reported Property",
+    },
+  ];
+
+  const agentLinks = [
+    {
+      path: "/dashboard/agent-profile",
+      title: "Agent Profile",
+    },
+    {
+      path: "/dashboard/add-property",
+      title: "Add Property",
+    },
+    {
+      path: "/dashboard/added-properties",
+      title: "My Added Properties",
+    },
+    {
+      path: "/dashboard/requested-properties",
+      title: "Requested Properties",
+    },
+    {
+      path: "/dashboard/sold-properties",
+      title: "My Sold Properties",
+    },
+  ];
+
+  const userLinks = [
+    {
+      path: "/dashboard/user-profile",
+      title: "My Profile",
+    },
+    {
+      path: "/dashboard/wishlist",
+      title: "Wishlist",
+    },
+    {
+      path: "/dashboard/bought-properties",
+      title: "Property Bought",
+    },
+    {
+      path: "/dashboard/my-reviews",
+      title: "My-Reviews",
+    },
+  ];
+
+  //  links when enter into dashboard
+  const dashboardLinks = (loggedUser?.role === "Admin" && [
+    ...links,
+    ...adminLinks,
+  ]) ||
+    (loggedUser?.role === "Agent" && [...links, ...agentLinks]) ||
+    loggedUser?.role || [...links, ...userLinks];
+
+  // Toggle links when in dashboard or not in dashboard
+  const smallDeviceDashboardLinks = showDashboardLink ? dashboardLinks : links;
+
   return loading ? (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <ScaleLoader color="#36d7b7" height={80} width={5} />
+    <div>
+      <Loader />
     </div>
   ) : (
     <div
-      className={`flex mx-auto fixed top-0 border-b-2 w-full   py-2 transition duration-300 ease-in-out ${
-        isScrolled ? 'bg-white text-black' : 'bg-transparent text-blue-500'
-      } justify-between ease-in-out items-center    z-50 mx-auto `}
+      className={`flex mx-auto fixed top-0  w-full   py-2 transition duration-300 ease-in-out ${
+        isScrolled ? "bg-white text-black" : "bg-transparent text-blue-500"
+      } justify-between ease-in-out items-center z-50 mx-auto  ${
+        location.pathname === "/" ? "border-b-2" : ""
+      }`}
     >
       <div className="flex items-center justify-center pl-2">
         <div className="block lg:hidden">
-          <Menu placement="top-start">
-            <MenuHandler>
-              <img
-                className="w-10 h-10 mr-3 cursor-pointer"
-                src="https://i.postimg.cc/Cx5JTg8j/menu-removebg-preview.png"
-                alt=""
-              />
-            </MenuHandler>
-            <MenuList>
-              <ul className="menu px-2  w-full list-none space-y-2">
-                {' '}
-                {showDashboardLink ? dashboardLink : Links}
-                {user ? (
-                  <li className="mb-1 w-full list-none block md:hidden">
-                    <MenuItem className="menu-item w-full hover:bg-transparent hover:text-current">
-                      <span
-                        onClick={handleLogout}
-                        className="  text-white w-full  btn bg-blue-500 hover:bg-gray-900  rounded-lg "
-                      >
-                        Log Out
-                      </span>
-                    </MenuItem>
-                  </li>
-                ) : (
-                  <li className="mb-1 list-none  w-full block md:hidden">
-                    <MenuItem className="menu-item  w-full hover:bg-transparent hover:text-current">
-                      <Link to={'/login'}>
-                        <span className="btn  w-full border-none text-white bg-blue-500">
-                          Sign In
-                        </span>
-                      </Link>
-                    </MenuItem>
-                  </li>
-                )}
-              </ul>
-            </MenuList>
-          </Menu>
-        </div>
-        {/* <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div className="dropdown">
+            <div
+              onClick={() => setMenuToggle(!menuToggle)}
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-48"
-          >
-            {showDashboardLink ? dashboardLink : Links}
-            <div className="navbar-end mt-2 ">
-              <div className=" ">
-                {user ? (
-                  <div className="">
-                    <div>
-                      <button
-                        onClick={handleLogout}
-                        className=" w-32  text-white  btn bg-blue-500 hover:bg-gray-900  rounded-lg "
-                      >
-                        Log Out
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <Link to={'/login'}>
-                      <button className="btn w-32 border-none text-white bg-blue-500">
-                        Sign In
-                      </button>
-                    </Link>
-                  </div>
-                )}
-              </div>
+              {menuToggle ? (
+                <>
+                  <RxCross2 className="text-3xl" />
+                </>
+              ) : (
+                <>
+                  <GiHamburgerMenu className="text-3xl" />
+                </>
+              )}
             </div>
-          </ul>
-        </div> */}
+            <ul
+              tabIndex={0}
+              className={`menu menu-sm absolute mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-48 ${
+                menuToggle ? "block" : "hidden"
+              }`}
+            >
+              {smallDeviceDashboardLinks?.map((link) => (
+                <li onClick={() => setMenuToggle(!menuToggle)}>
+                  <Link to={link?.path}>{link?.title}</Link>
+                </li>
+              ))}
+              <div className="mt-2 block md:hidden">
+                <div className=" ">
+                  {user ? (
+                    <div className="">
+                      <div>
+                        <button
+                          onClick={handleLogout}
+                          className=" w-32  text-white  btn bg-blue-500 hover:bg-gray-900  rounded-lg "
+                        >
+                          Log Out
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
 
-        <Link to={'/'} className="h-full">
+        <Link to={"/"} className="h-full">
           <div className="flex justify-center h-full gap-2 items-center">
             <img
               className="h-10 w-10 rounded-full"
@@ -678,62 +228,74 @@ const NavBar = () => {
         </Link>
       </div>
       <div className=" hidden  lg:flex">
-        <ul className="menu menu-horizontal px-1"> {LinkForLargeDevice}</ul>
+        <ul className="menu menu-horizontal px-1 ">
+          {" "}
+          {links?.map((link) => (
+            <li className="mr-[3px]">
+              <Link
+                to={link?.path}
+                className={`${
+                  location.pathname === link.path
+                    ? "font-bold border border-blue-500"
+                    : ""
+                }`}
+              >
+                {link?.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <div className="pr-4 lg:pr-8">
-        <div className="flex ">
-          {user ? (
-            <div className="flex gap-3 justify-between items-center ">
-              <nav className="relative parent ">
-                <ul className="flex items-start gap-2">
-                  <li>
-                    <div className="flex  items-center gap-3">
-                      <h2 className="font-bold lg:block hidden">
-                        {user?.displayName || ''}
-                      </h2>
-                      <Avatar
-                        src={
-                          (user && user?.photoURL) ||
-                          'https://i.ibb.co/zmbRY07/images.png'
-                        }
-                        className="  bg-no-repeat bg-cover bg-[url(https://i.ibb.co/zmbRY07/images.png)]"
-                      />
-                    </div>
-                  </li>
-                </ul>
-              </nav>
-              <button
-                onClick={handleLogout}
-                className="w-28 hidden md:flex items-center gap-1 text-white font-bold border-none btn bg-blue-500 hover:bg-gray-900  rounded-lg "
-              >
-                Log Out
-                <MdLogout />
-              </button>
+      <div className=" pr-2 lg:pr-4 flex">
+        {user ? (
+          <div className="flex gap-2 justify-between items-center ">
+            <nav className="relative parent ">
+              <ul className="flex items-start gap-2">
+                <li>
+                  <div className="flex  items-center gap-2">
+                    <h2 className="font-bold ">{user?.displayName || ""}</h2>
+                    <Avatar
+                      src={
+                        (user && user?.photoURL) ||
+                        "https://i.ibb.co/zmbRY07/images.png"
+                      }
+                      className="  bg-no-repeat bg-cover bg-[url(https://i.ibb.co/zmbRY07/images.png)] "
+                    />
+                  </div>
+                </li>
+              </ul>
+            </nav>
+            <button
+              onClick={handleLogout}
+              className="w-28 md:flex hidden items-center gap-1 text-white font-bold border-none btn bg-blue-500 hover:bg-gray-900  rounded-lg "
+            >
+              Log Out
+              <MdLogout />
+            </button>
+          </div>
+        ) : (
+          <div>
+            <div className="flex items-center gap-0 md:gap-3 ">
+              <Link to={"/login"}>
+                <button
+                  className={`w-28 font-bold border-none focus:outline-none btn  ${
+                    isScrolled
+                      ? "bg-[#01204E] text-white"
+                      : "bg-white text-black"
+                  }  py-1 px-1 rounded-lg `}
+                >
+                  <MdOutlineLogin /> Sign In
+                </button>
+              </Link>
+              <Link to={"/register"}>
+                <button className="w-28 md:flex items-center gap-1 hidden  bg-blue-500 text-white font-bold focus:outline-none border-none btn  hover:bg-[#01204E]  py-1 px-1 rounded-lg">
+                  <FaUserAlt /> Sign Up
+                </button>
+              </Link>
             </div>
-          ) : (
-            <div>
-              <div className="flex items-center gap-3 ">
-                <Link to={'/login'}>
-                  <button
-                    className={`w-28 font-bold border-none focus:outline-none btn  ${
-                      isScrolled
-                        ? 'bg-[#01204E] text-white'
-                        : 'bg-white text-black'
-                    }  py-1 px-1 rounded-lg `}
-                  >
-                    <MdOutlineLogin /> Sign In
-                  </button>
-                </Link>
-                <Link to={'/register'}>
-                  <button className="w-28 md:flex items-center gap-1 hidden  bg-blue-500 text-white font-bold focus:outline-none border-none btn  hover:bg-[#01204E]  py-1 px-1 rounded-lg">
-                    <FaUserAlt /> Sign Up
-                  </button>
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

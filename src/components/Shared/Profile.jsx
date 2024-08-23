@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {
   FaFacebook,
   FaInstagram,
@@ -9,25 +9,26 @@ import {
   FaUserGraduate,
   FaUserTie,
   FaVimeo,
-} from 'react-icons/fa6';
-import { IoLocationSharp } from 'react-icons/io5';
-import { TbEdit } from 'react-icons/tb';
-import { Helmet } from 'react-helmet-async';
-import { FaEnvelope } from 'react-icons/fa';
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import Swal from 'sweetalert2';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
-import { useMutation } from '@tanstack/react-query';
-import useAuth from '../../hooks/useAuth';
+} from "react-icons/fa6";
+import { IoLocationSharp } from "react-icons/io5";
+import { TbEdit } from "react-icons/tb";
+import { Helmet } from "react-helmet-async";
+import { FaEnvelope } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useMutation } from "@tanstack/react-query";
+import useAuth from "../../hooks/useAuth";
 
 const Profile = ({ user, refetch }) => {
   const { updateUserProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const [modalLoading, setModalLoading] = useState(true);
+  const [modalData, setModalData] = useState({});
   const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
@@ -47,7 +48,7 @@ const Profile = ({ user, refetch }) => {
   } = useForm();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async userInfo => {
+    mutationFn: async (userInfo) => {
       const { data } = await axiosSecure.put(
         `/update-user/${user?._id}`,
         userInfo
@@ -57,8 +58,8 @@ const Profile = ({ user, refetch }) => {
     onSuccess: () => {
       setTimeout(refetch, 1000);
       Swal.fire({
-        icon: 'success',
-        title: 'Profile updated Successfully!',
+        icon: "success",
+        title: "Profile updated Successfully!",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -68,12 +69,12 @@ const Profile = ({ user, refetch }) => {
   });
 
   // handle Update profile picture
-  const onSubmit1 = async data => {
+  const onSubmit1 = async (data) => {
     const imageFile = { image: data?.image[0] };
     // console.log(imageFile);
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data",
       },
     });
     // console.log(res.data.data);
@@ -105,7 +106,7 @@ const Profile = ({ user, refetch }) => {
   };
 
   // handle Update profile
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     const userInfo = {
       email: user?.email,
       name: data?.name || user?.name,
@@ -129,7 +130,7 @@ const Profile = ({ user, refetch }) => {
   };
 
   return (
-    <div className="container  mx-auto    rounded-lg ">
+    <div className="w-full mx-auto rounded-lg ">
       <Helmet>
         <title>RESIDENCE HUB | Profile</title>
       </Helmet>
@@ -154,7 +155,7 @@ const Profile = ({ user, refetch }) => {
           </label>
           <div className="divider"></div>
           <div className="md:hidden block text-center">
-            <h2 className="font-bold text-2xl">{user?.name || 'Unknown'}</h2>
+            <h2 className="font-bold text-2xl">{user?.name || "Unknown"}</h2>
             <h4 className="text-xl font-bold">{user?.role}</h4>
           </div>
           <div className="text-lg flex justify-center items-center gap-3 mt-5">
@@ -181,27 +182,27 @@ const Profile = ({ user, refetch }) => {
         <div className=" flex-1">
           <div className="px-5 mt-5">
             <div className="hidden md:block">
-              <h2 className="font-bold text-4xl">{user?.name || 'Unknown'}</h2>
+              <h2 className="font-bold text-4xl">{user?.name || "Unknown"}</h2>
               <h4 className="text-xl font-bold">{user?.role}</h4>
             </div>
             <div className="mt-5 space-y-2">
               <p className=" font-semibold flex items-center gap-2">
-                <FaEnvelope /> {user?.email || 'Not Found'}
+                <FaEnvelope /> {user?.email || "Not Found"}
               </p>
               <p className=" font-semibold flex items-center gap-2">
-                <FaPhone /> +{user?.phone || 'Not Found'}
+                <FaPhone /> +{user?.phone || "Not Found"}
               </p>
               <p className=" font-semibold flex items-center gap-2">
-                <IoLocationSharp /> {user?.address || 'Not Found'}
+                <IoLocationSharp /> {user?.address || "Not Found"}
               </p>
               <p className=" font-semibold flex items-center gap-2">
-                <FaUserTie /> {user?.profession || 'Not Found'}
+                <FaUserTie /> {user?.profession || "Not Found"}
               </p>
               <p className=" font-semibold flex items-center gap-2">
-                <FaUserGraduate /> {user?.education || 'Not Found'}
+                <FaUserGraduate /> {user?.education || "Not Found"}
               </p>
               <p className=" font-semibold flex items-center gap-2">
-                Gender: {user?.gender || 'Not Found'}
+                Gender: {user?.gender || "Not Found"}
               </p>
             </div>
             <div>
@@ -213,13 +214,13 @@ const Profile = ({ user, refetch }) => {
           </div>
         </div>
       </div>
-      {/* Modal for Filter by Price */}
+      {/* Modal  */}
       <div className=" ">
         <input type="checkbox" id="my_modal_8" className="modal-toggle" />
         <div className="modal  mx-auto h-full w-full" role="dialog">
           <div
             style={{
-              scrollbarWidth: 'none',
+              scrollbarWidth: "none",
             }}
             className="modal-box h-full  !max-w-3xl w-full right-0 !p-5 absolute!"
           >
@@ -242,8 +243,9 @@ const Profile = ({ user, refetch }) => {
                               <input
                                 id="name"
                                 name="name"
+                                defaultValue={user?.name}
                                 type="text"
-                                {...register('name')}
+                                {...register("name")}
                                 placeholder="Your Name"
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                               />
@@ -261,8 +263,9 @@ const Profile = ({ user, refetch }) => {
                                 id="address"
                                 name="address"
                                 type="text"
+                                defaultValue={user?.address}
                                 placeholder="Your Address"
-                                {...register('address')}
+                                {...register("address")}
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                               />
                             </div>
@@ -274,8 +277,9 @@ const Profile = ({ user, refetch }) => {
                                 id="phone"
                                 name="phone"
                                 type="number"
+                                defaultValue={user?.phone}
                                 placeholder="Phone number"
-                                {...register('phone')}
+                                {...register("phone")}
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                               />
                             </div>
@@ -287,8 +291,9 @@ const Profile = ({ user, refetch }) => {
                                 id="education"
                                 name="education"
                                 type="text"
+                                defaultValue={user?.education}
                                 placeholder="Education"
-                                {...register('education')}
+                                {...register("education")}
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                               />
                             </div>
@@ -300,8 +305,9 @@ const Profile = ({ user, refetch }) => {
                                 id="profession"
                                 name="profession"
                                 type="text"
+                                defaultValue={user?.profession}
                                 placeholder="Your Profession"
-                                {...register('profession')}
+                                {...register("profession")}
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                               />
                             </div>
@@ -310,15 +316,15 @@ const Profile = ({ user, refetch }) => {
                               <h4 className="font-bold mb-2">Gender</h4>
                               <select
                                 id="gender"
-                                {...register('gender', { required: true })}
+                                {...register("gender", { required: true })}
                                 className="border rounded-lg py-2 px-5  w-full  "
                               >
-                                <option value={''} disabled selected>
+                                <option defaultValue={""} disabled>
                                   Select one
                                 </option>
-                                <option value={'Male'}>Male</option>
-                                <option value={'Female'}>Female</option>
-                                <option value={'Custom'}>Custom</option>
+                                <option defaultValue={"Male"}>Male</option>
+                                <option defaultValue={"Female"}>Female</option>
+                                <option defaultValue={"Custom"}>Custom</option>
                               </select>
                             </div>
                           </div>
@@ -329,10 +335,11 @@ const Profile = ({ user, refetch }) => {
                             <textarea
                               id="about"
                               name="about"
+                              defaultValue={user?.about}
                               rows={5}
                               type="text"
                               placeholder="Write about yourself"
-                              {...register('about')}
+                              {...register("about")}
                               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                             />
                           </div>
@@ -369,7 +376,7 @@ const Profile = ({ user, refetch }) => {
           <div className="modal  mx-auto" role="dialog">
             <div
               style={{
-                scrollbarWidth: 'none',
+                scrollbarWidth: "none",
               }}
               className="modal-box !p-2 !h-[450px] !w-80 right-0 absolute!"
             >
@@ -405,7 +412,7 @@ const Profile = ({ user, refetch }) => {
                                   id="image"
                                   name="image"
                                   type="file"
-                                  {...register1('image')}
+                                  {...register1("image")}
                                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 />
                               </div>

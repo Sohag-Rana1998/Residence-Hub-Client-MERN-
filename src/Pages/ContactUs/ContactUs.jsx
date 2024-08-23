@@ -4,11 +4,12 @@ import { Button } from "@material-tailwind/react";
 import { MapContainer, Marker, Popup, TileLayer, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import ScaleLoader from "react-spinners/ScaleLoader";
+import emailjs from "@emailjs/browser";
 import Loader from "../../components/Shared/Loader";
+import toast from "react-hot-toast";
 const ContactUs = () => {
   const markerIcon = new Icon({
     iconUrl: "/location-2955 (1).png",
@@ -20,17 +21,28 @@ const ContactUs = () => {
     setTimeout(setLoading, 500, false);
   }, []);
 
-  const handleSent = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setTimeout(setLoading, 500, false);
-      Swal.fire({
-        icon: "success",
-        title: "Message Sent Successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }, 500);
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm("service_2mpe8uk", "template_sd4va7c", form.current, {
+        publicKey: "-YELe9jYCFqrAV82n",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+          toast.success("Your Email Sent Successfully");
+          form.current.user_name.value = "";
+          form.current.user_email.value = "";
+          form.current.user_phone.value = "";
+          form.current.message.value = "";
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
   };
 
   return loading ? (
@@ -38,7 +50,7 @@ const ContactUs = () => {
       <Loader />
     </div>
   ) : (
-    <div className="pt-[68px] ">
+    <div className="pt-[70px] ">
       <Helmet>
         <title>RESIDENCE HUB | Contact Us</title>
       </Helmet>
@@ -93,47 +105,52 @@ const ContactUs = () => {
       </div>
 
       <div className=" bg-slate-100   p-5 ">
-        <div className=" max-w-7xl container   mx-auto rounded-xl mt-5">
-          <h2 className="text-xl text-black md:text-3xl font-bold mb-3">
-            Give Us Your Message:
-          </h2>
-          <div>
-            <div className=" flex flex-col lg:flex-row gap-5 my-5">
-              <input
-                type="text"
-                className="input w-full   border-2 border-gray-500"
-                placeholder="Your Name"
-              />
-              <input
-                type="email"
-                className="input  w-full   border-2 border-gray-500"
-                placeholder="Your Email"
-              />
-              <input
-                type="text"
-                className="input  w-full   border-2 border-gray-500"
-                placeholder="Your Phone"
-              />
-            </div>
-            <div className="">
-              <textarea
-                cols="30"
-                rows="10"
-                className="w-full  border-2 border-gray-500 p-5 rounded-2xl mb-4"
-                placeholder="Message"
-              ></textarea>
-              <div className="w-full flex justify-end">
-                <Button
-                  onClick={handleSent}
-                  size="lg"
-                  className="text-white font-bold w-full hover:scale-[110%] hover:bg-gray-900 md:w-60 bg-blue-500"
-                >
-                  Send Email
-                </Button>
+        <form ref={form} onSubmit={sendEmail}>
+          <div className=" max-w-7xl container   mx-auto rounded-xl mt-5">
+            <h2 className="text-xl text-black md:text-3xl font-bold mb-3">
+              Give Us Your Message:
+            </h2>
+            <div>
+              <div className=" flex flex-col lg:flex-row gap-5 my-5">
+                <input
+                  type="text"
+                  className="input w-full   border-2 border-gray-500"
+                  placeholder="Your Name"
+                  name="user_name"
+                  required
+                />
+                <input
+                  type="email"
+                  className="input  w-full   border-2 border-gray-500"
+                  placeholder="Your Email"
+                  name="user_email"
+                  required
+                />
+                <input
+                  type="text"
+                  className="input  w-full   border-2 border-gray-500"
+                  placeholder="Your Phone"
+                  name="user_phone"
+                />
+              </div>
+              <div className="">
+                <textarea
+                  cols="30"
+                  rows="10"
+                  name="message"
+                  required
+                  className="w-full  border-2 border-gray-500 p-5 rounded-2xl mb-4"
+                  placeholder="Message"
+                ></textarea>
+                <div className="w-full flex justify-end">
+                  <button className="btn text-white font-bold w-full hover:scale-[110%] hover:bg-gray-900 md:w-60 bg-blue-500 border-none focus:outline-none">
+                    Send Email
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div className="my-20">
         <div>

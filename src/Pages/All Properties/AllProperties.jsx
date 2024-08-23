@@ -81,7 +81,7 @@ const AllProperties = () => {
       </Helmet>
       <div>
         <div>
-          <div className=" mb-5  h-60 bg-no-repeat bg-center bg-cover w-full  flex flex-col items-center justify-center bg-[url(https://i.postimg.cc/rmgxjThm/2.jpg)] bg-opacity-50 relative">
+          <div className=" mb-5 h-48 bg-no-repeat bg-center bg-cover w-full  flex flex-col items-center justify-center bg-[url(https://i.postimg.cc/rmgxjThm/2.jpg)] bg-opacity-50 relative">
             <div className=" inset-0 absolute  bg-gradient-to-r from-gray-900 ">
               <div className="pl-4 p-5 max-w-7xl container mx-auto  mt-1 md:mt-10 text-center md:text-left">
                 <h2 className=" text-2xl md:text-4xl font-bold text-white mb-2 md:mb-5">

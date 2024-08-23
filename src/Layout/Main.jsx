@@ -15,7 +15,7 @@ const Main = () => {
       <Loader />
     </div>
   ) : (
-    <div className="w-screen  mx-auto font-jost">
+    <div className="w-full mx-auto font-jost">
       <div className="w-full mx-auto ">
         <NavBar />
       </div>

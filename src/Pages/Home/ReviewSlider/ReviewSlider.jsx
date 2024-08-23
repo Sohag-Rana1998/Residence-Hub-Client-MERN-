@@ -72,8 +72,8 @@ export default function ReviewSlider() {
           className="mySwiper  max-w-7xl container mx-auto "
           onAutoplayTimeLeft={onAutoplayTimeLeft}
         >
-          {allReviews?.map((review) => (
-            <SwiperSlide className="h-full " key={review.id}>
+           {allReviews && allReviews?.map((review) => (
+            <SwiperSlide className="h-full " key={review._id}>
               <div className="h-[280px] w-full mx-auto border p-4 flex flex-col justify-center items-center bg-white relative">
                 <img
                   className="w-10 h-8 my-2"
