@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from './useAxiosSecure';
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useVerifiedProperty = (
   currentPage,
@@ -10,11 +10,11 @@ const useVerifiedProperty = (
 ) => {
   const axiosSecure = useAxiosSecure();
   const {
-    data: verifiedProperties = [],
+    data = {},
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['verified-properties'],
+    queryKey: ["verified-properties"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
         `/verified-properties?status=Verified&page=${currentPage}&size=${itemsPerPage}&search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`
@@ -23,7 +23,7 @@ const useVerifiedProperty = (
       return data;
     },
   });
-  return { verifiedProperties, isLoading, refetch };
+  return { data, isLoading, refetch };
 };
 
 export default useVerifiedProperty;

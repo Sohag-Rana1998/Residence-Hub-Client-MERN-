@@ -1,13 +1,10 @@
 import { FaHome, FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { Button } from "@material-tailwind/react";
 import { MapContainer, Marker, Popup, TileLayer, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import Swal from "sweetalert2";
-import emailjs from "@emailjs/browser";
 import Loader from "../../components/Shared/Loader";
 import toast from "react-hot-toast";
 const ContactUs = () => {

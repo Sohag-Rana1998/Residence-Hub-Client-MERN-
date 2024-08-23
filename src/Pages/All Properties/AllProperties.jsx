@@ -18,9 +18,9 @@ const AllProperties = () => {
   const [modalLoading, setModalLoading] = useState(true);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
-  const { count, reload, isPending } = useCount(search, minPrice, maxPrice);
+  // const { count, reload, isPending } = useCount(search, minPrice, maxPrice);
   // console.log(loader);
-  const { verifiedProperties, refetch, isLoading } = useVerifiedProperty(
+  const { data, refetch, isLoading } = useVerifiedProperty(
     currentPage,
     itemsPerPage,
     search,
@@ -28,9 +28,14 @@ const AllProperties = () => {
     maxPrice
   );
 
+  const verifiedProperties = data?.result || [];
+  const count = data.count || 0;
+
   useEffect(() => {
-    setTimeout(setLoader, 1300, false);
-  }, []);
+    setLoader(true);
+    setTimeout(refetch, 500);
+    setTimeout(setLoader, 1000, false);
+  }, [search, currentPage, minPrice, maxPrice]);
 
   // console.log(count);
 
@@ -40,14 +45,10 @@ const AllProperties = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    setLoader(true);
-    setMinPrice(0);
-    setMaxPrice(0);
     const searchText = e.target.search.value;
     setSearch(searchText);
-    setTimeout(refetch, 500);
-    setTimeout(reload, 500);
-    setTimeout(setLoader, 1000, false);
+    setMinPrice(0);
+    setMaxPrice(0);
     e.target.reset();
   };
 
@@ -61,16 +62,26 @@ const AllProperties = () => {
 
   // handle Review
   const onSubmit = async (data) => {
-    setLoader(true);
     setSearch("");
     setMinPrice(data.min_price);
     setMaxPrice(data.max_price);
-    setTimeout(reload, 500);
     reset();
-    setTimeout(setLoader, 1000, false);
   };
 
-  return loader || isLoading || isPending ? (
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleSeeAll = () => {
+    setSearch("");
+    setMinPrice(0);
+    setMaxPrice(0);
+    setCurrentPage(1);
+  };
+  return loader || isLoading ? (
     <div>
       <Loader />
     </div>
@@ -146,12 +157,7 @@ const AllProperties = () => {
                 <div className="flex justify-center items-center text-white my-5 bg-blue-500 rounded-xl p-3">
                   <div className="flex">
                     <a
-                      onClick={() => {
-                        setCurrentPage(currentPage - 1);
-                        setTimeout(refetch, 500);
-                        setLoader(true);
-                        setTimeout(setLoader, 1000, false);
-                      }}
+                      onClick={handlePrevPage}
                       className={
                         currentPage == 1
                           ? " hidden"
@@ -180,12 +186,7 @@ const AllProperties = () => {
 
                     {pageArray?.map((page) => (
                       <button
-                        onClick={() => {
-                          setCurrentPage(page);
-                          setTimeout(refetch, 500);
-                          setLoader(true);
-                          setTimeout(setLoader, 1000, false);
-                        }}
+                        onClick={() => setCurrentPage(page)}
                         key={page}
                         className={
                           currentPage == page
@@ -203,12 +204,7 @@ const AllProperties = () => {
                           ? "hidden"
                           : "px-4 py-2 mx-1  text-gray-700 transition-colors duration-300 transform bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
                       }
-                      onClick={() => {
-                        setCurrentPage(currentPage + 1);
-                        setTimeout(refetch, 500);
-                        setLoader(true);
-                        setTimeout(setLoader, 1000, false);
-                      }}
+                      onClick={handleNextPage}
                     >
                       <div className="flex items-center cursor-pointer -mx-1">
                         <span className="mx-1">Next Page</span>
@@ -237,22 +233,14 @@ const AllProperties = () => {
                     {verifiedProperties && verifiedProperties.length === 0 ? (
                       <h3 className="text-center text-3xl font-bold my-10">
                         {" "}
-                        No Job Found
+                        No Property Found
                       </h3>
                     ) : (
                       <></>
                     )}
                     <div className="w-full flex  justify-center">
                       <button
-                        onClick={() => {
-                          setSearch("");
-                          setMinPrice(0);
-                          setMaxPrice(0);
-                          setTimeout(refetch, 500);
-                          setTimeout(reload, 500);
-                          setLoader(true);
-                          setTimeout(setLoader, 1000, false);
-                        }}
+                        onClick={handleSeeAll}
                         className="btn w-[40] bg-blue-500 text-white text-right mb-5"
                       >
                         See All Property

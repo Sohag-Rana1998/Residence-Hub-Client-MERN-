@@ -1,28 +1,29 @@
-import { ScrollRestoration, useParams } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
-import { FaRegHeart, FaStar } from 'react-icons/fa';
-import { FaLocationDot } from 'react-icons/fa6';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import ScaleLoader from 'react-spinners/ScaleLoader';
-import { useEffect, useState } from 'react';
-import usePropertyById from '../../hooks/usePropertyById';
+import { ScrollRestoration, useParams } from "react-router-dom";
+import emailjs from "@emailjs/browser";
+import useAuth from "../../hooks/useAuth";
+import { FaRegHeart, FaStar } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import { useEffect, useRef, useState } from "react";
+import usePropertyById from "../../hooks/usePropertyById";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 // import required modules
-import { Pagination, Navigation } from 'swiper/modules';
-import toast from 'react-hot-toast';
-import { Helmet } from 'react-helmet-async';
-import Swal from 'sweetalert2';
-import { Rating } from '@smastrom/react-rating';
-import '@smastrom/react-rating/style.css';
-import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
-import useReviewsById from '../../hooks/useReviewsById';
-import useRole from '../../hooks/userRole';
+import { Pagination, Navigation } from "swiper/modules";
+import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import useReviewsById from "../../hooks/useReviewsById";
+import useRole from "../../hooks/userRole";
 
 const ViewDetails = () => {
   const { user } = useAuth();
@@ -58,7 +59,7 @@ const ViewDetails = () => {
   const present = new Date();
 
   const { mutateAsync: mutateAsync1 } = useMutation({
-    mutationFn: async propertyData => {
+    mutationFn: async (propertyData) => {
       const { data } = await axiosSecure.post(
         `/wishlist-property`,
         propertyData
@@ -71,8 +72,8 @@ const ViewDetails = () => {
         reload();
         refetch();
         Swal.fire({
-          icon: 'success',
-          title: 'Your Property Added Successfully',
+          icon: "success",
+          title: "Your Property Added Successfully",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -81,8 +82,8 @@ const ViewDetails = () => {
   });
 
   const handleAddToWishList = async () => {
-    if (agentEmail == user?.email || loggedUser?.role === 'Admin') {
-      return toast.error('You are not eligible buy this property.');
+    if (agentEmail == user?.email || loggedUser?.role === "Admin") {
+      return toast.error("You are not eligible buy this property.");
     }
 
     const email = user?.email;
@@ -115,14 +116,9 @@ const ViewDetails = () => {
     }
   };
 
-  const handleMessageSent = e => {
-    e.preventDefault();
-    toast.success('Message sent successfully!');
-  };
-
   // For save review data on mongodb
   const { mutateAsync } = useMutation({
-    mutationFn: async reviewData => {
+    mutationFn: async (reviewData) => {
       const { data } = await axiosSecure.post(`/add-review`, reviewData);
       // console.log(data);
       return data;
@@ -130,8 +126,8 @@ const ViewDetails = () => {
     onSuccess: () => {
       // console.log('Your Review Added Successfully');
       Swal.fire({
-        icon: 'success',
-        title: 'Your Review Added Successfully',
+        icon: "success",
+        title: "Your Review Added Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -143,7 +139,7 @@ const ViewDetails = () => {
 
   // For save report data on mongodb
   const { mutateAsync: mutateAsync2 } = useMutation({
-    mutationFn: async reportData => {
+    mutationFn: async (reportData) => {
       const { data } = await axiosSecure.post(`/add-report`, reportData);
       // console.log(data);
       return data;
@@ -151,8 +147,8 @@ const ViewDetails = () => {
     onSuccess: () => {
       // console.log('Your Report Submitted Successfully');
       Swal.fire({
-        icon: 'success',
-        title: 'Your Report Submitted  Successfully',
+        icon: "success",
+        title: "Your Report Submitted  Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -179,7 +175,7 @@ const ViewDetails = () => {
   } = useForm();
 
   // handle Review
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     // console.log(data);
 
     const reviewData = {
@@ -204,7 +200,7 @@ const ViewDetails = () => {
   };
 
   // handleReport
-  const onSubmit1 = async data => {
+  const onSubmit1 = async (data) => {
     // console.log('kaj hochse');
 
     const reportData = {
@@ -226,6 +222,32 @@ const ViewDetails = () => {
     } catch (err) {
       // console.log(err.message);
     }
+  };
+
+  // send email
+
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm("service_2mpe8uk", "template_sd4va7c", form.current, {
+        publicKey: "-YELe9jYCFqrAV82n",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+          toast.success("Your Email Sent Successfully");
+          form.current.user_name.value = "";
+          form.current.user_email.value = "";
+          form.current.user_phone.value = "";
+          form.current.message.value = "";
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
   };
 
   return isLoading || loading ? (
@@ -289,7 +311,7 @@ const ViewDetails = () => {
                 </Swiper>
                 <button
                   className={`px-3 py-2  ${
-                    status === 'Verified' ? 'bg-blue-500' : 'bg-red-400 '
+                    status === "Verified" ? "bg-blue-500" : "bg-red-400 "
                   }  absolute z-10 right-0 bottom-0 text-white rounded-tl-xl font-bold bg-opacity-80`}
                 >
                   {status}
@@ -360,17 +382,17 @@ const ViewDetails = () => {
             <h3 className="text-2xl font-bold mb-4 text-center">
               Contact With Agent:
             </h3>
-            <form onSubmit={handleMessageSent} className="">
+            <form ref={form} onSubmit={sendEmail} className="">
               <div className="mb-5">
                 <label className=" " htmlFor="name">
                   Your Name
                 </label>
                 <input
                   id="name"
-                  name="name"
+                  name="user_name"
                   defaultValue={user?.displayName}
                   type="text"
-                  disabled
+                  readOnly
                   className="block w-full px-4 py-2 mt-2  bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                 />
               </div>
@@ -380,8 +402,8 @@ const ViewDetails = () => {
                 </label>
                 <input
                   id="name"
-                  name="name"
-                  disabled
+                  name="user_email"
+                  readOnly
                   defaultValue={user?.email}
                   type="email"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
@@ -393,19 +415,19 @@ const ViewDetails = () => {
                 </label>
                 <input
                   id="name"
-                  name="phone"
+                  name="user_phone"
                   type="number"
                   placeholder="Phone Number"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                 />
               </div>
               <div className="mb-5">
-                <label className=" " htmlFor="name">
+                <label className=" " htmlFor="subject">
                   Subject
                 </label>
                 <input
-                  id="name"
-                  name="subject"
+                  id="subject"
+                  name="message"
                   type="text"
                   placeholder="Subject"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
@@ -467,7 +489,7 @@ const ViewDetails = () => {
           <div className="w-full lg:w-[70%]">
             {reviews && reviews?.length > 0 ? (
               <div className="border shadow-md p-5">
-                {reviews.map(review => (
+                {reviews.map((review) => (
                   <div key={review._id} className="mb-4 bg-gray-100 p-5">
                     <div>
                       <div className="flex items-center gap-2">
@@ -491,7 +513,7 @@ const ViewDetails = () => {
                       <div>
                         <div className="flex gap-3 items-center mt-4">
                           <div>
-                            Posted on:{' '}
+                            Posted on:{" "}
                             {new Date(review.date).toLocaleDateString()}
                           </div>
                           <div>
@@ -533,7 +555,7 @@ const ViewDetails = () => {
                                 id="name"
                                 name="name"
                                 type="text"
-                                {...register('name')}
+                                {...register("name")}
                                 defaultValue={user?.displayName}
                                 readOnly
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
@@ -550,7 +572,7 @@ const ViewDetails = () => {
                                 type="text"
                                 rows="5"
                                 placeholder="Write something here"
-                                {...register('review', { required: true })}
+                                {...register("review", { required: true })}
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                               ></textarea>
                               {errors.email && (
@@ -624,7 +646,7 @@ const ViewDetails = () => {
                                 id="name"
                                 name="name"
                                 type="text"
-                                {...register1('name')}
+                                {...register1("name")}
                                 defaultValue={user?.displayName}
                                 readOnly
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
@@ -641,7 +663,7 @@ const ViewDetails = () => {
                                 type="text"
                                 rows="5"
                                 placeholder="Write your issue here"
-                                {...register1('report', { required: true })}
+                                {...register1("report", { required: true })}
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                               ></textarea>
                               {error1.report && (

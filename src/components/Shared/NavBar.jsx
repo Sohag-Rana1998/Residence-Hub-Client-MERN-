@@ -187,8 +187,8 @@ const NavBar = () => {
                 menuToggle ? "block" : "hidden"
               }`}
             >
-              {smallDeviceDashboardLinks?.map((link) => (
-                <li onClick={() => setMenuToggle(!menuToggle)}>
+              {smallDeviceDashboardLinks?.map((link, index) => (
+                <li key={index} onClick={() => setMenuToggle(!menuToggle)}>
                   <Link to={link?.path}>{link?.title}</Link>
                 </li>
               ))}
@@ -230,13 +230,13 @@ const NavBar = () => {
       <div className=" hidden  lg:flex">
         <ul className="menu menu-horizontal px-1 ">
           {" "}
-          {links?.map((link) => (
-            <li className="mr-[3px]">
+          {links?.map((link, index) => (
+            <li key={index} className="mr-[3px]">
               <Link
                 to={link?.path}
                 className={`${
                   location.pathname === link.path
-                    ? "font-bold border border-blue-500"
+                    ? "font-bold border border-blue-500 !bg-transparent"
                     : ""
                 }`}
               >
